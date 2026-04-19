@@ -2,7 +2,7 @@
 title: "rENM Framework User Manual"
 author: "John L. Schnase"
 version: "0.1.0"
-date: "2026-04-18"
+date: "2026-04-19"
 number-sections: true
 number-depth: 2
 format:
@@ -30,31 +30,38 @@ execute:
 
 # Introduction
 
-The rENM framework provides a modular collection of R packages for fitting retrospective ecological niche models (rENMs). It combines historical occurrence records and environmental data to estimate the probabilities of suitable climatic conditions occurring across a study area and create time series that can reveal the spatiotemporal dynamics of suitable conditions for various species over time. These historical patterns can shed light on biological questions and the present and future conservation status of a species. While similar studies often rely solely on temperature and precipitation to represent changing climatic conditions, the rENM framework uses a combination of time-specific macroclimatic and microclimatic drivers in its models.
+The **rENM framework** is a modular suite of R packages designed to support the development and analysis of *retrospective ecological niche models* (rENMs). Retrospective ecological niche modeling integrates historical species occurrence records with time-matched environmental data to reconstruct the spatio-temporal dynamics of species’ responses to changing environmental conditions. By revealing these long-term patterns, rENMs provide a powerful observational lens for addressing biological questions and assessing both the current and future conservation status of species.
 
-rENMtools is adaptable to many type of organisms; however, it is currently designed to model climate change influences on North American bird species. Its capabilities span the past 45 years and draw on the citizen science observations contained in Cornell Lab's eBird collections and environmental data from NASA's Earth system models.
+Although this analytical approach is broadly applicable across taxa, the current implementation of the rENM framework is designed to investigate climate-driven dynamics in North American bird species. The framework spans approximately 45 years (1980–2020), leveraging citizen science observations from the Cornell Lab of Ornithology’s eBird database alongside environmental data derived from NASA Earth system models.
 
 Additional information can be found in the following publications and the project's GitHub repository at: <https://github.com/rENM-Framework>.
 
--   Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Maxwell, M.E. Aronne, and C.S. Spradlin. Toward a Monte Carlo approach to selecting climate variables in MaxEnt. PLoS One. 2021. Mar 3;16(3):e0237208. [doi:10.1371/journal.pone.0237208](https://doi.org/10.1371/journal.pone.0237208). PMID: 33657125; PMCID: PMC7928495.
+------------------------------------------------------------------------
 
--   Schnase, J.L. and Carroll, M.L. 2022. Automatic variable selection inf ecological niche modeling: a case study using Cassin's Sparrow (Peucaea cassinii). PLoS One. 2022 Jan 21;17(1):e0257502. [doi: 10.1371/journal.pone.0257502](https://doi.org/10.1371/journal.pone.0257502). PMID: 35061658; PMCID: PMC8782318.
+**Selected Publications**
 
--   Schnase, J.L., and M.L. Carroll. 2023. “The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation.” In Proceedings of the 2023 Conference on Big Data from Space (BiDS’23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European. <https://doi.org/10.2760/46796.>
+Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Maxwell, M.E. Aronne, and C.S. Spradlin. Toward a Monte Carlo approach to selecting climate variables in MaxEnt. PLoS One. 2021. Mar 3;16(3):e0237208. [doi:10.1371/journal.pone.0237208](https://doi.org/10.1371/journal.pone.0237208). PMID: 33657125; PMCID: PMC7928495.
 
--   Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin’s Sparrow (Peucaea cassinii) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <https://doi.org/10.5751/JFO-00432-950109>
+Schnase, J.L. and Carroll, M.L. 2022. Automatic variable selection inf ecological niche modeling: a case study using Cassin's Sparrow (Peucaea cassinii). PLoS One. 2022 Jan 21;17(1):e0257502. [doi: 10.1371/journal.pone.0257502](https://doi.org/10.1371/journal.pone.0257502). PMID: 35061658; PMCID: PMC8782318.
 
--   Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin’s Sparrow (Peucaea cassinii) over four decades. Journal of Field Ornithology 96(3):3. <https://doi.org/10.5751/JFO-00691-960303>
+Schnase, J.L., and M.L. Carroll. 2023. “The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation.” In Proceedings of the 2023 Conference on Big Data from Space (BiDS’23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European. <https://doi.org/10.2760/46796.>
 
--   Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin’s Sparrow (Peucaea cassinii) over four decades. The Southwestern Naturalist, 70(1):1-17. <https://doi.org/10.1894/0038-4909-70.1.7>
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin’s Sparrow (Peucaea cassinii) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <https://doi.org/10.5751/JFO-00432-950109>
 
-This manual guides the user through the rENM modeling and analysis process. Additional information about each of the functions used in this workflow can be found in the various packages' documentation.
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin’s Sparrow (Peucaea cassinii) over four decades. Journal of Field Ornithology 96(3):3. <https://doi.org/10.5751/JFO-00691-960303>
 
-Please note that this is very much a research platform in active development. The rENM framework is being made available for educational purposes only and is shared without technical support of any kind. See the accompany licenses for additional detail. Feedback and further contributions to this effort are welcome.
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin’s Sparrow (Peucaea cassinii) over four decades. The Southwestern Naturalist, 70(1):1-17. <https://doi.org/10.1894/0038-4909-70.1.7>
 
-Thanks for your interest. And good luck!
+------------------------------------------------------------------------
 
-John Schnase / rENM.Framework\@gmail.com
+This manual guides users through the rENM modeling and analysis workflow. Detailed documentation for individual functions is available within the respective package manuals.
+
+The rENM framework is an active research platform under ongoing development. It is provided for educational and research purposes only and is distributed without formal technical support. Feedback and contributions are welcome.
+
+Thank you for your interest.
+
+**John Schnase**\
+rENM.Framework\@gmail.com
 
 {{< pagebreak >}}
 
@@ -64,16 +71,20 @@ John Schnase / rENM.Framework\@gmail.com
 
 # Configuring the Host Environment
 
-The most straightforward way of configuring your local computing environment is to perform these first steps through a terminal window. I work in a MacOS world using the bash shell, so that's what these examples are based on.
+The most straightforward way to configure your local computing environment is to complete the initial setup steps in a terminal window. The examples provided here assume a macOS environment using the Bash shell, which is the system I use.
 
-The basic filesystem structure for working with the rENM framework is shown below. From a base project directory you'll have have a data directory containing input occurrence records and environmental predictors. In this initial set up, I'll show you how to install an example data set and set a symbolic link to that sample collection. rENM analysis runs will be placed in a *runs* subdirectory within the project's base directory.
+The rENM framework relies on a simple, standardized filesystem structure. At the top level is a base project directory. Within this directory, a `data` subdirectory stores input datasets, including species occurrence records and environmental predictor variables. In this initial setup, you will install an example dataset and create a symbolic link that points to this sample collection.
+
+Model outputs and analysis results are written to a `runs` subdirectory within the project directory, providing a clear and reproducible organization for all rENM analyses.
 
 PROJECT_DIRECTORY/\
 \|\_\_\_ data -\> (symbolic link to example_data)\
 \|\_\_\_ example_data/...\
 \|\_\_\_ runs/...
 
-You only need to configure your host environment once. After this initial configuration, you're ready to move into the RStudio environment to complete the rENM framework set up. I use *rENMtest* as the project directory name in these examples, but you'll of course use one of your own choosing. I use *\~/rENM* in my own work.
+You only need to configure your host environment once. After completing this initial setup, you can move into the RStudio environment to finalize the rENM framework installation and begin your analyses.
+
+In the examples that follow, I use `~/rENMtest` as the project directory for illustration. In practice, you should choose a directory name that fits your own workflow. For example, I typically use `~/rENM` in my own work
 
 ## Creating the project directory
 
@@ -117,9 +128,11 @@ rm -f "$ZIP_FILE"
 
 # Configuring the RStudio Environment
 
+From this point forward, all work is performed in the RStudio environment using R. Begin by specifying the location of the base project directory you created during the previous setup steps. This allows both RStudio and the rENM framework to locate and manage project files consistently.
+
 ## Setting the project directory location
 
-We begin by letting the RStudio environment and rENM framework know the location of the base project directory you've set up on your local host machine in the previous steps. The following command sets this in the *.Renviron* file. You only need to do this step the first time you set up the environment, so run these commands once, then leave them commented out going forward. The base directory name in this command obviously needs to be the same as the one you set up in the previous steps.
+The following command defines this location in the `.Renviron` file. This step only needs to be completed once during the initial setup. After running the command, I recommend that you leave it commented out in future sessions. Be sure that the base directory specified in this command matches the directory you created in the previous steps.
 
 ```{r}
 
@@ -137,7 +150,7 @@ We begin by letting the RStudio environment and rENM framework know the location
 
 ## Installing the framework packages
 
-You'll need to configure your local R/RStudio environment by downloading and installing the rENM framework's collection of module packages. You can get these from the GitHub repository as shown below. There are six modules in the collection. You should only need to install these once. Note that the *rENM.core* package is required by all the other framework modules.
+Next, install the rENM framework’s collection of modular packages. These can be obtained directly from the project’s GitHub repository, as shown below. The framework currently consists of six modules. This installation step only needs to be completed once.
 
 ```{r}
 
@@ -168,11 +181,11 @@ library(rENM.reports)
 
 # Performing an rENM Analysis
 
-We'll use a four-character banding code (alpha code) to identify a species to be studied. To demonstrate rENMtools' capabilities, we provide data for Brown-capped Rosy-Finch (*Leucosticte australis*) (BCRF), Cassin's Sparrow (*Peucaea cassinii*) (CASP), and Greater Roadrunner (*Geococcyx californianus*) (GRRO) in the base data collections. These three species, respectively, provide examples of small, medium, and large range distributions and occurrence record data sets.
+Species within the rENM framework are identified using a four-character banding code (alpha code). To demonstrate the framework’s capabilities, the example dataset includes three species: Brown-capped Rosy-Finch (*Leucosticte australis*; BCRF), Cassin’s Sparrow (*Peucaea cassinii*; CASP), and Greater Roadrunner (*Geococcyx californianus*; GRRO). These species represent a range of ecological contexts, providing examples of small, medium, and large geographic distributions, as well as varying occurrence record densities.
 
 ## Viewing installed species data
 
-You can see the species currently available for analysis using the following function. The four-letter ALPHA.CODE is what will be used to identify the species being studied in the step that follows.
+Use the `show_species()` helper function to display the full list of species available in the framework’s example dataset. The four-letter alpha code (`ALPHA.CODE`) is used to identify the species selected for analysis in the next step.
 
 ```{r}
 
@@ -196,9 +209,11 @@ alpha_code <- "BCRF"
 
 ### - Gathering eBird records
 
-The first step in performing an rENM time series analysis is to gather and format the input occurrence data and environmental variables you will use in the analysis. We begin by extracting occurrence records for a single species from a downloaded eBird Basic Dataset (EBD) text file in base data collection.
+The first step in an rENM time series analysis is to prepare the input occurrence data and environmental variables. This begins with extracting species-specific occurrence records from a downloaded eBird Basic Dataset (EBD) text file located in the base data directory.
 
-The function described below reads the raw EBD text file, filters records with valid geographic coordinates, writes a clean CSV copy to the run directory, and divides the occurrence data into 5-year temporal bins spanning 1980 through 2020. Each bin is saved as a CSV file in the run's *RENM_PROJECT_DIR/\<alpha_code\>/\_occs/tmp/* directory for further processing. Use the *show_species()* helper function to see the complete list of available species in rENMtools' base data collection.
+The function described below reads the raw EBD file, filters records with valid geographic coordinates, and writes a cleaned CSV file to the run directory. It then partitions the occurrence data into nine 5-year temporal bins spanning 1980–2020.
+
+Each temporal subset is saved as a separate CSV file in the run directory under `<alpha_code>/_occs/tmp/` for use in subsequent processing steps.
 
 ```{r}
 
@@ -208,7 +223,7 @@ rENM.data::get_ebird_occurrences(alpha_code)
 
 ### - Removing duplicate records
 
-Next, we'll remove duplicate records in the *\<alpha_code\>/\_occs/tmp/* run collection files.
+Next, remove duplicate records from the occurrence files in the `<alpha_code>/_occs/tmp/` run directory.
 
 ```{r}
 
@@ -218,11 +233,9 @@ rENM.data::remove_duplicate_occurrences(alpha_code)
 
 ### - Spatial thinning
 
-We now have the option of spatially thinning the occurrence records. Thinning reduces spatial clustering by enforcing a minimum distance between occurrence points, helping to mitigate spatial sampling biases.
+You may optionally apply spatial thinning to the occurrence records. Thinning reduces spatial clustering by enforcing a minimum distance between points, helping to mitigate sampling bias. For example, analyses of Cassin’s Sparrow typically use a thinning distance of 8 km (\~5 miles) to reduce the likelihood of counting the same individual multiple times. This step can be skipped entirely or configured by setting the `thin_distance` parameter, as shown below.
 
-For our work with Cassin's Sparrow, we generally thinned records to a 8 km (\~5 mile) radius to avoid double counting the same individual bird. You can ignore this thinning step altogether or set your preferred distance by setting the *thin_distance* parameter as shown below.
-
-This thinning step can take some time. The default is to thin the bins sequentially. As shown below, you have the option of running the thinning step as a parallel process, which can save time. However, if you have doubts about doing this on your machine, go with the default sequential thinning operation. Comment out the function you decide not to use.
+Thinning can be time-consuming. By default, temporal bins are processed sequentially. A parallel processing option is also available and can reduce runtime; however, if system resources are limited or uncertain, the default sequential approach is recommended. Comment out the option you do not use.
 
 ```{r}
 
@@ -238,7 +251,7 @@ rENM.data::thin_occurrences2(alpha_code, thin_distance)
 
 ### - Limiting the record count
 
-There may be times when you'd like to set an upper bound on the number of occurrence records used in each bin of the rENM time series. This sometimes is done to reduce record densities that can diminish model performance. This is an optional step.
+There may be times when you'd like to set an upper limit on the number of occurrence records retained within each temporal bin. This can be useful for reducing excessively high record densities, which may negatively affect model performance. This step is optional.
 
 ```{r}
 
@@ -263,7 +276,14 @@ rENM.data::tidy_occurrences(alpha_code)
 
 ### - Setting the spatial extent
 
-Preparing environmental data for use in these models involves several steps, some of which are optional. We begin by establishing a spatial extent for the models that we'll be creating. This is a required step, but rENMtools provides three options for doing this: model extent can be calculated using the species' eBird occurrence records, model extent can be calculated using the species' USGS GAP range, or model extent can be set manually. Select your preferred approach by commenting out the options you don't want. Run *?set_extent* in the RStudio console to see details on how to manually set function parameters.
+Preparing environmental data for modeling involves several steps, some of which are optional. The first step is to define the spatial extent of the analysis. This step is required.
+
+The framework provides three options for specifying model extent:\
+(1) derive extent from the species’ eBird occurrence records,\
+(2) derive extent from the species’ USGS GAP range, or\
+(3) define the extent manually.
+
+Select the desired approach by commenting out the options you do not intend to use. For guidance on manually specifying parameters, run `?set_extent` in the RStudio console.
 
 ```{r}
 
@@ -280,9 +300,7 @@ rENM.data::find_range_extent(alpha_code)
 
 ### - Assembling MERRA variables
 
-We're now ready to move environmental variables from the base data collection into the species' run directory. The first step in this process is to choose which MERRA-2 or MERRAclim-2 variables in the base collection you'd like to use:
-
--   Run the *show_variables()* utility from the RStudio console to see the complete list of available variables, then assign selected variables to the *m2_vars* and *mc_vars* parameters as shown below. NULL options for either means ALL of the available variables of that type will be used. The sample base collection contains the variables used in the Schnase et al. (2026) paper described above. Additional information is provided in the package documentation.
+We're now ready to copy environmental variables from the base data collection into the species-specific run directory. Begin by selecting the MERRA-2 and/or MERRAclim-2 variables to include in the analysis. Use the `show_variables()` utility in the RStudio console to display the full list of available variables. Assign your selections to the `m2_vars` and `mc_vars` parameters, as shown below. Setting either parameter to `NULL` will include all available variables of that type. The example dataset includes the variables used in Schnase et al. (2026), described above. Additional details are provided in the package documentation.
 
 ```{r}
 
@@ -295,7 +313,7 @@ We're now ready to move environmental variables from the base data collection in
 #             "bio14", "bio15", "bio18")
 ```
 
--   Next, we extract the selected MERRA variables from the base collection. The function below does the extraction, crops each variable to our spatial extent, and saves the variables in the run's *\<alpha_code\>/\_vars/'* directory for further processing.
+Once variables are selected, the extraction step copies them from the base collection, crops each layer to the defined spatial extent, and writes the results to the run directory under `<alpha_code>/_vars/` for subsequent processing.
 
 ```{r}
 
@@ -310,11 +328,9 @@ rENM.data::get_merra_variables(
 
 ## Staging occurrence records
 
-Having completed preparing the input data, we're now ready to create an rENM time series. To do this, we first move the filtered and refined occurrence records from the *\<alpha_code\>/\_occs/* collection to the *\<alpha_code\>/TimeSeries/* directory.
+With input data prepared, the next step is to construct the rENM time series. This begins by moving the processed occurrence records from the `<alpha_code>/_occs/` directory into a structured time series directory.
 
-The function described here creates the destination *TimeSeries* directory and sets up 5-year bins labeled by year. Occurrence record files are moved into an *occs* subdirectory within the newly-created *TimeSeries* directory. The destination for these moves is therefore *\<alpha_code\>/TimeSeries/\<year\>/occs/’* where *\<year\>* runs from 1980 to 2020 in 5-year increments.
-
-This is confusing to describe, but it becomes obvious after you run the function and look at the *\<alpha_code\>/TimeSeries/* directory structure.
+The function described below creates a `TimeSeries` directory and organizes it into nine 5-year bins labeled by year (1980–2020). Within each bin, occurrence records are stored in an `occs` subdirectory. The resulting structure is: `<alpha_code>/TimeSeries/<year>/occs/` .This organization becomes clear after running the function and inspecting the resulting `TimeSeries` directory.
 
 ```{r}
 
@@ -326,17 +342,11 @@ rENM.model::stage_occurrences(alpha_code)
 
 ## Staging environmental variables
 
-We now do the same thing with our environmental variables. There are two options for doing this, and you should only choose one:
-
--   [*Option 1 - Simple staging*]{.underline}. All of the cropped variables saved in the *\<alpha_code\>/\_vars/* collection are moved to the *\<alpha_code\>/TimeSeries/* directory without further modification of any kind.
-
--   [*Option 2 - Staging with down selection*]{.underline}. The Monte Carlo-based down selection method described in Schnase et al. (2022) is first applied to the variables saved in the *\<alpha_code\>/\_vars/* collection. This step identifies the top performing variables in the collection. This down selected set of variables is then moved into the time series for further processing.
+Environmental variables are now staged for time series analysis. Two approaches are available; select only one.
 
 ### - Option 1 - Simple staging
 
-The function described here performs simple staging: it moves all of the cropped environmental predictors from the *\<alpha_code\>/\_vars/* collection to the *\<alpha_code\>/TimeSeries/* directory without further modification of any kind.
-
-The files are moved into a *vars* subdirectory within the *TimeSeries* directory that was created by the previous operation. The destination for these moves is therefore *\<alpha_code\>/TimeSeries/\<year\>/vars/’* where *\<year\>* runs from 1980 to 2020 in 5-year increments.
+This function performs simple staging by transferring all cropped environmental predictors from the `<alpha_code>/_vars/` directory to the `TimeSeries` directory without modification. Files are organized into a `vars` subdirectory within each temporal bin created in the previous step. The resulting structure is: `<alpha_code>/TimeSeries/<year>/vars/` where `<year>` spans 1980–2020 in 5-year increments.
 
 ```{r}
 
@@ -347,7 +357,7 @@ The files are moved into a *vars* subdirectory within the *TimeSeries* directory
 
 ### - Option 2 - Staging with down selection
 
-*\[ In progress ... \]*
+With this option, a Monte Carlo–based variable selection procedure (Schnase et al. 2022) is first applied to the variables in `<alpha_code>/_vars/`. This step identifies the highest-performing variables, which are then transferred to the `TimeSeries` directory for further processing.
 
 ```{r}
 
@@ -368,7 +378,7 @@ rENM.model::stage_screened_variables(alpha_code)
 
 ## Reducing covariance
 
-This optional step reduces covariance in the staged environmental variables, records results, and retains only non-correlated variables for further processing. The default settings here perform a "light touch" collinearity reduction using variance inflation factors (VIF) and pairwise correlation thresholds. A relaxed VIF threshold (10) and high correlation threshold (0.95) are used to remove only extreme redundancy while preserving alternative representations of environmental gradients, thus ensuring that key dimensions of environmental structure identified during screening were retained in the final model.
+This optional step reduces covariance among the staged environmental variables, records the results, and retains a subset of non-collinear predictors for further processing. By default, a “light-touch” approach is applied using variance inflation factors (VIF) and pairwise correlation thresholds. A relaxed VIF threshold (10) and a high correlation threshold (0.95) are used to remove only strongly redundant variables while preserving alternative representations of environmental gradients. This helps maintain the key dimensions of environmental structure identified during earlier screening steps. In practice, improved representation of environmental structure may be achieved by omitting this step.
 
 ```{r}
 
@@ -378,9 +388,7 @@ This optional step reduces covariance in the staged environmental variables, rec
 
 ## Computing the time series
 
-We're now ready to create a time series of ensemble models using the staged occurrence records and staged variables. There's a lot of hidden detail here. The *create_timeseries()* function shown in the code block below makes calls on the *create_ensemble_model()* function to build up the time series. These calls run in parallel.
-
-In the default configuration, we're find the unweighted average of five model types: maxnet, random forest (rf), boosted regression tree (brt), generalized linear model (glm), and and multivariate adaptive regression splines (mars). Browse the online documentation using *?create_ensemble_model* for additional information.
+With occurrence records and environmental variables staged, the next step is to generate a time series of ensemble models. The `create_timeseries()` function orchestrates this process by making parallel calls to `create_ensemble_model()` to build models for each temporal bin. By default, ensemble predictions are computed as the unweighted average of five model types: `maxnet`, random forest (`rf`), boosted regression trees (`brt`), generalized linear models (`glm`), and multivariate adaptive regression splines (`mars`). For additional details and configuration options, refer to the documentation by running `?create_ensemble_model` in the RStudio console.
 
 ```{r}
 
@@ -394,7 +402,7 @@ rENM.model::create_timeseries(alpha_code)
 
 ### - Finding the suitability trend
 
-This required step computes per-cell Theil-Sen trends from the time series of predicted suitability rasters and derives Mann-Kendall statistics (p and Z) to assess temporal trends in climatic suitability. This trend raster becomes the basis further analyses.
+This required step computes per-cell Theil–Sen trend estimates from the time series of predicted suitability rasters and derives Mann–Kendall statistics (p-values and Z-scores) to assess temporal trends in climatic suitability. The resulting trend raster serves as the foundation for subsequent analyses.
 
 ```{r}
 
@@ -405,7 +413,7 @@ rENM.analysis::find_suitability_trend(alpha_code)
 
 ### - Finding overall trend percentages
 
-This is the first of several optional looks at the suitability trends that we've derived from our rENM time series. The function below computes cell-wise trend sign statistics from the suitability trend raster we've just calculated and summarizes proportions of positive, negative, and zero values across the full modeled extent.
+This is the first of several different ways of studying the suitability trends that we've derived from our rENM time series. This step provides an initial summary of the suitability trends derived from the rENM time series. The function below computes cell-wise trend sign statistics from the suitability trend raster and summarizes the proportions of positive, negative, and neutral (zero) trends *across the full modeled extent.*
 
 ```{r}
 
@@ -415,7 +423,7 @@ rENM.analysis::find_trend_percentages(alpha_code)
 
 ### - Finding range trend percentages
 
-The function below computes cell-wise trend sign statistics from the suitability trend raster we've just calculated and summarizes proportions of positive, negative, and zero values across the species' USGS GAP range.
+The function below computes cell-wise trend sign statistics from the suitability trend raster and summarizes the proportions of positive, negative, and neutral (zero) trends *within the species’ USGS GAP range.*
 
 ```{r}
 
@@ -425,7 +433,7 @@ rENM.analysis::find_range_change_percentages(alpha_code)
 
 ### - Finding state-level suitability trends
 
-We can now perform a per-state analysis of climatic suitability trends based on the species' USGS GAP range. The function below does the analysis and generates a map showing spatial patterns and state-level metrics for the state that encompass the species' GAP range.
+We can now perform a state-level analysis of climatic suitability trends based on the species' USGS GAP range. The function below computes summary metrics for each state intersecting the GAP range and generates a map illustrating spatial patterns alongside state-level statistics.
 
 ```{r}
 
@@ -437,7 +445,7 @@ rENM.analysis::create_state_trend_analysis(alpha_code)
 
 ### - Finding temporal trends
 
-Another way of looking at climatic suitability trends for the species is by analyzing spatial shifts in the weighted centroid for suitability over time. This function fits Bayesian linear trends to the species' annual weighted centroids for suitability (latitude and longitude) and writes plots and summaries to the species run directory.
+Another approach to analyzing climatic suitability trends is to examine spatial shifts in the weighted centroid of suitability over time. This function fits Bayesian linear models to annual centroid coordinates (latitude and longitude) and writes the resulting plots and summary statistics to the species’ run directory.
 
 ```{r}
 
@@ -447,7 +455,7 @@ rENM.analysis::analyze_weighted_centroids(alpha_code)
 
 ### - Finding bioclimatic velocity
 
-Historical patterns of centroid movement also can be used to determine the bearing, distance, and velocity of suitability shifts. We calculate these values and save them to our run directory in the following step.
+Historical centroid trajectories can also be used to quantify the direction, distance, and velocity of suitability shifts. This step computes these metrics and writes the results to the species’ run directory.
 
 ```{r}
 
@@ -455,7 +463,7 @@ Historical patterns of centroid movement also can be used to determine the beari
 rENM.analysis::find_bioclimatic_velocity(alpha_code)
 ```
 
-To aid visualizing long-term shifts, this function creates and saves our suitability trend map with an overlay of the centroid displacement vector.
+To support visualization of long-term shifts, this function generates a suitability trend map with an overlay of the centroid displacement vector. The resulting map is saved to the species’ run directory.
 
 ```{r}
 
@@ -467,7 +475,7 @@ rENM.analysis::save_trend_plot_with_centroids(alpha_code)
 
 ### - Gathering ranked variables
 
-Consolidate ranked variable importance outputs across time-series runs into a single summary dataset for a species. This step produces a unified CSV file that can be used in further variable analysis.
+This step consolidates ranked variable importance results across the time series into a single summary dataset for the species. The output is a unified CSV file that can be used for subsequent variable analysis.
 
 ```{r}
 
@@ -477,7 +485,7 @@ rENM.analysis::gather_variable_contributions(alpha_code)
 
 ### - Summarizing variable contributions
 
-Reads a species-specific CSV of variable contributions across the time series, selects variables by average relative contribution, and produces a complete suite of visualizations and statistics.
+Using this summary, this function selects variables based on average relative contribution and generates a comprehensive set of visualizations and summary statistics.
 
 ```{r}
 
@@ -511,7 +519,7 @@ rENM.analysis::create_hot_spot_map(alpha_code)
 
 ## Suitability trend analysis
 
-This experimental collection of tools draws on the capabilities of GenAI to do suitability trend analysis. In a first step, the function collects suitability-trend rasters, summary tables, and species metadata for a species, then builds an AI-ready package together with a prompt template. In a second step, the package is submitted to OpenAI's ChatGPT gpt-5.1 LLM for analysis. Finally, the completed analysis is converted to a PDF document.
+This experimental module uses generative AI (GenAI) to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, this package is submitted to ChatGPT (GPT-5.1) for analysis. Finally, the generated results are compiled into a PDF document.
 
 ```{r}
 
@@ -534,7 +542,7 @@ rENM.ai::render_ai_docs(alpha_code)
 
 # Report Generation
 
-The following set of functions gathers key outputs from the analysis steps above and creates summary maps, tables, and reports. It's important to note these capabilities are grouped together in the *rENM.reports* R package, which has to be installed and loaded before you can run these steps. Because they draw on products created by earlier steps in the rENM workflow, you have to have all the steps above before moving on the summaries and report generation.
+The following functions compile key outputs from the preceding analysis steps to generate summary maps, tables, and reports. Because these functions depend on products created earlier in the workflow, all prior steps must be completed before proceeding to summary and report generation.
 
 ## Assemble suitability results
 
@@ -612,3 +620,15 @@ rENM.reports::assemble_final_report(alpha_code)
 #                                               "Variable-Trend-Maps1",
 #                                               "Variable-Trend-Maps2"))
 ```
+
+# Automated Workflows
+
+# APPENDICES
+
+## Technical specifications
+
+## Data extensions
+
+### - Adding new species
+
+### - Adding new variables

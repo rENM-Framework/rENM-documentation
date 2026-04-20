@@ -2,7 +2,7 @@
 title: "rENM Framework User Manual"
 author: "John L. Schnase"
 version: "0.1.0"
-date: "2026-04-19"
+date: "2026-04-20"
 number-sections: true
 number-depth: 2
 format:
@@ -42,15 +42,15 @@ Additional information can be found in the following publications and the projec
 
 Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Maxwell, M.E. Aronne, and C.S. Spradlin. Toward a Monte Carlo approach to selecting climate variables in MaxEnt. PLoS One. 2021. Mar 3;16(3):e0237208. [doi:10.1371/journal.pone.0237208](https://doi.org/10.1371/journal.pone.0237208). PMID: 33657125; PMCID: PMC7928495.
 
-Schnase, J.L. and Carroll, M.L. 2022. Automatic variable selection inf ecological niche modeling: a case study using Cassin's Sparrow (Peucaea cassinii). PLoS One. 2022 Jan 21;17(1):e0257502. [doi: 10.1371/journal.pone.0257502](https://doi.org/10.1371/journal.pone.0257502). PMID: 35061658; PMCID: PMC8782318.
+Schnase, J.L. and Carroll, M.L. 2022. Automatic variable selection inf ecological niche modeling: a case study using Cassin's Sparrow (*Peucaea cassinii*). PLoS One. 2022 Jan 21;17(1):e0257502. [doi: 10.1371/journal.pone.0257502](https://doi.org/10.1371/journal.pone.0257502). PMID: 35061658; PMCID: PMC8782318.
 
 Schnase, J.L., and M.L. Carroll. 2023. “The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation.” In Proceedings of the 2023 Conference on Big Data from Space (BiDS’23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European. <https://doi.org/10.2760/46796.>
 
-Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin’s Sparrow (Peucaea cassinii) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <https://doi.org/10.5751/JFO-00432-950109>
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin’s Sparrow (*Peucaea cassinii*) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <https://doi.org/10.5751/JFO-00432-950109>
 
-Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin’s Sparrow (Peucaea cassinii) over four decades. Journal of Field Ornithology 96(3):3. <https://doi.org/10.5751/JFO-00691-960303>
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin’s Sparrow (*Peucaea cassinii*) over four decades. Journal of Field Ornithology 96(3):3. <https://doi.org/10.5751/JFO-00691-960303>
 
-Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin’s Sparrow (Peucaea cassinii) over four decades. The Southwestern Naturalist, 70(1):1-17. <https://doi.org/10.1894/0038-4909-70.1.7>
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin’s Sparrow (*Peucaea cassinii*) over four decades. The Southwestern Naturalist, 70(1):1-17. <https://doi.org/10.1894/0038-4909-70.1.7>
 
 ------------------------------------------------------------------------
 
@@ -88,7 +88,7 @@ In the examples that follow, I use `~/rENMtest` as the project directory for ill
 
 ## Creating the project directory
 
-You'll first need to create the base project directory and the *runs* subdirectory. Open a terminal window and run the following commands:
+You'll first need to create the base project directory and the `runs` subdirectory. Open a terminal window and run the following commands:
 
 ``` bash
 #!/usr/bin/env bash
@@ -497,7 +497,7 @@ rENM.analysis::summarize_variable_contributions(alpha_code)
 
 ### - Bioclimatic acceleration
 
-The following function wraps *find_suitability_change_trend()* and *plot_suitability_change_trend()* to create a map that essentially shows areas of accelerating or decelerating trends in climatic suitability. This is still experimental, but it's an interesting perspective on the spatial and temporal dynamics of historical climatic influences on suitability.
+The following function wraps *find_suitability_change_trend()* and *plot_suitability_change_trend()* to generate a map highlighting areas of accelerating and decelerating trends in climatic suitability. This step is experimental but provides an additional perspective on the spatial and temporal dynamics of historical climatic influences on suitability.
 
 ```{r}
 
@@ -507,7 +507,7 @@ rENM.analysis::create_suitability_change_map(alpha_code)
 
 ### - Hot spot analysis
 
-In this metric we find areas where the baseline trend in climatic suitability is *decreasing at an increasing rate*. This function creates a map showing those areas. The question is whether such a metric could be a useful indicator of increased climate change vulnerability ...
+This metric identifies areas where climatic suitability is declining at an increasing rate. The function generates a map highlighting these regions. This analysis is exploratory and may provide insight into areas of heightened vulnerability to climate change.
 
 ```{r}
 

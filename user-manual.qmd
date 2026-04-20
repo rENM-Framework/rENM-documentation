@@ -84,7 +84,7 @@ PROJECT_DIRECTORY/\
 
 You only need to configure your host environment once. After completing this initial setup, you can move into the RStudio environment to finalize the rENM framework installation and begin your analyses.
 
-In the examples that follow, I use `~/rENMtest` as the project directory for illustration. In practice, you should choose a directory name that fits your own workflow. For example, I typically use `~/rENM` in my own work
+In the examples that follow, I use `~/rENMtest` as the project directory for illustration. In practice, you should choose a directory name that fits your own workflow. For example, I typically use `~/rENM` in my own work. If you'd prefer to run these script outside of the RStudio ecosystem, they're available in the GitHub repository at <https://github.com/rENM-Framework/rENM-scripts>.
 
 ## Creating the project directory
 
@@ -101,7 +101,7 @@ mkdir -p "$PROJECT_DIRECTORY"
 mkdir -p "$PROJECT_DIRECTORY/runs"
 ```
 
-## Installing the sample data set
+## Installing the example data set
 
 Next, you'll want to install the example data set. Make sure your current working directory is the project base directory you just created, then run the following commands from a terminal window:
 

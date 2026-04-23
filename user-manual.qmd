@@ -2,7 +2,7 @@
 title: "rENM Framework User Manual"
 author: "John L. Schnase"
 version: "0.1.0"
-date: "2026-04-20"
+date: "2026-04-22"
 number-sections: true
 number-depth: 2
 format:
@@ -155,13 +155,13 @@ Next, install the rENM framework’s collection of modular packages. These can b
 ```{r}
 
 # # install rENM framework packates from the GitHub repository
-# install.packages("remotes")
-# remotes::install_github("rENM-Framework/rENM.core")
-# remotes::install_github("rENM-Framework/rENM.data")
-# remotes::install_github("rENM-Framework/rENM.model")
-# remotes::install_github("rENM-Framework/rENM.analysis")
-# remotes::install_github("rENM-Framework/rENM.reports")
-# remotes::install_github("rENM-Framework/rENM.ai")
+# install.packages("devtools")
+# devtools::install_github("rENM-Framework/rENM.core")
+# devtools::install_github("rENM-Framework/rENM.data")
+# devtools::install_github("rENM-Framework/rENM.model")
+# devtools::install_github("rENM-Framework/rENM.analysis")
+# devtools::install_github("rENM-Framework/rENM.reports")
+# devtools::install_github("rENM-Framework/rENM.ai")
 ```
 
 ## Loading the rENM framework modules
@@ -175,7 +175,7 @@ library(rENM.core)
 library(rENM.data)
 library(rENM.model)
 library(rENM.analysis)
-library(rENM.ai)
+# library(rENM.ai)
 library(rENM.reports)
 ```
 
@@ -515,31 +515,6 @@ This metric identifies areas where climatic suitability is declining at an incre
 rENM.analysis::create_hot_spot_map(alpha_code)
 ```
 
-# GenAI Analysis (In development)
-
-## Suitability trend analysis
-
-This experimental module uses generative AI (GenAI) to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, this package is submitted to ChatGPT (GPT-5.1) for analysis. Finally, the generated results are compiled into a PDF document.
-
-```{r}
-
-# build a data package for submission to ChatGPT
-rENM.ai::assemble_suitability_ai_package(alpha_code)
-
-# submit the package using the OpenAI Reponses API
-rENM.ai::submit_suitability_ai_package(alpha_code)
-
-# render the returned .docx file into a .pdf file
-rENM.ai::render_ai_docs(alpha_code)
-
-```
-
-## Environmental structure analysis
-
-## rENM-based suitability projection
-
-## rENM-based conservation planning
-
 # Report Generation
 
 The following functions compile key outputs from the preceding analysis steps to generate summary maps, tables, and reports. Because these functions depend on products created earlier in the workflow, all prior steps must be completed before proceeding to summary and report generation.
@@ -601,7 +576,45 @@ rENM.reports::create_centroid_trend_summary_table(alpha_code)
 rENM.reports::assemble_centroid_trends_page(alpha_code)
 ```
 
-## Assemble final report
+# GenAI Analysis
+
+## Suitability trend analysis
+
+This experimental module uses generative AI (GenAI) to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, this package is submitted to ChatGPT (GPT-5.1) for analysis. Finally, the generated results are compiled into a PDF document.
+
+```{r}
+
+# # build a data package for submission to ChatGPT
+# rENM.ai::assemble_suitability_ai_package(alpha_code)
+# 
+# # submit the package using the OpenAI Reponses API
+# rENM.ai::submit_suitability_ai_package(alpha_code)
+# 
+# # render the returned .docx file into a .pdf file
+# rENM.ai::render_ai_docs(alpha_code)
+```
+
+# GenAI Analysis (dev)
+
+This material is in active development ...
+
+```{r}
+
+# devtools::install_github("rENM-Framework/rENM.ai")
+library(rENM.dev)
+
+# build a data package for submission to ChatGPT
+rENM.dev::assemble_ai_package(alpha_code)
+
+# submit the package using the OpenAI Reponses API
+rENM.dev::submit_ai_package(alpha_code)
+
+# render the returned .docx file into a .pdf file
+rENM.dev::render_ai_docx(alpha_code)
+
+```
+
+# Assemble final report
 
 ```{r}
 

@@ -175,7 +175,7 @@ library(rENM.core)
 library(rENM.data)
 library(rENM.model)
 library(rENM.analysis)
-# library(rENM.ai)
+library(rENM.ai)
 library(rENM.reports)
 ```
 
@@ -240,7 +240,7 @@ Thinning can be time-consuming. By default, temporal bins are processed sequenti
 ```{r}
 
 # set thinning distance (radius in km)
-thin_distance <- 1 
+thin_distance <- 1 # default value
 
 # thin records in the _occs/tmp/ run collection [sequential version]
 # thin_occurrences(alpha_code, thin_distance)
@@ -614,7 +614,7 @@ rENM.dev::render_ai_docx(alpha_code)
 
 ```
 
-# Assemble final report
+# Create Final Report
 
 ```{r}
 

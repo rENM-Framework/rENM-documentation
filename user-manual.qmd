@@ -2,7 +2,7 @@
 title: "rENM Framework User Manual"
 author: "John L. Schnase"
 version: "0.1.0"
-date: "2026-04-22"
+date: "2026-04-26"
 number-sections: true
 number-depth: 2
 format:

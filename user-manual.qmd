@@ -2,7 +2,7 @@
 title: "rENM Framework User Manual"
 author: "John L. Schnase"
 version: "0.1.0"
-date: "2026-04-26"
+date: "2026-04-27"
 number-sections: true
 number-depth: 2
 format:
@@ -30,9 +30,9 @@ execute:
 
 # Introduction
 
-The **rENM framework** is a modular suite of R packages designed to support the development and analysis of *retrospective ecological niche models* (rENMs). Retrospective ecological niche modeling integrates historical species occurrence records with time-matched environmental data to reconstruct the spatio-temporal dynamics of species’ responses to changing environmental conditions. By revealing these long-term patterns, rENMs provide a powerful observational lens for addressing biological questions and assessing both the current and future conservation status of species.
+The **rENM framework** is a modular suite of R packages designed to support the development and analysis of *retrospective ecological niche models (rENMs)*. *Retrospective ecological niche modeling* integrates historical species occurrence records with time-matched environmental data to reconstruct the **spatio-temporal dynamics** of species’ responses to changing environmental conditions. By revealing *long-term patterns*, rENMs provide a **powerful observational lens** for addressing biological questions and assessing both the *current and future conservation status* of species.
 
-Although this analytical approach is broadly applicable across taxa, the current implementation of the rENM framework is designed to investigate climate-driven dynamics in North American bird species. The framework spans approximately 45 years (1980–2020), leveraging citizen science observations from the Cornell Lab of Ornithology’s eBird database alongside environmental data derived from NASA Earth system models.
+Although this analytical approach is broadly applicable across taxa, the current implementation of the **rENM framework** is designed to investigate **climate-driven dynamics** in North American bird species. The framework spans approximately *45 years (1980–2020)*, leveraging citizen science observations from the Cornell Lab of Ornithology’s eBird database alongside environmental data derived from *NASA Earth system models*.
 
 Additional information can be found in the following publications and the project's GitHub repository at: <https://github.com/rENM-Framework>.
 
@@ -54,9 +54,9 @@ Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts
 
 ------------------------------------------------------------------------
 
-This manual guides users through the rENM modeling and analysis workflow. Detailed documentation for individual functions is available within the respective package manuals.
+This manual guides users through the **rENM modeling and analysis workflow**. Detailed documentation for individual functions is available within the *respective package manuals*.
 
-The rENM framework is an active research platform under ongoing development. It is provided for educational and research purposes only and is distributed without formal technical support. Feedback and contributions are welcome.
+The **rENM framework** is an *active research platform* under ongoing development. It is provided for *educational and research purposes only* and is distributed **without formal technical support**. Feedback and contributions are welcome.
 
 Thank you for your interest.
 
@@ -67,9 +67,29 @@ rENM.Framework\@gmail.com
 
 # The rENM Workflow
 
+![](images/clipboard-2962903405.png)
+
+The **rENM processing pipeline** consists of **five core steps**, including an *optional, experimental GenAI-mediated interpretation step*. One way to engage this workflow is by using this **Quarto Markdown (.qmd) document** as an *interactive User Manual*. It becomes a **reproducible, executable scientific document** that combines *code, results,* and *narrative* into a single, renderable file.
+
+## **Using the Quarto document**
+
+-   After initially configuring your local [host environment](#hostenvironment) and [RStudio environment](#hostenvironment), you can set the species [banding code](#bandingcode) and step through each of the following explanations and code blocks in sequence to perform the processing steps in the **rENM workflow**.
+
+-   Alternatively, from the *RStudio* **Run** drop-down menu, select *Restart R and Run All Chunks*. This performs an **automatic batch execution** of the workflow.
+
+-   Finally, you may wish to copy the *user-manual.qmd* file, rename it, and use it as a **customized, reproducible analysis template** for your own species or study system.
+
+## **Automated scripting**
+
+Another option is to use the rENM.R script available in the rENM.scripts package at <https://github.com/rENM-Framework/rENM-scripts>. Down load the script and run the entire processing pipeline from the RStudio console by providing a four-letter banding code, something like this: rENM("CASP").
+
+## **Document rendering options**
+
+Keep in mind that if you do use the *user-manual.qmd* file as a template for your own species or study system, RStudio provides several rendering options. From the **Render** drop-down menu, you can create .docx, .pdf, .html, and .ipynb Jupyter Notebook versions of your new document.
+
 {{< pagebreak >}}
 
-# Configuring the Host Environment
+# Configuring the Host Environment {#hostenvironment}
 
 The most straightforward way to configure your local computing environment is to complete the initial setup steps in a terminal window. The examples provided here assume a macOS environment using the Bash shell, which is the system I use.
 
@@ -126,7 +146,7 @@ rm -rf __MACOSX
 rm -f "$ZIP_FILE"
 ```
 
-# Configuring the RStudio Environment
+# Configuring the RStudio Environment {#rstudioenvironment}
 
 From this point forward, all work is performed in the RStudio environment using R. Begin by specifying the location of the base project directory you created during the previous setup steps. This allows both RStudio and the rENM framework to locate and manage project files consistently.
 
@@ -193,7 +213,7 @@ Use the `show_species()` helper function to display the full list of species ava
 rENM.core::show_species()
 ```
 
-## Setting the species banding code
+## Setting the species banding code {#bandingcode}
 
 ```{r}
 
@@ -580,38 +600,18 @@ rENM.reports::assemble_centroid_trends_page(alpha_code)
 
 ## Suitability trend analysis
 
-This experimental module uses generative AI (GenAI) to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, this package is submitted to ChatGPT (GPT-5.1) for analysis. Finally, the generated results are compiled into a PDF document.
+This experimental module uses generative AI (GenAI) to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, the package is submitted to ChatGPT (GPT-5.1) for analysis. Finally, the generated results are compiled into a PDF document.
 
 ```{r}
-
-# # build a data package for submission to ChatGPT
-# rENM.ai::assemble_suitability_ai_package(alpha_code)
-# 
-# # submit the package using the OpenAI Reponses API
-# rENM.ai::submit_suitability_ai_package(alpha_code)
-# 
-# # render the returned .docx file into a .pdf file
-# rENM.ai::render_ai_docs(alpha_code)
-```
-
-# GenAI Analysis (dev)
-
-This material is in active development ...
-
-```{r}
-
-# devtools::install_github("rENM-Framework/rENM.ai")
-library(rENM.dev)
 
 # build a data package for submission to ChatGPT
-rENM.dev::assemble_ai_package(alpha_code)
+rENM.ai::assemble_ai_package(alpha_code)
 
 # submit the package using the OpenAI Reponses API
-rENM.dev::submit_ai_package(alpha_code)
+rENM.ai::submit_ai_package(alpha_code)
 
 # render the returned .docx file into a .pdf file
-rENM.dev::render_ai_docx(alpha_code)
-
+rENM.ai::render_ai_docx(alpha_code)
 ```
 
 # Create Final Report

@@ -2,7 +2,7 @@
 title: "rENM Framework User Manual"
 author: "John L. Schnase"
 version: "0.1.0"
-date: "2026-04-27"
+date: "2026-04-29"
 number-sections: true
 number-depth: 2
 format:
@@ -30,7 +30,15 @@ execute:
 
 # Introduction
 
-The **rENM framework** is a modular suite of R packages designed to support the development and analysis of *retrospective ecological niche models (rENMs)*. *Retrospective ecological niche modeling* integrates historical species occurrence records with time-matched environmental data to reconstruct the **spatio-temporal dynamics** of species’ responses to changing environmental conditions. By revealing *long-term patterns*, rENMs provide a **powerful observational lens** for addressing biological questions and assessing both the *current and future conservation status* of species.
+The **rENM framework** is a modular suite of R packages designed to support the development and analysis of *retrospective ecological niche models (rENMs)*. *Retrospective ecological niche modeling* integrates historical species occurrence records with historical environmental data to reconstruct the **spatio-temporal dynamics** of species’ responses to changing environmental conditions
+
+By revealing *long-term patterns*, rENMs provide a **powerful observational lens** for addressing biological questions and assessing both the *current and future conservation status* of species. Rather than treating ecological niche models as static representations, the rENM framework uses time-structured modeling to reveal:
+
+-   Long-term trends in climatic suitability for a species
+-   Acceleration and deceleration in these long-term trends
+-   Changes in environmental structure across decades
+-   Bioclimatic velocity and directional change in suitabiliy
+-   Hot spots of potential climate change vulnerability
 
 Although this analytical approach is broadly applicable across taxa, the current implementation of the **rENM framework** is designed to investigate **climate-driven dynamics** in North American bird species. The framework spans approximately *45 years (1980–2020)*, leveraging citizen science observations from the Cornell Lab of Ornithology’s eBird database alongside environmental data derived from *NASA Earth system models*.
 
@@ -40,17 +48,19 @@ Additional information can be found in the following publications and the projec
 
 **Selected Publications**
 
-Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Maxwell, M.E. Aronne, and C.S. Spradlin. Toward a Monte Carlo approach to selecting climate variables in MaxEnt. PLoS One. 2021. Mar 3;16(3):e0237208. [doi:10.1371/journal.pone.0237208](https://doi.org/10.1371/journal.pone.0237208). PMID: 33657125; PMCID: PMC7928495.
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. (in preparation). The rENM Framework: Toward a modular system for reconstructing and analyzing long-term ecological niche dynamics.
 
-Schnase, J.L. and Carroll, M.L. 2022. Automatic variable selection inf ecological niche modeling: a case study using Cassin's Sparrow (*Peucaea cassinii*). PLoS One. 2022 Jan 21;17(1):e0257502. [doi: 10.1371/journal.pone.0257502](https://doi.org/10.1371/journal.pone.0257502). PMID: 35061658; PMCID: PMC8782318.
-
-Schnase, J.L., and M.L. Carroll. 2023. “The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation.” In Proceedings of the 2023 Conference on Big Data from Space (BiDS’23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European. <https://doi.org/10.2760/46796.>
-
-Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin’s Sparrow (*Peucaea cassinii*) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <https://doi.org/10.5751/JFO-00432-950109>
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin’s Sparrow (*Peucaea cassinii*) over four decades. The Southwestern Naturalist, 70(1):1-17. <https://doi.org/10.1894/0038-4909-70.1.7>
 
 Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin’s Sparrow (*Peucaea cassinii*) over four decades. Journal of Field Ornithology 96(3):3. <https://doi.org/10.5751/JFO-00691-960303>
 
-Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin’s Sparrow (*Peucaea cassinii*) over four decades. The Southwestern Naturalist, 70(1):1-17. <https://doi.org/10.1894/0038-4909-70.1.7>
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin’s Sparrow (*Peucaea cassinii*) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <https://doi.org/10.5751/JFO-00432-950109>
+
+Schnase, J.L., and M.L. Carroll. 2023. “The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation.” In Proceedings of the 2023 Conference on Big Data from Space (BiDS’23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European. <https://doi.org/10.2760/46796.>
+
+Schnase, J.L. and Carroll, M.L. 2022. Automatic variable selection in ecological niche modeling: a case study using Cassin's Sparrow (*Peucaea cassinii*). PLoS One. 2022 Jan 21;17(1):e0257502. [doi: 10.1371/journal.pone.0257502](https://doi.org/10.1371/journal.pone.0257502). PMID: 35061658; PMCID: PMC8782318.
+
+Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Maxwell, M.E. Aronne, and C.S. Spradlin. Toward a Monte Carlo approach to selecting climate variables in MaxEnt. PLoS One. 2021. Mar 3;16(3):e0237208. [doi:10.1371/journal.pone.0237208](https://doi.org/10.1371/journal.pone.0237208). PMID: 33657125; PMCID: PMC7928495.
 
 ------------------------------------------------------------------------
 

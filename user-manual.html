@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="John L. Schnase">
-<meta name="dcterms.date" content="2026-04-27">
+<meta name="dcterms.date" content="2026-04-29">
 
 <title>rENM Framework User Manual</title>
 <style>
@@ -2329,7 +2329,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 27, 2026</p>
+      <p class="date">April 29, 2026</p>
     </div>
   </div>
   
@@ -2344,17 +2344,26 @@ vertical-align: -.125em;
 <div style="page-break-after: always;"></div>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>The <strong>rENM framework</strong> is a modular suite of R packages designed to support the development and analysis of <em>retrospective ecological niche models (rENMs)</em>. <em>Retrospective ecological niche modeling</em> integrates historical species occurrence records with time-matched environmental data to reconstruct the <strong>spatio-temporal dynamics</strong> of species’ responses to changing environmental conditions. By revealing <em>long-term patterns</em>, rENMs provide a <strong>powerful observational lens</strong> for addressing biological questions and assessing both the <em>current and future conservation status</em> of species.</p>
+<p>The <strong>rENM framework</strong> is a modular suite of R packages designed to support the development and analysis of <em>retrospective ecological niche models (rENMs)</em>. <em>Retrospective ecological niche modeling</em> integrates historical species occurrence records with historical environmental data to reconstruct the <strong>spatio-temporal dynamics</strong> of species’ responses to changing environmental conditions</p>
+<p>By revealing <em>long-term patterns</em>, rENMs provide a <strong>powerful observational lens</strong> for addressing biological questions and assessing both the <em>current and future conservation status</em> of species. Rather than treating ecological niche models as static representations, the rENM framework uses time-structured modeling to reveal:</p>
+<ul>
+<li>Long-term trends in climatic suitability for a species</li>
+<li>Acceleration and deceleration in these long-term trends</li>
+<li>Changes in environmental structure across decades</li>
+<li>Bioclimatic velocity and directional change in suitabiliy</li>
+<li>Hot spots of potential climate change vulnerability</li>
+</ul>
 <p>Although this analytical approach is broadly applicable across taxa, the current implementation of the <strong>rENM framework</strong> is designed to investigate <strong>climate-driven dynamics</strong> in North American bird species. The framework spans approximately <em>45 years (1980–2020)</em>, leveraging citizen science observations from the Cornell Lab of Ornithology’s eBird database alongside environmental data derived from <em>NASA Earth system models</em>.</p>
 <p>Additional information can be found in the following publications and the project’s GitHub repository at: <a href="https://github.com/rENM-Framework" class="uri">https://github.com/rENM-Framework</a>.</p>
 <hr>
 <p><strong>Selected Publications</strong></p>
-<p>Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Maxwell, M.E. Aronne, and C.S. Spradlin. Toward a Monte Carlo approach to selecting climate variables in MaxEnt. PLoS One. 2021. Mar 3;16(3):e0237208. <a href="https://doi.org/10.1371/journal.pone.0237208">doi:10.1371/journal.pone.0237208</a>. PMID: 33657125; PMCID: PMC7928495.</p>
-<p>Schnase, J.L. and Carroll, M.L. 2022. Automatic variable selection inf ecological niche modeling: a case study using Cassin’s Sparrow (<em>Peucaea cassinii</em>). PLoS One. 2022 Jan 21;17(1):e0257502. <a href="https://doi.org/10.1371/journal.pone.0257502">doi: 10.1371/journal.pone.0257502</a>. PMID: 35061658; PMCID: PMC8782318.</p>
-<p>Schnase, J.L., and M.L. Carroll. 2023. “The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation.” In Proceedings of the 2023 Conference on Big Data from Space (BiDS’23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European. <a href="https://doi.org/10.2760/46796." class="uri">https://doi.org/10.2760/46796.</a></p>
-<p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin’s Sparrow (<em>Peucaea cassinii</em>) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <a href="https://doi.org/10.5751/JFO-00432-950109" class="uri">https://doi.org/10.5751/JFO-00432-950109</a></p>
-<p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin’s Sparrow (<em>Peucaea cassinii</em>) over four decades. Journal of Field Ornithology 96(3):3. <a href="https://doi.org/10.5751/JFO-00691-960303" class="uri">https://doi.org/10.5751/JFO-00691-960303</a></p>
+<p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. (in preparation). The rENM Framework: Toward a modular system for reconstructing and analyzing long-term ecological niche dynamics.</p>
 <p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin’s Sparrow (<em>Peucaea cassinii</em>) over four decades. The Southwestern Naturalist, 70(1):1-17. <a href="https://doi.org/10.1894/0038-4909-70.1.7" class="uri">https://doi.org/10.1894/0038-4909-70.1.7</a></p>
+<p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin’s Sparrow (<em>Peucaea cassinii</em>) over four decades. Journal of Field Ornithology 96(3):3. <a href="https://doi.org/10.5751/JFO-00691-960303" class="uri">https://doi.org/10.5751/JFO-00691-960303</a></p>
+<p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin’s Sparrow (<em>Peucaea cassinii</em>) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <a href="https://doi.org/10.5751/JFO-00432-950109" class="uri">https://doi.org/10.5751/JFO-00432-950109</a></p>
+<p>Schnase, J.L., and M.L. Carroll. 2023. “The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation.” In Proceedings of the 2023 Conference on Big Data from Space (BiDS’23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European. <a href="https://doi.org/10.2760/46796." class="uri">https://doi.org/10.2760/46796.</a></p>
+<p>Schnase, J.L. and Carroll, M.L. 2022. Automatic variable selection in ecological niche modeling: a case study using Cassin’s Sparrow (<em>Peucaea cassinii</em>). PLoS One. 2022 Jan 21;17(1):e0257502. <a href="https://doi.org/10.1371/journal.pone.0257502">doi: 10.1371/journal.pone.0257502</a>. PMID: 35061658; PMCID: PMC8782318.</p>
+<p>Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Maxwell, M.E. Aronne, and C.S. Spradlin. Toward a Monte Carlo approach to selecting climate variables in MaxEnt. PLoS One. 2021. Mar 3;16(3):e0237208. <a href="https://doi.org/10.1371/journal.pone.0237208">doi:10.1371/journal.pone.0237208</a>. PMID: 33657125; PMCID: PMC7928495.</p>
 <hr>
 <p>This manual guides users through the <strong>rENM modeling and analysis workflow</strong>. Detailed documentation for individual functions is available within the <em>respective package manuals</em>.</p>
 <p>The <strong>rENM framework</strong> is an <em>active research platform</em> under ongoing development. It is provided for <em>educational and research purposes only</em> and is distributed <strong>without formal technical support</strong>. Feedback and contributions are welcome.</p>

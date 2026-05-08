@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="John L. Schnase">
-<meta name="dcterms.date" content="2026-04-29">
+<meta name="dcterms.date" content="2026-05-08">
 
 <title>rENM Framework User Manual</title>
 <style>
@@ -2290,10 +2290,6 @@ vertical-align: -.125em;
   <li><a href="#assemble-variable-results" id="toc-assemble-variable-results" class="nav-link" data-scroll-target="#assemble-variable-results"><span class="header-section-number">9.2</span> Assemble variable results</a></li>
   <li><a href="#assemble-centroid-results" id="toc-assemble-centroid-results" class="nav-link" data-scroll-target="#assemble-centroid-results"><span class="header-section-number">9.3</span> Assemble centroid results</a></li>
   </ul></li>
-  <li><a href="#genai-analysis" id="toc-genai-analysis" class="nav-link" data-scroll-target="#genai-analysis"><span class="header-section-number">10</span> GenAI Analysis</a>
-  <ul class="collapse">
-  <li><a href="#suitability-trend-analysis-1" id="toc-suitability-trend-analysis-1" class="nav-link" data-scroll-target="#suitability-trend-analysis-1"><span class="header-section-number">10.1</span> Suitability trend analysis</a></li>
-  </ul></li>
   <li><a href="#create-final-report" id="toc-create-final-report" class="nav-link" data-scroll-target="#create-final-report"><span class="header-section-number">11</span> Create Final Report</a></li>
   <li><a href="#automated-workflows" id="toc-automated-workflows" class="nav-link" data-scroll-target="#automated-workflows"><span class="header-section-number">12</span> Automated Workflows</a></li>
   <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices"><span class="header-section-number">13</span> APPENDICES</a>
@@ -2306,7 +2302,7 @@ vertical-align: -.125em;
   </ul></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="user-manual.docx"><i class="bi bi-file-word"></i>MS Word</a></li><li><a href="user-manual.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="user-manual.ipynb" download="user-manual.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="rENM-Framework-User-Manual.docx"><i class="bi bi-file-word"></i>MS Word</a></li><li><a href="rENM-Framework-User-Manual.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="rENM-Framework-User-Manual.ipynb" download="rENM-Framework-User-Manual.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -2329,7 +2325,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 29, 2026</p>
+      <p class="date">May 8, 2026</p>
     </div>
   </div>
   
@@ -2342,9 +2338,11 @@ vertical-align: -.125em;
 
 
 <div style="page-break-after: always;"></div>
+<p><strong><em>** Pre-release documentation. Content is subject to ongoing revision and periodic updates … **</em></strong></p>
+<p> </p>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>The <strong>rENM framework</strong> is a modular suite of R packages designed to support the development and analysis of <em>retrospective ecological niche models (rENMs)</em>. <em>Retrospective ecological niche modeling</em> integrates historical species occurrence records with historical environmental data to reconstruct the <strong>spatio-temporal dynamics</strong> of species’ responses to changing environmental conditions</p>
+<p>The <strong>rENM framework</strong> is a modular suite of R packages designed to support the development and analysis of <em>retrospective ecological niche models (rENMs)</em>. <em>Retrospective ecological niche modeling</em> integrates historical species occurrence records with historical environmental data to reconstruct the <strong>spatio-temporal dynamics</strong> of species’ responses to changing environmental conditions.</p>
 <p>By revealing <em>long-term patterns</em>, rENMs provide a <strong>powerful observational lens</strong> for addressing biological questions and assessing both the <em>current and future conservation status</em> of species. Rather than treating ecological niche models as static representations, the rENM framework uses time-structured modeling to reveal:</p>
 <ul>
 <li>Long-term trends in climatic suitability for a species</li>
@@ -2824,29 +2822,35 @@ rENM.Framework@gmail.com</p>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a suitability trends with centroids page</span></span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_centroid_trends_page</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-</section>
-<section id="genai-analysis" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> GenAI Analysis</h1>
-<section id="suitability-trend-analysis-1" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="suitability-trend-analysis-1"><span class="header-section-number">10.1</span> Suitability trend analysis</h2>
-<p>This experimental module uses generative AI (GenAI) to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, the package is submitted to ChatGPT (GPT-5.1) for analysis. Finally, the generated results are compiled into a PDF document.</p>
+<blockquote class="blockquote">
+<h1 id="genai-analysis" data-number="10"><span class="header-section-number">10</span> GenAI Analysis</h1>
+</blockquote>
+<p>This experimental module uses <strong>generative AI (GenAI)</strong> to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, the package is submitted to to a large language model (LLM) for interpretation.</p>
+<p>There are several manual steps required before you’ll be able to use the rENM.ai module. Without going into the details, you’ll basically need to create an account with ChatGPT or Claude, acquire and API key, then record that key in the .Renviron file in your home directory. Your .Renviron file will end up looking something like this:</p>
+<p><code>OPENAI_API_KEY=&quot;sk-proj-fQpuBZIF5l4XkgB ...&quot;</code></p>
+<p><code>ANTHROPIC_API_KEY=&quot;sk-ant-api03-JuQS6V9 ...&quot;</code></p>
+<p><code>RENM_PROJECT_DIR=&quot;/Users/jschnase/rENM&quot;</code></p>
+<p>We’re currently evaluating two AI options: <strong>ChatGPT</strong> (model gpt-5.1) and <strong>Claude</strong> (model claude-sonnet-4.6). It’s interesting see the differences in behavior and interpretations. Note that interacting with Claude programmatically through Antrhopic’s API takes more time and costs a lot more. We’ll have more on that soon …</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># build a data package for submission to ChatGPT</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># build a data and prompt submission package</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">assemble_ai_package</span>(alpha_code)</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># submit the package using the OpenAI Reponses API</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">submit_ai_package</span>(alpha_code)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># submit the package to chatgpt</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">submit_to_chatgpt</span>(alpha_code)</span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># render the returned .docx file into a .pdf file</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">render_ai_docx</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># submit the package to claude</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.ai::submit_to_claude(alpha_code)</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co"># render the returned .docx file into a .pdf file</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">render_ai_docx</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
 <section id="create-final-report" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Create Final Report</h1>
+<p>As a final step, the results generated by the preceding steps can be compiled into a final PDF document.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a final report comprising all summary pages</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a final report composed of all the summary pages</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_final_report</span>(alpha_code)</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># these are the default pages, edit as needed ...</span></span>
@@ -2861,6 +2865,8 @@ rENM.Framework@gmail.com</p>
 <span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Variable-Trend-Maps1&quot;,</span></span>
 <span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Variable-Trend-Maps2&quot;))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p> </p>
+<p><strong><em>Coming soon …</em></strong></p>
 </section>
 <section id="automated-workflows" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Automated Workflows</h1>

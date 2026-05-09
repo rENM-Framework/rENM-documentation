@@ -1,8 +1,8 @@
 ---
 title: "rENM Framework User Manual"
 author: "John L. Schnase"
-version: "0.1.0"
-date: "2026-05-08"
+version: "0.1.0.9000"
+date: "2026-05-09"
 number-sections: true
 number-depth: 2
 format:
@@ -91,15 +91,15 @@ The **rENM processing pipeline** consists of **five core steps**, including an *
 
 -   Alternatively, from the *RStudio* **Run** drop-down menu, select *Restart R and Run All Chunks*. This performs an **automatic batch execution** of the workflow.
 
--   Finally, you may wish to copy the *user-manual.qmd* file, rename it, and use it as a **customized, reproducible analysis template** for your own species or study system.
+-   Finally, you may wish to copy the *rENM-Framework-User-Manual.qmd* file, rename it, and use it as a **customized, reproducible analysis template** for your own species or study system.
 
 ## **Automated scripting**
 
-Another option is to use the rENM.R script available in the rENM.scripts package at <https://github.com/rENM-Framework/rENM-scripts>. Down load the script and run the entire processing pipeline from the RStudio console by providing a four-letter banding code, something like this: rENM("CASP").
+If you prefer not to run an rENM analysis step-by-step, you can use automated orchestration to execute the full pipeline. From the RStudio console, simply provide a four-letter banding code to the `rENM()` function. For example: `rENM("CASP")`. For additional details on automation options, enter `?rENM` in the RStudio console.
 
 ## **Document rendering options**
 
-Keep in mind that if you do use the *user-manual.qmd* file as a template for your own species or study system, RStudio provides several rendering options. From the **Render** drop-down menu, you can create .docx, .pdf, .html, and .ipynb Jupyter Notebook versions of your new document.
+Keep in mind that if you do use the *rENM-Framework-User-Manual.qmd* file as a template for your own species or study system, RStudio provides several rendering options. From the **Render** drop-down menu, you can create .docx, .pdf, .html, and .ipynb Jupyter Notebook versions of your new document.
 
 {{< pagebreak >}}
 
@@ -188,8 +188,9 @@ Next, install the rENM framework’s collection of modular packages. These can b
 
 ```{r}
 
-# # install rENM framework packates from the GitHub repository
+# # install rENM framework packages from the GitHub repository
 # install.packages("devtools")
+# devtools::install_github("rENM-Framework/rENM")
 # devtools::install_github("rENM-Framework/rENM.core")
 # devtools::install_github("rENM-Framework/rENM.data")
 # devtools::install_github("rENM-Framework/rENM.model")
@@ -205,12 +206,13 @@ Now, load the installed rENM framework packages.
 ```{r}
 
 # load the installed rENM framework packages
+library(rENM)
 library(rENM.core)
 library(rENM.data)
 library(rENM.model)
 library(rENM.analysis)
-library(rENM.ai)
 library(rENM.reports)
+library(rENM.ai)
 ```
 
 # Performing an rENM Analysis
@@ -664,8 +666,6 @@ rENM.reports::assemble_final_report(alpha_code)
  
 
 ***Coming soon ...***
-
-# Automated Workflows
 
 # APPENDICES
 

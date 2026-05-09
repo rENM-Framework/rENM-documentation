@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="John L. Schnase">
-<meta name="dcterms.date" content="2026-05-08">
+<meta name="dcterms.date" content="2026-05-09">
 
 <title>rENM Framework User Manual</title>
 <style>
@@ -2291,11 +2291,10 @@ vertical-align: -.125em;
   <li><a href="#assemble-centroid-results" id="toc-assemble-centroid-results" class="nav-link" data-scroll-target="#assemble-centroid-results"><span class="header-section-number">9.3</span> Assemble centroid results</a></li>
   </ul></li>
   <li><a href="#create-final-report" id="toc-create-final-report" class="nav-link" data-scroll-target="#create-final-report"><span class="header-section-number">11</span> Create Final Report</a></li>
-  <li><a href="#automated-workflows" id="toc-automated-workflows" class="nav-link" data-scroll-target="#automated-workflows"><span class="header-section-number">12</span> Automated Workflows</a></li>
-  <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices"><span class="header-section-number">13</span> APPENDICES</a>
+  <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices"><span class="header-section-number">12</span> APPENDICES</a>
   <ul class="collapse">
-  <li><a href="#technical-specifications" id="toc-technical-specifications" class="nav-link" data-scroll-target="#technical-specifications"><span class="header-section-number">13.1</span> Technical specifications</a></li>
-  <li><a href="#data-extensions" id="toc-data-extensions" class="nav-link" data-scroll-target="#data-extensions"><span class="header-section-number">13.2</span> Data extensions</a>
+  <li><a href="#technical-specifications" id="toc-technical-specifications" class="nav-link" data-scroll-target="#technical-specifications"><span class="header-section-number">12.1</span> Technical specifications</a></li>
+  <li><a href="#data-extensions" id="toc-data-extensions" class="nav-link" data-scroll-target="#data-extensions"><span class="header-section-number">12.2</span> Data extensions</a>
   <ul class="collapse">
   <li><a href="#adding-new-species" id="toc-adding-new-species" class="nav-link" data-scroll-target="#adding-new-species">- Adding new species</a></li>
   <li><a href="#adding-new-variables" id="toc-adding-new-variables" class="nav-link" data-scroll-target="#adding-new-variables">- Adding new variables</a></li>
@@ -2325,7 +2324,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 8, 2026</p>
+      <p class="date">May 9, 2026</p>
     </div>
   </div>
   
@@ -2379,16 +2378,16 @@ rENM.Framework@gmail.com</p>
 <ul>
 <li><p>After initially configuring your local <a href="#hostenvironment">host environment</a> and <a href="#hostenvironment">RStudio environment</a>, you can set the species <a href="#bandingcode">banding code</a> and step through each of the following explanations and code blocks in sequence to perform the processing steps in the <strong>rENM workflow</strong>.</p></li>
 <li><p>Alternatively, from the <em>RStudio</em> <strong>Run</strong> drop-down menu, select <em>Restart R and Run All Chunks</em>. This performs an <strong>automatic batch execution</strong> of the workflow.</p></li>
-<li><p>Finally, you may wish to copy the <em>user-manual.qmd</em> file, rename it, and use it as a <strong>customized, reproducible analysis template</strong> for your own species or study system.</p></li>
+<li><p>Finally, you may wish to copy the <em>rENM-Framework-User-Manual.qmd</em> file, rename it, and use it as a <strong>customized, reproducible analysis template</strong> for your own species or study system.</p></li>
 </ul>
 </section>
 <section id="automated-scripting" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="automated-scripting"><span class="header-section-number">2.2</span> <strong>Automated scripting</strong></h2>
-<p>Another option is to use the rENM.R script available in the rENM.scripts package at <a href="https://github.com/rENM-Framework/rENM-scripts" class="uri">https://github.com/rENM-Framework/rENM-scripts</a>. Down load the script and run the entire processing pipeline from the RStudio console by providing a four-letter banding code, something like this: rENM(“CASP”).</p>
+<p>If you prefer not to run an rENM analysis step-by-step, you can use automated orchestration to execute the full pipeline. From the RStudio console, simply provide a four-letter banding code to the <code>rENM()</code> function. For example: <code>rENM(&quot;CASP&quot;)</code>. For additional details on automation options, enter <code>?rENM</code> in the RStudio console.</p>
 </section>
 <section id="document-rendering-options" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="document-rendering-options"><span class="header-section-number">2.3</span> <strong>Document rendering options</strong></h2>
-<p>Keep in mind that if you do use the <em>user-manual.qmd</em> file as a template for your own species or study system, RStudio provides several rendering options. From the <strong>Render</strong> drop-down menu, you can create .docx, .pdf, .html, and .ipynb Jupyter Notebook versions of your new document.</p>
+<p>Keep in mind that if you do use the <em>rENM-Framework-User-Manual.qmd</em> file as a template for your own species or study system, RStudio provides several rendering options. From the <strong>Render</strong> drop-down menu, you can create .docx, .pdf, .html, and .ipynb Jupyter Notebook versions of your new document.</p>
 <div style="page-break-after: always;"></div>
 </section>
 </section>
@@ -2461,14 +2460,15 @@ rENM.Framework@gmail.com</p>
 <h2 data-number="4.2" class="anchored" data-anchor-id="installing-the-framework-packages"><span class="header-section-number">4.2</span> Installing the framework packages</h2>
 <p>Next, install the rENM framework’s collection of modular packages. These can be obtained directly from the project’s GitHub repository, as shown below. The framework currently consists of six modules. This installation step only needs to be completed once.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # install rENM framework packates from the GitHub repository</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # install rENM framework packages from the GitHub repository</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.core&quot;)</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.data&quot;)</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.model&quot;)</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.analysis&quot;)</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.reports&quot;)</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.ai&quot;)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM&quot;)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.core&quot;)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.data&quot;)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.model&quot;)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.analysis&quot;)</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.reports&quot;)</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.ai&quot;)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="loading-the-renm-framework-modules" class="level2" data-number="4.3">
@@ -2476,12 +2476,13 @@ rENM.Framework@gmail.com</p>
 <p>Now, load the installed rENM framework packages.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the installed rENM framework packages</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.core)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.data)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.model)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.analysis)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.ai)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.reports)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.core)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.data)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.model)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.analysis)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.reports)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.ai)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -2868,16 +2869,13 @@ rENM.Framework@gmail.com</p>
 <p> </p>
 <p><strong><em>Coming soon …</em></strong></p>
 </section>
-<section id="automated-workflows" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> Automated Workflows</h1>
+<section id="appendices" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> APPENDICES</h1>
+<section id="technical-specifications" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="technical-specifications"><span class="header-section-number">12.1</span> Technical specifications</h2>
 </section>
-<section id="appendices" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> APPENDICES</h1>
-<section id="technical-specifications" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="technical-specifications"><span class="header-section-number">13.1</span> Technical specifications</h2>
-</section>
-<section id="data-extensions" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="data-extensions"><span class="header-section-number">13.2</span> Data extensions</h2>
+<section id="data-extensions" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="data-extensions"><span class="header-section-number">12.2</span> Data extensions</h2>
 <section id="adding-new-species" class="level3">
 <h3 class="anchored" data-anchor-id="adding-new-species">- Adding new species</h3>
 </section>

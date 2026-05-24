@@ -1,8 +1,8 @@
 ---
 title: "rENM Framework User Manual"
+subtitle: "Version 0.1.0.9000"
 author: "John L. Schnase"
-version: "0.1.0.9000"
-date: "2026-05-09"
+date: today
 number-sections: true
 number-depth: 2
 format:
@@ -14,7 +14,7 @@ format:
     number-sections: true
   html:
     toc: true
-    self-contained: true
+    embed-resources: true
   ipynb:
     toc: true
 execute:
@@ -22,13 +22,15 @@ execute:
   warning: false
   message: false
   eval: false
-  results: 'hide'
-  fig-show: 'hide'
+  output: false
+  fig-show: hide
 ---
 
 {{< pagebreak >}}
 
-***\*\* Pre-release documentation. Content is subject to ongoing revision and periodic updates ... \*\****
+::: callout-warning
+**Pre-release documentation.** Content is subject to ongoing revision and periodic updates.
+:::
 
  
 
@@ -38,11 +40,11 @@ The **rENM framework** is a modular suite of R packages designed to support the 
 
 By revealing *long-term patterns*, rENMs provide a **powerful observational lens** for addressing biological questions and assessing both the *current and future conservation status* of species. Rather than treating ecological niche models as static representations, the rENM framework uses time-structured modeling to reveal:
 
--   Long-term trends in climatic suitability for a species
--   Acceleration and deceleration in these long-term trends
--   Changes in environmental structure across decades
--   Bioclimatic velocity and directional change in suitabiliy
--   Hot spots of potential climate change vulnerability
+- Long-term trends in climatic suitability for a species
+- Acceleration and deceleration in these long-term trends
+- Changes in environmental structure across decades
+- Bioclimatic velocity and directional change in suitability
+- Hot spots of potential climate change vulnerability
 
 Although this analytical approach is broadly applicable across taxa, the current implementation of the **rENM framework** is designed to investigate **climate-driven dynamics** in North American bird species. The framework spans approximately *45 years (1980–2020)*, leveraging citizen science observations from the Cornell Lab of Ornithology’s eBird database alongside environmental data derived from *NASA Earth system models*.
 
@@ -54,13 +56,13 @@ Additional information can be found in the following publications and the projec
 
 Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. (in preparation). The rENM Framework: Toward a modular system for reconstructing and analyzing long-term ecological niche dynamics.
 
-Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin’s Sparrow (*Peucaea cassinii*) over four decades. The Southwestern Naturalist, 70(1):1-17. <https://doi.org/10.1894/0038-4909-70.1.7>
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin's Sparrow (*Peucaea cassinii*) over four decades. The Southwestern Naturalist, 70(1):1-17. <https://doi.org/10.1894/0038-4909-70.1.7>
 
-Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin’s Sparrow (*Peucaea cassinii*) over four decades. Journal of Field Ornithology 96(3):3. <https://doi.org/10.5751/JFO-00691-960303>
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin's Sparrow (*Peucaea cassinii*) over four decades. Journal of Field Ornithology 96(3):3. <https://doi.org/10.5751/JFO-00691-960303>
 
-Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin’s Sparrow (*Peucaea cassinii*) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <https://doi.org/10.5751/JFO-00432-950109>
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin's Sparrow (*Peucaea cassinii*) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <https://doi.org/10.5751/JFO-00432-950109>
 
-Schnase, J.L., and M.L. Carroll. 2023. “The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation.” In Proceedings of the 2023 Conference on Big Data from Space (BiDS’23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European. <https://doi.org/10.2760/46796.>
+Schnase, J.L., and M.L. Carroll. 2023. "The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation." In Proceedings of the 2023 Conference on Big Data from Space (BiDS'23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European Union. <https://doi.org/10.2760/46796>
 
 Schnase, J.L. and Carroll, M.L. 2022. Automatic variable selection in ecological niche modeling: a case study using Cassin's Sparrow (*Peucaea cassinii*). PLoS One. 2022 Jan 21;17(1):e0257502. [doi: 10.1371/journal.pone.0257502](https://doi.org/10.1371/journal.pone.0257502). PMID: 35061658; PMCID: PMC8782318.
 
@@ -87,11 +89,11 @@ The **rENM processing pipeline** consists of **five core steps**, including an *
 
 ## **Using the Quarto document**
 
--   After initially configuring your local [host environment](#hostenvironment) and [RStudio environment](#hostenvironment), you can set the species [banding code](#bandingcode) and step through each of the following explanations and code blocks in sequence to perform the processing steps in the **rENM workflow**.
+- After initially configuring your local [host environment](#hostenvironment) and [RStudio environment](#rstudioenvironment), you can set the species [banding code](#bandingcode) and step through each of the following explanations and code blocks in sequence to perform the processing steps in the **rENM workflow**.
 
--   Alternatively, from the *RStudio* **Run** drop-down menu, select *Restart R and Run All Chunks*. This performs an **automatic batch execution** of the workflow.
+- Alternatively, from the *RStudio* **Run** drop-down menu, select *Restart R and Run All Chunks*. This performs an **automatic batch execution** of the workflow.
 
--   Finally, you may wish to copy the *rENM-Framework-User-Manual.qmd* file, rename it, and use it as a **customized, reproducible analysis template** for your own species or study system.
+- Finally, you may wish to copy the *rENM-Framework-User-Manual.qmd* file, rename it, and use it as a **customized, reproducible analysis template** for your own species or study system.
 
 ## **Automated scripting**
 
@@ -103,6 +105,53 @@ Keep in mind that if you do use the *rENM-Framework-User-Manual.qmd* file as a t
 
 {{< pagebreak >}}
 
+# System Requirements
+
+The rENM framework requires R (≥ 4.1.0) and two external software packages that must be installed separately before the full pipeline can run. All R package dependencies are installed automatically when you install the framework packages from GitHub (see Section 4).
+
+## R package dependencies
+
+Two framework packages pull in notably heavy R dependencies worth anticipating:
+
+- **`rENM.model`** depends on `sdm`, which requires `randomForest`, `gbm`, and `earth` as modeling back-ends. These are installed on first use.
+- **`rENM.analysis`** depends on `rstanarm` for Bayesian trend estimation. `rstanarm` is large and may take several minutes to compile on first install.
+
+The `rENM.reports` package uses `webshot2`, `pagedown`, and `chromote` for PNG and PDF rendering of summary tables. These are optional (`Suggests`) and must be installed separately (see below).
+
+## LibreOffice
+
+`rENM.ai::render_ai_docx()` converts AI-generated DOCX reports to PDF using LibreOffice in headless mode. LibreOffice must be installed before using that function.
+
+Download from <https://www.libreoffice.org>. On macOS, LibreOffice installs to `/Applications` but its `soffice` binary is **not** added to `PATH` automatically. Run this once in Terminal after installing:
+
+``` bash
+sudo ln -s /Applications/LibreOffice.app/Contents/MacOS/soffice /usr/local/bin/soffice
+```
+
+On Linux, install via your package manager (e.g., `apt install libreoffice`); `soffice` is placed on `PATH` automatically. If LibreOffice is absent when `render_ai_docx()` is called, a clear error message is displayed with installation instructions.
+
+## Chrome or Chromium
+
+`rENM.reports` renders summary tables as PNG and PDF files by driving a headless Chrome browser via the `chromote`, `webshot2`, and `pagedown` packages. Install these R packages first:
+
+```{r}
+# install.packages(c("chromote", "webshot2", "pagedown"))
+```
+
+Then verify Chrome is found before running the pipeline:
+
+```{r}
+# chromote::find_chrome()
+```
+
+If that call throws an error, install Google Chrome from <https://www.google.com/chrome/> and re-run `chromote::find_chrome()` to confirm. If Chrome is unavailable at runtime, PNG and PDF outputs are silently skipped with a console note; the Excel (`.xlsx`) output is always written regardless.
+
+## Note on hidden string dependencies
+
+One class of R package dependency is invisible to standard static-analysis tools such as `R CMD check`: package names passed as *string arguments* to functions rather than referenced directly in code. The rENM framework uses `paletteer` for color scales, and some palette names embed a package reference in string form (e.g., `"ggthemes::Classic Area Red-Green"`). These indirect dependencies are listed under `Suggests` in the relevant package DESCRIPTION files, but they will not be flagged automatically if missing — they surface only at runtime. If you encounter an unexpected "package not found" error during a plotting step, check whether a `paletteer`-based color scale is the source.
+
+{{< pagebreak >}}
+
 # Configuring the Host Environment {#hostenvironment}
 
 The most straightforward way to configure your local computing environment is to complete the initial setup steps in a terminal window. The examples provided here assume a macOS environment using the Bash shell, which is the system I use.
@@ -111,10 +160,12 @@ The rENM framework relies on a simple, standardized filesystem structure. At the
 
 Model outputs and analysis results are written to a `runs` subdirectory within the project directory, providing a clear and reproducible organization for all rENM analyses.
 
-PROJECT_DIRECTORY/\
-\|\_\_\_ data -\> (symbolic link to example_data)\
-\|\_\_\_ example_data/...\
-\|\_\_\_ runs/...
+```         
+PROJECT_DIRECTORY/
+|___ data -> (symbolic link to example_data)
+|___ example_data/...
+|___ runs/...
+```
 
 You only need to configure your host environment once. After completing this initial setup, you can move into the RStudio environment to finalize the rENM framework installation and begin your analyses.
 
@@ -176,7 +227,6 @@ The following command defines this location in the `.Renviron` file. This step o
 #   file = "~/.Renviron",
 #   append = TRUE
 # )
-# s
 # # reload (or restart R)
 # readRenviron("~/.Renviron")
 # Sys.getenv("RENM_PROJECT_DIR")
@@ -189,14 +239,14 @@ Next, install the rENM framework’s collection of modular packages. These can b
 ```{r}
 
 # # install rENM framework packages from the GitHub repository
-# install.packages("devtools")
-# devtools::install_github("rENM-Framework/rENM")
-# devtools::install_github("rENM-Framework/rENM.core")
-# devtools::install_github("rENM-Framework/rENM.data")
-# devtools::install_github("rENM-Framework/rENM.model")
-# devtools::install_github("rENM-Framework/rENM.analysis")
-# devtools::install_github("rENM-Framework/rENM.reports")
-# devtools::install_github("rENM-Framework/rENM.ai")
+# install.packages("remotes")
+# remotes::install_github("rENM-Framework/rENM.core")
+# remotes::install_github("rENM-Framework/rENM.data")
+# remotes::install_github("rENM-Framework/rENM.model")
+# remotes::install_github("rENM-Framework/rENM.analysis")
+# remotes::install_github("rENM-Framework/rENM.ai")
+# remotes::install_github("rENM-Framework/rENM.reports")
+# remotes::install_github("rENM-Framework/rENM")  # umbrella package — install last
 ```
 
 ## Loading the rENM framework modules
@@ -300,7 +350,7 @@ rENM.data::limit_record_count(alpha_code, record_count)
 
 ### - Wrapping up occurrence data prep
 
-We finish setting up occurrence data by moving the prepared per-bin occurrence files from the temporary *\<alpha_code\>/\_occs/tmp/* directory into the main *\<alpha_code\>/\_occs/* directory for our species run. After copying the files, the temporary directory is removed. This is the finial cleanup step before preparing environmental data.
+We finish setting up occurrence data by moving the prepared per-bin occurrence files from the temporary *\<alpha_code\>/\_occs/tmp/* directory into the main *\<alpha_code\>/\_occs/* directory for our species run. After copying the files, the temporary directory is removed. This is the final cleanup step before preparing environmental data.
 
 ```{r}
 
@@ -495,7 +545,7 @@ Historical centroid trajectories can also be used to quantify the direction, dis
 
 ```{r}
 
-# finds bioclimatic verlocity from weighted centroids
+# finds bioclimatic velocity from weighted centroids
 rENM.analysis::find_bioclimatic_velocity(alpha_code)
 ```
 
@@ -612,19 +662,19 @@ rENM.reports::create_centroid_trend_summary_table(alpha_code)
 rENM.reports::assemble_centroid_trends_page(alpha_code)
 ```
 
-> # GenAI Analysis
+# GenAI Analysis
 
-This experimental module uses **generative AI (GenAI)** to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, the package is submitted to to a large language model (LLM) for interpretation.
+This experimental module uses **generative AI (GenAI)** to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, the package is submitted to a large language model (LLM) for interpretation, and the resulting DOCX report is converted to PDF.
 
-There are several manual steps required before you'll be able to use the rENM.ai module. Without going into the details, you'll basically need to create an account with ChatGPT or Claude, acquire and API key, then record that key in the .Renviron file in your home directory. Your .Renviron file will end up looking something like this:
+Before using `rENM.ai`, you must create an account with your preferred AI provider, obtain an API key, and record it in your `.Renviron` file. Note that API usage is billed per token, independently of any web subscription. Your `.Renviron` file should include entries of the following form:
 
-`OPENAI_API_KEY="sk-proj-fQpuBZIF5l4XkgB ..."`
+```         
+OPENAI_API_KEY="sk-proj-..."
+ANTHROPIC_API_KEY="sk-ant-..."
+RENM_PROJECT_DIR="/Users/yourname/rENM"
+```
 
-`ANTHROPIC_API_KEY="sk-ant-api03-JuQS6V9 ..."`
-
-`RENM_PROJECT_DIR="/Users/jschnase/rENM"`
-
-We're currently evaluating two AI options: **ChatGPT** (model gpt-5.1) and **Claude** (model claude-sonnet-4.6). It's interesting see the differences in behavior and interpretations. Note that interacting with Claude programmatically through Antrhopic's API takes more time and costs a lot more. We'll have more on that soon ...
+The framework currently supports two providers: **OpenAI** (ChatGPT) and **Anthropic** (Claude). Both providers accept the same assembled data package; the choice of provider affects interpretation style, response time, and per-run cost. Consult each provider's current API documentation for model availability and pricing. For additional details on authentication and configuration, see `?submit_to_claude` and `?submit_to_chatgpt`.
 
 ```{r}
 
@@ -671,8 +721,20 @@ rENM.reports::assemble_final_report(alpha_code)
 
 ## Technical specifications
 
+::: callout-note
+This section is under development. It will document R and system version requirements, tested platform configurations, and known compatibility notes.
+:::
+
 ## Data extensions
 
 ### - Adding new species
 
+::: callout-note
+This section is under development. It will describe how to prepare and register occurrence data and GAP range files for species not included in the example dataset.
+:::
+
 ### - Adding new variables
+
+::: callout-note
+This section is under development. It will describe how to prepare and integrate additional MERRA-2 or custom environmental predictor variables into the framework's data collection.
+:::

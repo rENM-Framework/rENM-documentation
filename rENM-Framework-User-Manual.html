@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="John L. Schnase">
-<meta name="dcterms.date" content="2026-05-09">
+<meta name="dcterms.date" content="2026-05-24">
 
 <title>rENM Framework User Manual</title>
 <style>
@@ -2216,25 +2216,32 @@ vertical-align: -.125em;
   <li><a href="#automated-scripting" id="toc-automated-scripting" class="nav-link" data-scroll-target="#automated-scripting"><span class="header-section-number">2.2</span> <strong>Automated scripting</strong></a></li>
   <li><a href="#document-rendering-options" id="toc-document-rendering-options" class="nav-link" data-scroll-target="#document-rendering-options"><span class="header-section-number">2.3</span> <strong>Document rendering options</strong></a></li>
   </ul></li>
-  <li><a href="#hostenvironment" id="toc-hostenvironment" class="nav-link" data-scroll-target="#hostenvironment"><span class="header-section-number">3</span> Configuring the Host Environment</a>
+  <li><a href="#system-requirements" id="toc-system-requirements" class="nav-link" data-scroll-target="#system-requirements"><span class="header-section-number">3</span> System Requirements</a>
   <ul class="collapse">
-  <li><a href="#creating-the-project-directory" id="toc-creating-the-project-directory" class="nav-link" data-scroll-target="#creating-the-project-directory"><span class="header-section-number">3.1</span> Creating the project directory</a></li>
-  <li><a href="#installing-the-example-data-set" id="toc-installing-the-example-data-set" class="nav-link" data-scroll-target="#installing-the-example-data-set"><span class="header-section-number">3.2</span> Installing the example data set</a></li>
+  <li><a href="#r-package-dependencies" id="toc-r-package-dependencies" class="nav-link" data-scroll-target="#r-package-dependencies"><span class="header-section-number">3.1</span> R package dependencies</a></li>
+  <li><a href="#libreoffice" id="toc-libreoffice" class="nav-link" data-scroll-target="#libreoffice"><span class="header-section-number">3.2</span> LibreOffice</a></li>
+  <li><a href="#chrome-or-chromium" id="toc-chrome-or-chromium" class="nav-link" data-scroll-target="#chrome-or-chromium"><span class="header-section-number">3.3</span> Chrome or Chromium</a></li>
+  <li><a href="#note-on-hidden-string-dependencies" id="toc-note-on-hidden-string-dependencies" class="nav-link" data-scroll-target="#note-on-hidden-string-dependencies"><span class="header-section-number">3.4</span> Note on hidden string dependencies</a></li>
   </ul></li>
-  <li><a href="#rstudioenvironment" id="toc-rstudioenvironment" class="nav-link" data-scroll-target="#rstudioenvironment"><span class="header-section-number">4</span> Configuring the RStudio Environment</a>
+  <li><a href="#hostenvironment" id="toc-hostenvironment" class="nav-link" data-scroll-target="#hostenvironment"><span class="header-section-number">4</span> Configuring the Host Environment</a>
   <ul class="collapse">
-  <li><a href="#setting-the-project-directory-location" id="toc-setting-the-project-directory-location" class="nav-link" data-scroll-target="#setting-the-project-directory-location"><span class="header-section-number">4.1</span> Setting the project directory location</a></li>
-  <li><a href="#installing-the-framework-packages" id="toc-installing-the-framework-packages" class="nav-link" data-scroll-target="#installing-the-framework-packages"><span class="header-section-number">4.2</span> Installing the framework packages</a></li>
-  <li><a href="#loading-the-renm-framework-modules" id="toc-loading-the-renm-framework-modules" class="nav-link" data-scroll-target="#loading-the-renm-framework-modules"><span class="header-section-number">4.3</span> Loading the rENM framework modules</a></li>
+  <li><a href="#creating-the-project-directory" id="toc-creating-the-project-directory" class="nav-link" data-scroll-target="#creating-the-project-directory"><span class="header-section-number">4.1</span> Creating the project directory</a></li>
+  <li><a href="#installing-the-example-data-set" id="toc-installing-the-example-data-set" class="nav-link" data-scroll-target="#installing-the-example-data-set"><span class="header-section-number">4.2</span> Installing the example data set</a></li>
   </ul></li>
-  <li><a href="#performing-an-renm-analysis" id="toc-performing-an-renm-analysis" class="nav-link" data-scroll-target="#performing-an-renm-analysis"><span class="header-section-number">5</span> Performing an rENM Analysis</a>
+  <li><a href="#rstudioenvironment" id="toc-rstudioenvironment" class="nav-link" data-scroll-target="#rstudioenvironment"><span class="header-section-number">5</span> Configuring the RStudio Environment</a>
   <ul class="collapse">
-  <li><a href="#viewing-installed-species-data" id="toc-viewing-installed-species-data" class="nav-link" data-scroll-target="#viewing-installed-species-data"><span class="header-section-number">5.1</span> Viewing installed species data</a></li>
-  <li><a href="#bandingcode" id="toc-bandingcode" class="nav-link" data-scroll-target="#bandingcode"><span class="header-section-number">5.2</span> Setting the species banding code</a></li>
+  <li><a href="#setting-the-project-directory-location" id="toc-setting-the-project-directory-location" class="nav-link" data-scroll-target="#setting-the-project-directory-location"><span class="header-section-number">5.1</span> Setting the project directory location</a></li>
+  <li><a href="#installing-the-framework-packages" id="toc-installing-the-framework-packages" class="nav-link" data-scroll-target="#installing-the-framework-packages"><span class="header-section-number">5.2</span> Installing the framework packages</a></li>
+  <li><a href="#loading-the-renm-framework-modules" id="toc-loading-the-renm-framework-modules" class="nav-link" data-scroll-target="#loading-the-renm-framework-modules"><span class="header-section-number">5.3</span> Loading the rENM framework modules</a></li>
   </ul></li>
-  <li><a href="#data-assembly" id="toc-data-assembly" class="nav-link" data-scroll-target="#data-assembly"><span class="header-section-number">6</span> Data Assembly</a>
+  <li><a href="#performing-an-renm-analysis" id="toc-performing-an-renm-analysis" class="nav-link" data-scroll-target="#performing-an-renm-analysis"><span class="header-section-number">6</span> Performing an rENM Analysis</a>
   <ul class="collapse">
-  <li><a href="#occurrence-data" id="toc-occurrence-data" class="nav-link" data-scroll-target="#occurrence-data"><span class="header-section-number">6.1</span> Occurrence data</a>
+  <li><a href="#viewing-installed-species-data" id="toc-viewing-installed-species-data" class="nav-link" data-scroll-target="#viewing-installed-species-data"><span class="header-section-number">6.1</span> Viewing installed species data</a></li>
+  <li><a href="#bandingcode" id="toc-bandingcode" class="nav-link" data-scroll-target="#bandingcode"><span class="header-section-number">6.2</span> Setting the species banding code</a></li>
+  </ul></li>
+  <li><a href="#data-assembly" id="toc-data-assembly" class="nav-link" data-scroll-target="#data-assembly"><span class="header-section-number">7</span> Data Assembly</a>
+  <ul class="collapse">
+  <li><a href="#occurrence-data" id="toc-occurrence-data" class="nav-link" data-scroll-target="#occurrence-data"><span class="header-section-number">7.1</span> Occurrence data</a>
   <ul class="collapse">
   <li><a href="#gathering-ebird-records" id="toc-gathering-ebird-records" class="nav-link" data-scroll-target="#gathering-ebird-records">- Gathering eBird records</a></li>
   <li><a href="#removing-duplicate-records" id="toc-removing-duplicate-records" class="nav-link" data-scroll-target="#removing-duplicate-records">- Removing duplicate records</a></li>
@@ -2242,59 +2249,60 @@ vertical-align: -.125em;
   <li><a href="#limiting-the-record-count" id="toc-limiting-the-record-count" class="nav-link" data-scroll-target="#limiting-the-record-count">- Limiting the record count</a></li>
   <li><a href="#wrapping-up-occurrence-data-prep" id="toc-wrapping-up-occurrence-data-prep" class="nav-link" data-scroll-target="#wrapping-up-occurrence-data-prep">- Wrapping up occurrence data prep</a></li>
   </ul></li>
-  <li><a href="#environmental-data" id="toc-environmental-data" class="nav-link" data-scroll-target="#environmental-data"><span class="header-section-number">6.2</span> Environmental data</a>
+  <li><a href="#environmental-data" id="toc-environmental-data" class="nav-link" data-scroll-target="#environmental-data"><span class="header-section-number">7.2</span> Environmental data</a>
   <ul class="collapse">
   <li><a href="#setting-the-spatial-extent" id="toc-setting-the-spatial-extent" class="nav-link" data-scroll-target="#setting-the-spatial-extent">- Setting the spatial extent</a></li>
   <li><a href="#assembling-merra-variables" id="toc-assembling-merra-variables" class="nav-link" data-scroll-target="#assembling-merra-variables">- Assembling MERRA variables</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#time-series-construction" id="toc-time-series-construction" class="nav-link" data-scroll-target="#time-series-construction"><span class="header-section-number">7</span> Time Series Construction</a>
+  <li><a href="#time-series-construction" id="toc-time-series-construction" class="nav-link" data-scroll-target="#time-series-construction"><span class="header-section-number">8</span> Time Series Construction</a>
   <ul class="collapse">
-  <li><a href="#staging-occurrence-records" id="toc-staging-occurrence-records" class="nav-link" data-scroll-target="#staging-occurrence-records"><span class="header-section-number">7.1</span> Staging occurrence records</a></li>
-  <li><a href="#staging-environmental-variables" id="toc-staging-environmental-variables" class="nav-link" data-scroll-target="#staging-environmental-variables"><span class="header-section-number">7.2</span> Staging environmental variables</a>
+  <li><a href="#staging-occurrence-records" id="toc-staging-occurrence-records" class="nav-link" data-scroll-target="#staging-occurrence-records"><span class="header-section-number">8.1</span> Staging occurrence records</a></li>
+  <li><a href="#staging-environmental-variables" id="toc-staging-environmental-variables" class="nav-link" data-scroll-target="#staging-environmental-variables"><span class="header-section-number">8.2</span> Staging environmental variables</a>
   <ul class="collapse">
   <li><a href="#option-1---simple-staging" id="toc-option-1---simple-staging" class="nav-link" data-scroll-target="#option-1---simple-staging">- Option 1 - Simple staging</a></li>
   <li><a href="#option-2---staging-with-down-selection" id="toc-option-2---staging-with-down-selection" class="nav-link" data-scroll-target="#option-2---staging-with-down-selection">- Option 2 - Staging with down selection</a></li>
   </ul></li>
-  <li><a href="#reducing-covariance" id="toc-reducing-covariance" class="nav-link" data-scroll-target="#reducing-covariance"><span class="header-section-number">7.3</span> Reducing covariance</a></li>
-  <li><a href="#computing-the-time-series" id="toc-computing-the-time-series" class="nav-link" data-scroll-target="#computing-the-time-series"><span class="header-section-number">7.4</span> Computing the time series</a></li>
+  <li><a href="#reducing-covariance" id="toc-reducing-covariance" class="nav-link" data-scroll-target="#reducing-covariance"><span class="header-section-number">8.3</span> Reducing covariance</a></li>
+  <li><a href="#computing-the-time-series" id="toc-computing-the-time-series" class="nav-link" data-scroll-target="#computing-the-time-series"><span class="header-section-number">8.4</span> Computing the time series</a></li>
   </ul></li>
-  <li><a href="#time-series-analysis" id="toc-time-series-analysis" class="nav-link" data-scroll-target="#time-series-analysis"><span class="header-section-number">8</span> Time Series Analysis</a>
+  <li><a href="#time-series-analysis" id="toc-time-series-analysis" class="nav-link" data-scroll-target="#time-series-analysis"><span class="header-section-number">9</span> Time Series Analysis</a>
   <ul class="collapse">
-  <li><a href="#suitability-trend-analysis" id="toc-suitability-trend-analysis" class="nav-link" data-scroll-target="#suitability-trend-analysis"><span class="header-section-number">8.1</span> Suitability trend analysis</a>
+  <li><a href="#suitability-trend-analysis" id="toc-suitability-trend-analysis" class="nav-link" data-scroll-target="#suitability-trend-analysis"><span class="header-section-number">9.1</span> Suitability trend analysis</a>
   <ul class="collapse">
   <li><a href="#finding-the-suitability-trend" id="toc-finding-the-suitability-trend" class="nav-link" data-scroll-target="#finding-the-suitability-trend">- Finding the suitability trend</a></li>
   <li><a href="#finding-overall-trend-percentages" id="toc-finding-overall-trend-percentages" class="nav-link" data-scroll-target="#finding-overall-trend-percentages">- Finding overall trend percentages</a></li>
   <li><a href="#finding-range-trend-percentages" id="toc-finding-range-trend-percentages" class="nav-link" data-scroll-target="#finding-range-trend-percentages">- Finding range trend percentages</a></li>
   <li><a href="#finding-state-level-suitability-trends" id="toc-finding-state-level-suitability-trends" class="nav-link" data-scroll-target="#finding-state-level-suitability-trends">- Finding state-level suitability trends</a></li>
   </ul></li>
-  <li><a href="#centroid-trend-analysis" id="toc-centroid-trend-analysis" class="nav-link" data-scroll-target="#centroid-trend-analysis"><span class="header-section-number">8.2</span> Centroid trend analysis</a>
+  <li><a href="#centroid-trend-analysis" id="toc-centroid-trend-analysis" class="nav-link" data-scroll-target="#centroid-trend-analysis"><span class="header-section-number">9.2</span> Centroid trend analysis</a>
   <ul class="collapse">
   <li><a href="#finding-temporal-trends" id="toc-finding-temporal-trends" class="nav-link" data-scroll-target="#finding-temporal-trends">- Finding temporal trends</a></li>
   <li><a href="#finding-bioclimatic-velocity" id="toc-finding-bioclimatic-velocity" class="nav-link" data-scroll-target="#finding-bioclimatic-velocity">- Finding bioclimatic velocity</a></li>
   </ul></li>
-  <li><a href="#variable-trend-analysis" id="toc-variable-trend-analysis" class="nav-link" data-scroll-target="#variable-trend-analysis"><span class="header-section-number">8.3</span> Variable trend analysis</a>
+  <li><a href="#variable-trend-analysis" id="toc-variable-trend-analysis" class="nav-link" data-scroll-target="#variable-trend-analysis"><span class="header-section-number">9.3</span> Variable trend analysis</a>
   <ul class="collapse">
   <li><a href="#gathering-ranked-variables" id="toc-gathering-ranked-variables" class="nav-link" data-scroll-target="#gathering-ranked-variables">- Gathering ranked variables</a></li>
   <li><a href="#summarizing-variable-contributions" id="toc-summarizing-variable-contributions" class="nav-link" data-scroll-target="#summarizing-variable-contributions">- Summarizing variable contributions</a></li>
   </ul></li>
-  <li><a href="#experimental-metrics" id="toc-experimental-metrics" class="nav-link" data-scroll-target="#experimental-metrics"><span class="header-section-number">8.4</span> Experimental metrics</a>
+  <li><a href="#experimental-metrics" id="toc-experimental-metrics" class="nav-link" data-scroll-target="#experimental-metrics"><span class="header-section-number">9.4</span> Experimental metrics</a>
   <ul class="collapse">
   <li><a href="#bioclimatic-acceleration" id="toc-bioclimatic-acceleration" class="nav-link" data-scroll-target="#bioclimatic-acceleration">- Bioclimatic acceleration</a></li>
   <li><a href="#hot-spot-analysis" id="toc-hot-spot-analysis" class="nav-link" data-scroll-target="#hot-spot-analysis">- Hot spot analysis</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#report-generation" id="toc-report-generation" class="nav-link" data-scroll-target="#report-generation"><span class="header-section-number">9</span> Report Generation</a>
+  <li><a href="#report-generation" id="toc-report-generation" class="nav-link" data-scroll-target="#report-generation"><span class="header-section-number">10</span> Report Generation</a>
   <ul class="collapse">
-  <li><a href="#assemble-suitability-results" id="toc-assemble-suitability-results" class="nav-link" data-scroll-target="#assemble-suitability-results"><span class="header-section-number">9.1</span> Assemble suitability results</a></li>
-  <li><a href="#assemble-variable-results" id="toc-assemble-variable-results" class="nav-link" data-scroll-target="#assemble-variable-results"><span class="header-section-number">9.2</span> Assemble variable results</a></li>
-  <li><a href="#assemble-centroid-results" id="toc-assemble-centroid-results" class="nav-link" data-scroll-target="#assemble-centroid-results"><span class="header-section-number">9.3</span> Assemble centroid results</a></li>
+  <li><a href="#assemble-suitability-results" id="toc-assemble-suitability-results" class="nav-link" data-scroll-target="#assemble-suitability-results"><span class="header-section-number">10.1</span> Assemble suitability results</a></li>
+  <li><a href="#assemble-variable-results" id="toc-assemble-variable-results" class="nav-link" data-scroll-target="#assemble-variable-results"><span class="header-section-number">10.2</span> Assemble variable results</a></li>
+  <li><a href="#assemble-centroid-results" id="toc-assemble-centroid-results" class="nav-link" data-scroll-target="#assemble-centroid-results"><span class="header-section-number">10.3</span> Assemble centroid results</a></li>
   </ul></li>
-  <li><a href="#create-final-report" id="toc-create-final-report" class="nav-link" data-scroll-target="#create-final-report"><span class="header-section-number">11</span> Create Final Report</a></li>
-  <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices"><span class="header-section-number">12</span> APPENDICES</a>
+  <li><a href="#genai-analysis" id="toc-genai-analysis" class="nav-link" data-scroll-target="#genai-analysis"><span class="header-section-number">11</span> GenAI Analysis</a></li>
+  <li><a href="#create-final-report" id="toc-create-final-report" class="nav-link" data-scroll-target="#create-final-report"><span class="header-section-number">12</span> Create Final Report</a></li>
+  <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices"><span class="header-section-number">13</span> APPENDICES</a>
   <ul class="collapse">
-  <li><a href="#technical-specifications" id="toc-technical-specifications" class="nav-link" data-scroll-target="#technical-specifications"><span class="header-section-number">12.1</span> Technical specifications</a></li>
-  <li><a href="#data-extensions" id="toc-data-extensions" class="nav-link" data-scroll-target="#data-extensions"><span class="header-section-number">12.2</span> Data extensions</a>
+  <li><a href="#technical-specifications" id="toc-technical-specifications" class="nav-link" data-scroll-target="#technical-specifications"><span class="header-section-number">13.1</span> Technical specifications</a></li>
+  <li><a href="#data-extensions" id="toc-data-extensions" class="nav-link" data-scroll-target="#data-extensions"><span class="header-section-number">13.2</span> Data extensions</a>
   <ul class="collapse">
   <li><a href="#adding-new-species" id="toc-adding-new-species" class="nav-link" data-scroll-target="#adding-new-species">- Adding new species</a></li>
   <li><a href="#adding-new-variables" id="toc-adding-new-variables" class="nav-link" data-scroll-target="#adding-new-variables">- Adding new variables</a></li>
@@ -2308,6 +2316,7 @@ vertical-align: -.125em;
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">rENM Framework User Manual</h1>
+<p class="subtitle lead">Version 0.1.0.9000</p>
 </div>
 
 
@@ -2324,7 +2333,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 9, 2026</p>
+      <p class="date">May 24, 2026</p>
     </div>
   </div>
   
@@ -2337,7 +2346,19 @@ vertical-align: -.125em;
 
 
 <div style="page-break-after: always;"></div>
-<p><strong><em>** Pre-release documentation. Content is subject to ongoing revision and periodic updates … **</em></strong></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Pre-release documentation.</strong> Content is subject to ongoing revision and periodic updates.</p>
+</div>
+</div>
 <p> </p>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
@@ -2347,7 +2368,7 @@ vertical-align: -.125em;
 <li>Long-term trends in climatic suitability for a species</li>
 <li>Acceleration and deceleration in these long-term trends</li>
 <li>Changes in environmental structure across decades</li>
-<li>Bioclimatic velocity and directional change in suitabiliy</li>
+<li>Bioclimatic velocity and directional change in suitability</li>
 <li>Hot spots of potential climate change vulnerability</li>
 </ul>
 <p>Although this analytical approach is broadly applicable across taxa, the current implementation of the <strong>rENM framework</strong> is designed to investigate <strong>climate-driven dynamics</strong> in North American bird species. The framework spans approximately <em>45 years (1980–2020)</em>, leveraging citizen science observations from the Cornell Lab of Ornithology’s eBird database alongside environmental data derived from <em>NASA Earth system models</em>.</p>
@@ -2355,10 +2376,10 @@ vertical-align: -.125em;
 <hr>
 <p><strong>Selected Publications</strong></p>
 <p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. (in preparation). The rENM Framework: Toward a modular system for reconstructing and analyzing long-term ecological niche dynamics.</p>
-<p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin’s Sparrow (<em>Peucaea cassinii</em>) over four decades. The Southwestern Naturalist, 70(1):1-17. <a href="https://doi.org/10.1894/0038-4909-70.1.7" class="uri">https://doi.org/10.1894/0038-4909-70.1.7</a></p>
+<p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin’s Sparrow (<em>Peucaea cassinii</em>) over four decades. The Southwestern Naturalist, 70(1):1-17. <a href="https://doi.org/10.1894/0038-4909-70.1.7" class="uri">https://doi.org/10.1894/0038-4909-70.1.7</a></p>
 <p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin’s Sparrow (<em>Peucaea cassinii</em>) over four decades. Journal of Field Ornithology 96(3):3. <a href="https://doi.org/10.5751/JFO-00691-960303" class="uri">https://doi.org/10.5751/JFO-00691-960303</a></p>
 <p>Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2024. Complex changes in climatic suitability for Cassin’s Sparrow (<em>Peucaea cassinii</em>) revealed by retrospective ecological niche modeling. Journal of Field Ornithology 95(1):9. <a href="https://doi.org/10.5751/JFO-00432-950109" class="uri">https://doi.org/10.5751/JFO-00432-950109</a></p>
-<p>Schnase, J.L., and M.L. Carroll. 2023. “The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation.” In Proceedings of the 2023 Conference on Big Data from Space (BiDS’23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European. <a href="https://doi.org/10.2760/46796." class="uri">https://doi.org/10.2760/46796.</a></p>
+<p>Schnase, J.L., and M.L. Carroll. 2023. “The MMX Toolkit: High-Performance, Reanalysis-Based Climatic Suitability Modeling to Advance Avian Conservation.” In Proceedings of the 2023 Conference on Big Data from Space (BiDS’23): 6-9 November 2023, edited by P. Soille, S. Lumnitz, and S. Albani, 299–303. Austrian Center, Vienna: Publications Office of the European Union. <a href="https://doi.org/10.2760/46796" class="uri">https://doi.org/10.2760/46796</a></p>
 <p>Schnase, J.L. and Carroll, M.L. 2022. Automatic variable selection in ecological niche modeling: a case study using Cassin’s Sparrow (<em>Peucaea cassinii</em>). PLoS One. 2022 Jan 21;17(1):e0257502. <a href="https://doi.org/10.1371/journal.pone.0257502">doi: 10.1371/journal.pone.0257502</a>. PMID: 35061658; PMCID: PMC8782318.</p>
 <p>Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Maxwell, M.E. Aronne, and C.S. Spradlin. Toward a Monte Carlo approach to selecting climate variables in MaxEnt. PLoS One. 2021. Mar 3;16(3):e0237208. <a href="https://doi.org/10.1371/journal.pone.0237208">doi:10.1371/journal.pone.0237208</a>. PMID: 33657125; PMCID: PMC7928495.</p>
 <hr>
@@ -2376,7 +2397,7 @@ rENM.Framework@gmail.com</p>
 <section id="using-the-quarto-document" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="using-the-quarto-document"><span class="header-section-number">2.1</span> <strong>Using the Quarto document</strong></h2>
 <ul>
-<li><p>After initially configuring your local <a href="#hostenvironment">host environment</a> and <a href="#hostenvironment">RStudio environment</a>, you can set the species <a href="#bandingcode">banding code</a> and step through each of the following explanations and code blocks in sequence to perform the processing steps in the <strong>rENM workflow</strong>.</p></li>
+<li><p>After initially configuring your local <a href="#hostenvironment">host environment</a> and <a href="#rstudioenvironment">RStudio environment</a>, you can set the species <a href="#bandingcode">banding code</a> and step through each of the following explanations and code blocks in sequence to perform the processing steps in the <strong>rENM workflow</strong>.</p></li>
 <li><p>Alternatively, from the <em>RStudio</em> <strong>Run</strong> drop-down menu, select <em>Restart R and Run All Chunks</em>. This performs an <strong>automatic batch execution</strong> of the workflow.</p></li>
 <li><p>Finally, you may wish to copy the <em>rENM-Framework-User-Manual.qmd</em> file, rename it, and use it as a <strong>customized, reproducible analysis template</strong> for your own species or study system.</p></li>
 </ul>
@@ -2391,142 +2412,178 @@ rENM.Framework@gmail.com</p>
 <div style="page-break-after: always;"></div>
 </section>
 </section>
-<section id="hostenvironment" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Configuring the Host Environment</h1>
+<section id="system-requirements" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> System Requirements</h1>
+<p>The rENM framework requires R (≥ 4.1.0) and two external software packages that must be installed separately before the full pipeline can run. All R package dependencies are installed automatically when you install the framework packages from GitHub (see Section 4).</p>
+<section id="r-package-dependencies" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="r-package-dependencies"><span class="header-section-number">3.1</span> R package dependencies</h2>
+<p>Two framework packages pull in notably heavy R dependencies worth anticipating:</p>
+<ul>
+<li><strong><code>rENM.model</code></strong> depends on <code>sdm</code>, which requires <code>randomForest</code>, <code>gbm</code>, and <code>earth</code> as modeling back-ends. These are installed on first use.</li>
+<li><strong><code>rENM.analysis</code></strong> depends on <code>rstanarm</code> for Bayesian trend estimation. <code>rstanarm</code> is large and may take several minutes to compile on first install.</li>
+</ul>
+<p>The <code>rENM.reports</code> package uses <code>webshot2</code>, <code>pagedown</code>, and <code>chromote</code> for PNG and PDF rendering of summary tables. These are optional (<code>Suggests</code>) and must be installed separately (see below).</p>
+</section>
+<section id="libreoffice" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="libreoffice"><span class="header-section-number">3.2</span> LibreOffice</h2>
+<p><code>rENM.ai::render_ai_docx()</code> converts AI-generated DOCX reports to PDF using LibreOffice in headless mode. LibreOffice must be installed before using that function.</p>
+<p>Download from <a href="https://www.libreoffice.org" class="uri">https://www.libreoffice.org</a>. On macOS, LibreOffice installs to <code>/Applications</code> but its <code>soffice</code> binary is <strong>not</strong> added to <code>PATH</code> automatically. Run this once in Terminal after installing:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /Applications/LibreOffice.app/Contents/MacOS/soffice /usr/local/bin/soffice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On Linux, install via your package manager (e.g., <code>apt install libreoffice</code>); <code>soffice</code> is placed on <code>PATH</code> automatically. If LibreOffice is absent when <code>render_ai_docx()</code> is called, a clear error message is displayed with installation instructions.</p>
+</section>
+<section id="chrome-or-chromium" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="chrome-or-chromium"><span class="header-section-number">3.3</span> Chrome or Chromium</h2>
+<p><code>rENM.reports</code> renders summary tables as PNG and PDF files by driving a headless Chrome browser via the <code>chromote</code>, <code>webshot2</code>, and <code>pagedown</code> packages. Install these R packages first:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c(&quot;chromote&quot;, &quot;webshot2&quot;, &quot;pagedown&quot;))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then verify Chrome is found before running the pipeline:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chromote::find_chrome()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If that call throws an error, install Google Chrome from <a href="https://www.google.com/chrome/" class="uri">https://www.google.com/chrome/</a> and re-run <code>chromote::find_chrome()</code> to confirm. If Chrome is unavailable at runtime, PNG and PDF outputs are silently skipped with a console note; the Excel (<code>.xlsx</code>) output is always written regardless.</p>
+</section>
+<section id="note-on-hidden-string-dependencies" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="note-on-hidden-string-dependencies"><span class="header-section-number">3.4</span> Note on hidden string dependencies</h2>
+<p>One class of R package dependency is invisible to standard static-analysis tools such as <code>R CMD check</code>: package names passed as <em>string arguments</em> to functions rather than referenced directly in code. The rENM framework uses <code>paletteer</code> for color scales, and some palette names embed a package reference in string form (e.g., <code>&quot;ggthemes::Classic Area Red-Green&quot;</code>). These indirect dependencies are listed under <code>Suggests</code> in the relevant package DESCRIPTION files, but they will not be flagged automatically if missing — they surface only at runtime. If you encounter an unexpected “package not found” error during a plotting step, check whether a <code>paletteer</code>-based color scale is the source.</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="hostenvironment" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Configuring the Host Environment</h1>
 <p>The most straightforward way to configure your local computing environment is to complete the initial setup steps in a terminal window. The examples provided here assume a macOS environment using the Bash shell, which is the system I use.</p>
 <p>The rENM framework relies on a simple, standardized filesystem structure. At the top level is a base project directory. Within this directory, a <code>data</code> subdirectory stores input datasets, including species occurrence records and environmental predictor variables. In this initial setup, you will install an example dataset and create a symbolic link that points to this sample collection.</p>
 <p>Model outputs and analysis results are written to a <code>runs</code> subdirectory within the project directory, providing a clear and reproducible organization for all rENM analyses.</p>
-<p>PROJECT_DIRECTORY/<br>
-|___ data -&gt; (symbolic link to example_data)<br>
-|___ example_data/…<br>
-|___ runs/…</p>
+<pre><code>PROJECT_DIRECTORY/
+|___ data -&gt; (symbolic link to example_data)
+|___ example_data/...
+|___ runs/...</code></pre>
 <p>You only need to configure your host environment once. After completing this initial setup, you can move into the RStudio environment to finalize the rENM framework installation and begin your analyses.</p>
 <p>In the examples that follow, I use <code>~/rENMtest</code> as the project directory for illustration. In practice, you should choose a directory name that fits your own workflow. For example, I typically use <code>~/rENM</code> in my own work. If you’d prefer to run these script outside of the RStudio ecosystem, they’re available in the GitHub repository at <a href="https://github.com/rENM-Framework/rENM-scripts" class="uri">https://github.com/rENM-Framework/rENM-scripts</a>.</p>
-<section id="creating-the-project-directory" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="creating-the-project-directory"><span class="header-section-number">3.1</span> Creating the project directory</h2>
+<section id="creating-the-project-directory" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="creating-the-project-directory"><span class="header-section-number">4.1</span> Creating the project directory</h2>
 <p>You’ll first need to create the base project directory and the <code>runs</code> subdirectory. Open a terminal window and run the following commands:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set project directory name</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">PROJECT_DIRECTORY</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$HOME</span><span class="st">/rENMtest&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create initial directory structure</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">&quot;</span><span class="va">$PROJECT_DIRECTORY</span><span class="st">&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">&quot;</span><span class="va">$PROJECT_DIRECTORY</span><span class="st">/runs&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set project directory name</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="va">PROJECT_DIRECTORY</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$HOME</span><span class="st">/rENMtest&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create initial directory structure</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">&quot;</span><span class="va">$PROJECT_DIRECTORY</span><span class="st">&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">&quot;</span><span class="va">$PROJECT_DIRECTORY</span><span class="st">/runs&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="installing-the-example-data-set" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="installing-the-example-data-set"><span class="header-section-number">3.2</span> Installing the example data set</h2>
+<section id="installing-the-example-data-set" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="installing-the-example-data-set"><span class="header-section-number">4.2</span> Installing the example data set</h2>
 <p>Next, you’ll want to install the example data set. Make sure your current working directory is the project base directory you just created, then run the following commands from a terminal window:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set project directory name (same as above ...)</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">PROJECT_DIRECTORY</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$HOME</span><span class="st">/rENMtest&quot;</span> </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${PROJECT_DIRECTORY}</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># download and unzip example data set</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_URL</span><span class="op">=</span><span class="st">&quot;https://storage.googleapis.com/renm_data/example_data.zip&quot;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="va">ZIP_FILE</span><span class="op">=</span><span class="st">&quot;example_data.zip&quot;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> <span class="at">-o</span> <span class="st">&quot;</span><span class="va">${ZIP_FILE}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${DATA_URL}</span><span class="st">&quot;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> <span class="at">-o</span> <span class="st">&quot;</span><span class="va">${ZIP_FILE}</span><span class="st">&quot;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create symbolic link</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-sfn</span> example_data data</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># clean up the installation</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> __MACOSX</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-f</span> <span class="st">&quot;</span><span class="va">$ZIP_FILE</span><span class="st">&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set project directory name (same as above ...)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="va">PROJECT_DIRECTORY</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$HOME</span><span class="st">/rENMtest&quot;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="va">${PROJECT_DIRECTORY}</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># download and unzip example data set</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="va">DATA_URL</span><span class="op">=</span><span class="st">&quot;https://storage.googleapis.com/renm_data/example_data.zip&quot;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="va">ZIP_FILE</span><span class="op">=</span><span class="st">&quot;example_data.zip&quot;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-L</span> <span class="at">-o</span> <span class="st">&quot;</span><span class="va">${ZIP_FILE}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${DATA_URL}</span><span class="st">&quot;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> <span class="at">-o</span> <span class="st">&quot;</span><span class="va">${ZIP_FILE}</span><span class="st">&quot;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create symbolic link</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-sfn</span> example_data data</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># clean up the installation</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> __MACOSX</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-f</span> <span class="st">&quot;</span><span class="va">$ZIP_FILE</span><span class="st">&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="rstudioenvironment" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Configuring the RStudio Environment</h1>
+<section id="rstudioenvironment" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Configuring the RStudio Environment</h1>
 <p>From this point forward, all work is performed in the RStudio environment using R. Begin by specifying the location of the base project directory you created during the previous setup steps. This allows both RStudio and the rENM framework to locate and manage project files consistently.</p>
-<section id="setting-the-project-directory-location" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="setting-the-project-directory-location"><span class="header-section-number">4.1</span> Setting the project directory location</h2>
+<section id="setting-the-project-directory-location" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="setting-the-project-directory-location"><span class="header-section-number">5.1</span> Setting the project directory location</h2>
 <p>The following command defines this location in the <code>.Renviron</code> file. This step only needs to be completed once during the initial setup. After running the command, I recommend that you leave it commented out in future sessions. Be sure that the base directory specified in this command matches the directory you created in the previous steps.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # set the location of the project directory</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># write(</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   paste0(&#39;RENM_PROJECT_DIR=&quot;&#39;, file.path(Sys.getenv(&quot;HOME&quot;), &quot;rENMtest&quot;)),</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   file = &quot;~/.Renviron&quot;,</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   append = TRUE</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># s</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># # reload (or restart R)</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># readRenviron(&quot;~/.Renviron&quot;)</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Sys.getenv(&quot;RENM_PROJECT_DIR&quot;)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # set the location of the project directory</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># write(</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   paste0(&#39;RENM_PROJECT_DIR=&quot;&#39;, file.path(Sys.getenv(&quot;HOME&quot;), &quot;rENMtest&quot;)),</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   file = &quot;~/.Renviron&quot;,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   append = TRUE</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># # reload (or restart R)</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># readRenviron(&quot;~/.Renviron&quot;)</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Sys.getenv(&quot;RENM_PROJECT_DIR&quot;)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="installing-the-framework-packages" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="installing-the-framework-packages"><span class="header-section-number">4.2</span> Installing the framework packages</h2>
+<section id="installing-the-framework-packages" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="installing-the-framework-packages"><span class="header-section-number">5.2</span> Installing the framework packages</h2>
 <p>Next, install the rENM framework’s collection of modular packages. These can be obtained directly from the project’s GitHub repository, as shown below. The framework currently consists of six modules. This installation step only needs to be completed once.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # install rENM framework packages from the GitHub repository</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM&quot;)</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.core&quot;)</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.data&quot;)</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.model&quot;)</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.analysis&quot;)</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.reports&quot;)</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rENM-Framework/rENM.ai&quot;)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # install rENM framework packages from the GitHub repository</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;remotes&quot;)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;rENM-Framework/rENM.core&quot;)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;rENM-Framework/rENM.data&quot;)</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;rENM-Framework/rENM.model&quot;)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;rENM-Framework/rENM.analysis&quot;)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;rENM-Framework/rENM.ai&quot;)</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;rENM-Framework/rENM.reports&quot;)</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;rENM-Framework/rENM&quot;)  # umbrella package — install last</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="loading-the-renm-framework-modules" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="loading-the-renm-framework-modules"><span class="header-section-number">4.3</span> Loading the rENM framework modules</h2>
+<section id="loading-the-renm-framework-modules" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="loading-the-renm-framework-modules"><span class="header-section-number">5.3</span> Loading the rENM framework modules</h2>
 <p>Now, load the installed rENM framework packages.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the installed rENM framework packages</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.core)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.data)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.model)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.analysis)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.reports)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.ai)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the installed rENM framework packages</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.core)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.data)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.model)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.analysis)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.reports)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rENM.ai)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-<section id="performing-an-renm-analysis" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Performing an rENM Analysis</h1>
+<section id="performing-an-renm-analysis" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Performing an rENM Analysis</h1>
 <p>Species within the rENM framework are identified using a four-character banding code (alpha code). To demonstrate the framework’s capabilities, the example dataset includes three species: Brown-capped Rosy-Finch (<em>Leucosticte australis</em>; BCRF), Cassin’s Sparrow (<em>Peucaea cassinii</em>; CASP), and Greater Roadrunner (<em>Geococcyx californianus</em>; GRRO). These species represent a range of ecological contexts, providing examples of small, medium, and large geographic distributions, as well as varying occurrence record densities.</p>
-<section id="viewing-installed-species-data" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="viewing-installed-species-data"><span class="header-section-number">5.1</span> Viewing installed species data</h2>
+<section id="viewing-installed-species-data" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="viewing-installed-species-data"><span class="header-section-number">6.1</span> Viewing installed species data</h2>
 <p>Use the <code>show_species()</code> helper function to display the full list of species available in the framework’s example dataset. The four-letter alpha code (<code>ALPHA.CODE</code>) is used to identify the species selected for analysis in the next step.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show available species</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>rENM.core<span class="sc">::</span><span class="fu">show_species</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show available species</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>rENM.core<span class="sc">::</span><span class="fu">show_species</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="bandingcode" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="bandingcode"><span class="header-section-number">5.2</span> Setting the species banding code</h2>
+<section id="bandingcode" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="bandingcode"><span class="header-section-number">6.2</span> Setting the species banding code</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set four-letter banding code of a bird species</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>alpha_code <span class="ot">&lt;-</span> <span class="st">&quot;BCRF&quot;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha_code &lt;- &quot;CASP&quot;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha_code &lt;- &quot;GRRO&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set four-letter banding code of a bird species</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>alpha_code <span class="ot">&lt;-</span> <span class="st">&quot;BCRF&quot;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha_code &lt;- &quot;CASP&quot;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha_code &lt;- &quot;GRRO&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-<section id="data-assembly" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Data Assembly</h1>
-<section id="occurrence-data" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="occurrence-data"><span class="header-section-number">6.1</span> Occurrence data</h2>
+<section id="data-assembly" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Data Assembly</h1>
+<section id="occurrence-data" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="occurrence-data"><span class="header-section-number">7.1</span> Occurrence data</h2>
 <section id="gathering-ebird-records" class="level3">
 <h3 class="anchored" data-anchor-id="gathering-ebird-records">- Gathering eBird records</h3>
 <p>The first step in an rENM time series analysis is to prepare the input occurrence data and environmental variables. This begins with extracting species-specific occurrence records from a downloaded eBird Basic Dataset (EBD) text file located in the base data directory.</p>
 <p>The function described below reads the raw EBD file, filters records with valid geographic coordinates, and writes a cleaned CSV file to the run directory. It then partitions the occurrence data into nine 5-year temporal bins spanning 1980–2020.</p>
 <p>Each temporal subset is saved as a separate CSV file in the run directory under <code>&lt;alpha_code&gt;/_occs/tmp/</code> for use in subsequent processing steps.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract ebird occurrence records from the base collection</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">get_ebird_occurrences</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract ebird occurrence records from the base collection</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">get_ebird_occurrences</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="removing-duplicate-records" class="level3">
 <h3 class="anchored" data-anchor-id="removing-duplicate-records">- Removing duplicate records</h3>
 <p>Next, remove duplicate records from the occurrence files in the <code>&lt;alpha_code&gt;/_occs/tmp/</code> run directory.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># de-duplicate occurrence records</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">remove_duplicate_occurrences</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># de-duplicate occurrence records</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">remove_duplicate_occurrences</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="spatial-thinning" class="level3">
@@ -2534,38 +2591,38 @@ rENM.Framework@gmail.com</p>
 <p>You may optionally apply spatial thinning to the occurrence records. Thinning reduces spatial clustering by enforcing a minimum distance between points, helping to mitigate sampling bias. For example, analyses of Cassin’s Sparrow typically use a thinning distance of 8 km (~5 miles) to reduce the likelihood of counting the same individual multiple times. This step can be skipped entirely or configured by setting the <code>thin_distance</code> parameter, as shown below.</p>
 <p>Thinning can be time-consuming. By default, temporal bins are processed sequentially. A parallel processing option is also available and can reduce runtime; however, if system resources are limited or uncertain, the default sequential approach is recommended. Comment out the option you do not use.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set thinning distance (radius in km)</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>thin_distance <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># default value</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># thin records in the _occs/tmp/ run collection [sequential version]</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># thin_occurrences(alpha_code, thin_distance)</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># thin records in the _occs/tmp/ run collection [parallel version]</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">thin_occurrences2</span>(alpha_code, thin_distance)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set thinning distance (radius in km)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>thin_distance <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># default value</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># thin records in the _occs/tmp/ run collection [sequential version]</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># thin_occurrences(alpha_code, thin_distance)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># thin records in the _occs/tmp/ run collection [parallel version]</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">thin_occurrences2</span>(alpha_code, thin_distance)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="limiting-the-record-count" class="level3">
 <h3 class="anchored" data-anchor-id="limiting-the-record-count">- Limiting the record count</h3>
 <p>There may be times when you’d like to set an upper limit on the number of occurrence records retained within each temporal bin. This can be useful for reducing excessively high record densities, which may negatively affect model performance. This step is optional.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set upper bound on the number of occurrence records</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>record_count <span class="ot">&lt;-</span> <span class="dv">250</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># thin records to upper bound</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">limit_record_count</span>(alpha_code, record_count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set upper bound on the number of occurrence records</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>record_count <span class="ot">&lt;-</span> <span class="dv">250</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># thin records to upper bound</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">limit_record_count</span>(alpha_code, record_count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="wrapping-up-occurrence-data-prep" class="level3">
 <h3 class="anchored" data-anchor-id="wrapping-up-occurrence-data-prep">- Wrapping up occurrence data prep</h3>
-<p>We finish setting up occurrence data by moving the prepared per-bin occurrence files from the temporary <em>&lt;alpha_code&gt;/_occs/tmp/</em> directory into the main <em>&lt;alpha_code&gt;/_occs/</em> directory for our species run. After copying the files, the temporary directory is removed. This is the finial cleanup step before preparing environmental data.</p>
+<p>We finish setting up occurrence data by moving the prepared per-bin occurrence files from the temporary <em>&lt;alpha_code&gt;/_occs/tmp/</em> directory into the main <em>&lt;alpha_code&gt;/_occs/</em> directory for our species run. After copying the files, the temporary directory is removed. This is the final cleanup step before preparing environmental data.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move filtered records to the &lt;alpha_code&gt;/_occs/ run collection and tidy up</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">tidy_occurrences</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move filtered records to the &lt;alpha_code&gt;/_occs/ run collection and tidy up</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">tidy_occurrences</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-<section id="environmental-data" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="environmental-data"><span class="header-section-number">6.2</span> Environmental data</h2>
+<section id="environmental-data" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="environmental-data"><span class="header-section-number">7.2</span> Environmental data</h2>
 <section id="setting-the-spatial-extent" class="level3">
 <h3 class="anchored" data-anchor-id="setting-the-spatial-extent">- Setting the spatial extent</h3>
 <p>Preparing environmental data for modeling involves several steps, some of which are optional. The first step is to define the spatial extent of the analysis. This step is required.</p>
@@ -2575,312 +2632,351 @@ rENM.Framework@gmail.com</p>
 (3) define the extent manually.</p>
 <p>Select the desired approach by commenting out the options you do not intend to use. For guidance on manually specifying parameters, run <code>?set_extent</code> in the RStudio console.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set model extent using the usgs gap range</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">find_range_extent</span>(alpha_code)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set model extent using ebird occurrences records</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.data::find_occurrence_extent(alpha_code)</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># manually set the model extent</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.data::set_extent(alpha_code)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set model extent using the usgs gap range</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">find_range_extent</span>(alpha_code)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set model extent using ebird occurrences records</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.data::find_occurrence_extent(alpha_code)</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># manually set the model extent</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.data::set_extent(alpha_code)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="assembling-merra-variables" class="level3">
 <h3 class="anchored" data-anchor-id="assembling-merra-variables">- Assembling MERRA variables</h3>
 <p>We’re now ready to copy environmental variables from the base data collection into the species-specific run directory. Begin by selecting the MERRA-2 and/or MERRAclim-2 variables to include in the analysis. Use the <code>show_variables()</code> utility in the RStudio console to display the full list of available variables. Assign your selections to the <code>m2_vars</code> and <code>mc_vars</code> parameters, as shown below. Setting either parameter to <code>NULL</code> will include all available variables of that type. The example dataset includes the variables used in Schnase et al. (2026), described above. Additional details are provided in the package documentation.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MERRA-2 microclimatic variables</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># m2_vars = c(&quot;evpintr&quot;, &quot;evpsoil&quot;, &quot;prevtot&quot;, &quot;qv2m&quot;,</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#             &quot;speed&quot;, &quot;swgnt&quot;, &quot;tautot&quot;)</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># MERRAclim-2 macroclimatic variables</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># mc_vars = c(&quot;bio3&quot;, &quot;bio5&quot;, &quot;bio8&quot;, &quot;bio13&quot;,</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#             &quot;bio14&quot;, &quot;bio15&quot;, &quot;bio18&quot;)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MERRA-2 microclimatic variables</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># m2_vars = c(&quot;evpintr&quot;, &quot;evpsoil&quot;, &quot;prevtot&quot;, &quot;qv2m&quot;,</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#             &quot;speed&quot;, &quot;swgnt&quot;, &quot;tautot&quot;)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># MERRAclim-2 macroclimatic variables</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># mc_vars = c(&quot;bio3&quot;, &quot;bio5&quot;, &quot;bio8&quot;, &quot;bio13&quot;,</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#             &quot;bio14&quot;, &quot;bio15&quot;, &quot;bio18&quot;)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Once variables are selected, the extraction step copies them from the base collection, crops each layer to the defined spatial extent, and writes the results to the run directory under <code>&lt;alpha_code&gt;/_vars/</code> for subsequent processing.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract merra variables and move to the run directory</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">get_merra_variables</span>(</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha_code =</span> alpha_code,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">m2_vars =</span> <span class="cn">NULL</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mc_vars =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract merra variables and move to the run directory</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>rENM.data<span class="sc">::</span><span class="fu">get_merra_variables</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha_code =</span> alpha_code,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">m2_vars =</span> <span class="cn">NULL</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mc_vars =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
 </section>
-<section id="time-series-construction" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Time Series Construction</h1>
-<section id="staging-occurrence-records" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="staging-occurrence-records"><span class="header-section-number">7.1</span> Staging occurrence records</h2>
+<section id="time-series-construction" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Time Series Construction</h1>
+<section id="staging-occurrence-records" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="staging-occurrence-records"><span class="header-section-number">8.1</span> Staging occurrence records</h2>
 <p>With input data prepared, the next step is to construct the rENM time series. This begins by moving the processed occurrence records from the <code>&lt;alpha_code&gt;/_occs/</code> directory into a structured time series directory.</p>
 <p>The function described below creates a <code>TimeSeries</code> directory and organizes it into nine 5-year bins labeled by year (1980–2020). Within each bin, occurrence records are stored in an <code>occs</code> subdirectory. The resulting structure is: <code>&lt;alpha_code&gt;/TimeSeries/&lt;year&gt;/occs/</code> .This organization becomes clear after running the function and inspecting the resulting <code>TimeSeries</code> directory.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move prepared occurrence files from the &lt;alpha_code&gt;/_occs/ directory </span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   to 5-year bins within the &lt;alpha_code/TimeSeries/occs/ directory</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>rENM.model<span class="sc">::</span><span class="fu">stage_occurrences</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move prepared occurrence files from the &lt;alpha_code&gt;/_occs/ directory </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   to 5-year bins within the &lt;alpha_code/TimeSeries/occs/ directory</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>rENM.model<span class="sc">::</span><span class="fu">stage_occurrences</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="staging-environmental-variables" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="staging-environmental-variables"><span class="header-section-number">7.2</span> Staging environmental variables</h2>
+<section id="staging-environmental-variables" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="staging-environmental-variables"><span class="header-section-number">8.2</span> Staging environmental variables</h2>
 <p>Environmental variables are now staged for time series analysis. Two approaches are available; select only one.</p>
 <section id="option-1---simple-staging" class="level3">
 <h3 class="anchored" data-anchor-id="option-1---simple-staging">- Option 1 - Simple staging</h3>
 <p>This function performs simple staging by transferring all cropped environmental predictors from the <code>&lt;alpha_code&gt;/_vars/</code> directory to the <code>TimeSeries</code> directory without modification. Files are organized into a <code>vars</code> subdirectory within each temporal bin created in the previous step. The resulting structure is: <code>&lt;alpha_code&gt;/TimeSeries/&lt;year&gt;/vars/</code> where <code>&lt;year&gt;</code> spans 1980–2020 in 5-year increments.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move all the cropped environmental variables from the &lt;alpha_code&gt;/_vars/</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  directory to 5-year bins within the &lt;alpha_code/TimeSeries/vars/ directory</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.model::stage_all_variables(alpha_code)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move all the cropped environmental variables from the &lt;alpha_code&gt;/_vars/</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  directory to 5-year bins within the &lt;alpha_code/TimeSeries/vars/ directory</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.model::stage_all_variables(alpha_code)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="option-2---staging-with-down-selection" class="level3">
 <h3 class="anchored" data-anchor-id="option-2---staging-with-down-selection">- Option 2 - Staging with down selection</h3>
 <p>With this option, a Monte Carlo–based variable selection procedure (Schnase et al. 2022) is first applied to the variables in <code>&lt;alpha_code&gt;/_vars/</code>. This step identifies the highest-performing variables, which are then transferred to the <code>TimeSeries</code> directory for further processing.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># down select variables (maxent version)</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.model::screen_by_convergence1(alpha_code)</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># down select variables (maxnet version)</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>rENM.model<span class="sc">::</span><span class="fu">screen_by_convergence2</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># down select variables (maxent version)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.model::screen_by_convergence1(alpha_code)</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># down select variables (maxnet version)</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>rENM.model<span class="sc">::</span><span class="fu">screen_by_convergence2</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move the down selected, cropped environmental variables from the </span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  the &lt;alpha_code&gt;/_vars/ directory to 5-year bins within the </span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  &lt;alpha_code/TimeSeries/vars/ directory</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>rENM.model<span class="sc">::</span><span class="fu">stage_screened_variables</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move the down selected, cropped environmental variables from the </span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  the &lt;alpha_code&gt;/_vars/ directory to 5-year bins within the </span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  &lt;alpha_code/TimeSeries/vars/ directory</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>rENM.model<span class="sc">::</span><span class="fu">stage_screened_variables</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-<section id="reducing-covariance" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="reducing-covariance"><span class="header-section-number">7.3</span> Reducing covariance</h2>
+<section id="reducing-covariance" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="reducing-covariance"><span class="header-section-number">8.3</span> Reducing covariance</h2>
 <p>This optional step reduces covariance among the staged environmental variables, records the results, and retains a subset of non-collinear predictors for further processing. By default, a “light-touch” approach is applied using variance inflation factors (VIF) and pairwise correlation thresholds. A relaxed VIF threshold (10) and a high correlation threshold (0.95) are used to remove only strongly redundant variables while preserving alternative representations of environmental gradients. This helps maintain the key dimensions of environmental structure identified during earlier screening steps. In practice, improved representation of environmental structure may be achieved by omitting this step.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce covariance among staged variables</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.model::reduce_covariance(alpha_code)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce covariance among staged variables</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.model::reduce_covariance(alpha_code)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="computing-the-time-series" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="computing-the-time-series"><span class="header-section-number">7.4</span> Computing the time series</h2>
+<section id="computing-the-time-series" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="computing-the-time-series"><span class="header-section-number">8.4</span> Computing the time series</h2>
 <p>With occurrence records and environmental variables staged, the next step is to generate a time series of ensemble models. The <code>create_timeseries()</code> function orchestrates this process by making parallel calls to <code>create_ensemble_model()</code> to build models for each temporal bin. By default, ensemble predictions are computed as the unweighted average of five model types: <code>maxnet</code>, random forest (<code>rf</code>), boosted regression trees (<code>brt</code>), generalized linear models (<code>glm</code>), and multivariate adaptive regression splines (<code>mars</code>). For additional details and configuration options, refer to the documentation by running <code>?create_ensemble_model</code> in the RStudio console.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create an rENM time series</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>rENM.model<span class="sc">::</span><span class="fu">create_timeseries</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create an rENM time series</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>rENM.model<span class="sc">::</span><span class="fu">create_timeseries</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-<section id="time-series-analysis" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Time Series Analysis</h1>
-<section id="suitability-trend-analysis" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="suitability-trend-analysis"><span class="header-section-number">8.1</span> Suitability trend analysis</h2>
+<section id="time-series-analysis" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Time Series Analysis</h1>
+<section id="suitability-trend-analysis" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="suitability-trend-analysis"><span class="header-section-number">9.1</span> Suitability trend analysis</h2>
 <section id="finding-the-suitability-trend" class="level3">
 <h3 class="anchored" data-anchor-id="finding-the-suitability-trend">- Finding the suitability trend</h3>
 <p>This required step computes per-cell Theil–Sen trend estimates from the time series of predicted suitability rasters and derives Mann–Kendall statistics (p-values and Z-scores) to assess temporal trends in climatic suitability. The resulting trend raster serves as the foundation for subsequent analyses.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the thiel-sen trend across the time series</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">find_suitability_trend</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the thiel-sen trend across the time series</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">find_suitability_trend</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="finding-overall-trend-percentages" class="level3">
 <h3 class="anchored" data-anchor-id="finding-overall-trend-percentages">- Finding overall trend percentages</h3>
 <p>This is the first of several different ways of studying the suitability trends that we’ve derived from our rENM time series. This step provides an initial summary of the suitability trends derived from the rENM time series. The function below computes cell-wise trend sign statistics from the suitability trend raster and summarizes the proportions of positive, negative, and neutral (zero) trends <em>across the full modeled extent.</em></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find proportions of pos, neg, and zero values across modeled extent</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">find_trend_percentages</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find proportions of pos, neg, and zero values across modeled extent</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">find_trend_percentages</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="finding-range-trend-percentages" class="level3">
 <h3 class="anchored" data-anchor-id="finding-range-trend-percentages">- Finding range trend percentages</h3>
 <p>The function below computes cell-wise trend sign statistics from the suitability trend raster and summarizes the proportions of positive, negative, and neutral (zero) trends <em>within the species’ USGS GAP range.</em></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find proportions of pos, neg, and zero values across USGS GAP range</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">find_range_change_percentages</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find proportions of pos, neg, and zero values across USGS GAP range</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">find_range_change_percentages</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="finding-state-level-suitability-trends" class="level3">
 <h3 class="anchored" data-anchor-id="finding-state-level-suitability-trends">- Finding state-level suitability trends</h3>
 <p>We can now perform a state-level analysis of climatic suitability trends based on the species’ USGS GAP range. The function below computes summary metrics for each state intersecting the GAP range and generates a map illustrating spatial patterns alongside state-level statistics.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create state-level suitability trend analysis and map for a species</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">create_state_trend_analysis</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create state-level suitability trend analysis and map for a species</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">create_state_trend_analysis</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-<section id="centroid-trend-analysis" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="centroid-trend-analysis"><span class="header-section-number">8.2</span> Centroid trend analysis</h2>
+<section id="centroid-trend-analysis" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="centroid-trend-analysis"><span class="header-section-number">9.2</span> Centroid trend analysis</h2>
 <section id="finding-temporal-trends" class="level3">
 <h3 class="anchored" data-anchor-id="finding-temporal-trends">- Finding temporal trends</h3>
 <p>Another approach to analyzing climatic suitability trends is to examine spatial shifts in the weighted centroid of suitability over time. This function fits Bayesian linear models to annual centroid coordinates (latitude and longitude) and writes the resulting plots and summary statistics to the species’ run directory.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analyze temporal trends in suitability centroids</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">analyze_weighted_centroids</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analyze temporal trends in suitability centroids</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">analyze_weighted_centroids</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="finding-bioclimatic-velocity" class="level3">
 <h3 class="anchored" data-anchor-id="finding-bioclimatic-velocity">- Finding bioclimatic velocity</h3>
 <p>Historical centroid trajectories can also be used to quantify the direction, distance, and velocity of suitability shifts. This step computes these metrics and writes the results to the species’ run directory.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># finds bioclimatic verlocity from weighted centroids</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">find_bioclimatic_velocity</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># finds bioclimatic velocity from weighted centroids</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">find_bioclimatic_velocity</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>To support visualization of long-term shifts, this function generates a suitability trend map with an overlay of the centroid displacement vector. The resulting map is saved to the species’ run directory.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot and save suitability trend map with centroids</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">save_trend_plot_with_centroids</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot and save suitability trend map with centroids</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">save_trend_plot_with_centroids</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-<section id="variable-trend-analysis" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="variable-trend-analysis"><span class="header-section-number">8.3</span> Variable trend analysis</h2>
+<section id="variable-trend-analysis" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="variable-trend-analysis"><span class="header-section-number">9.3</span> Variable trend analysis</h2>
 <section id="gathering-ranked-variables" class="level3">
 <h3 class="anchored" data-anchor-id="gathering-ranked-variables">- Gathering ranked variables</h3>
 <p>This step consolidates ranked variable importance results across the time series into a single summary dataset for the species. The output is a unified CSV file that can be used for subsequent variable analysis.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gather variable rankings</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">gather_variable_contributions</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gather variable rankings</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">gather_variable_contributions</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="summarizing-variable-contributions" class="level3">
 <h3 class="anchored" data-anchor-id="summarizing-variable-contributions">- Summarizing variable contributions</h3>
 <p>Using this summary, this function selects variables based on average relative contribution and generates a comprehensive set of visualizations and summary statistics.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize variable contributions</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">summarize_variable_contributions</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize variable contributions</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">summarize_variable_contributions</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-<section id="experimental-metrics" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="experimental-metrics"><span class="header-section-number">8.4</span> Experimental metrics</h2>
+<section id="experimental-metrics" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="experimental-metrics"><span class="header-section-number">9.4</span> Experimental metrics</h2>
 <section id="bioclimatic-acceleration" class="level3">
 <h3 class="anchored" data-anchor-id="bioclimatic-acceleration">- Bioclimatic acceleration</h3>
 <p>The following function wraps <em>find_suitability_change_trend()</em> and <em>plot_suitability_change_trend()</em> to generate a map highlighting areas of accelerating and decelerating trends in climatic suitability. This step is experimental but provides an additional perspective on the spatial and temporal dynamics of historical climatic influences on suitability.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a climatic suitability trend acceleration/deceleration map</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">create_suitability_change_map</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a climatic suitability trend acceleration/deceleration map</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">create_suitability_change_map</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="hot-spot-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="hot-spot-analysis">- Hot spot analysis</h3>
 <p>This metric identifies areas where climatic suitability is declining at an increasing rate. The function generates a map highlighting these regions. This analysis is exploratory and may provide insight into areas of heightened vulnerability to climate change.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a hot spot map</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">create_hot_spot_map</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a hot spot map</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>rENM.analysis<span class="sc">::</span><span class="fu">create_hot_spot_map</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
 </section>
-<section id="report-generation" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Report Generation</h1>
+<section id="report-generation" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Report Generation</h1>
 <p>The following functions compile key outputs from the preceding analysis steps to generate summary maps, tables, and reports. Because these functions depend on products created earlier in the workflow, all prior steps must be completed before proceeding to summary and report generation.</p>
-<section id="assemble-suitability-results" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="assemble-suitability-results"><span class="header-section-number">9.1</span> Assemble suitability results</h2>
+<section id="assemble-suitability-results" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="assemble-suitability-results"><span class="header-section-number">10.1</span> Assemble suitability results</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gather time series suitability maps</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">gather_suitability_maps</span>(alpha_code)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># gather range maps</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">gather_range_maps</span>(alpha_code)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># gather suitability trend and hot spot stats</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">gather_suitability_trend_stats</span>(alpha_code)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># create a suitability trend summary table</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">create_suitability_trend_summary_table</span>(alpha_code)</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create a suitability time series summary page</span></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_suitability_timeseries_page</span>(alpha_code)</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="co"># create a range time series summary page</span></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_range_timeseries_page</span>(alpha_code)</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="co"># create a suitability trends, acceleration/decleration page</span></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_suitability_trends_page</span>(alpha_code)</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="co"># create a state trends and state hot spot page</span></span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_state_trends_page</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gather time series suitability maps</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">gather_suitability_maps</span>(alpha_code)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># gather range maps</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">gather_range_maps</span>(alpha_code)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># gather suitability trend and hot spot stats</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">gather_suitability_trend_stats</span>(alpha_code)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># create a suitability trend summary table</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">create_suitability_trend_summary_table</span>(alpha_code)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create a suitability time series summary page</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_suitability_timeseries_page</span>(alpha_code)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co"># create a range time series summary page</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_range_timeseries_page</span>(alpha_code)</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="co"># create a suitability trends, acceleration/decleration page</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_suitability_trends_page</span>(alpha_code)</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="co"># create a state trends and state hot spot page</span></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_state_trends_page</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="assemble-variable-results" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="assemble-variable-results"><span class="header-section-number">9.2</span> Assemble variable results</h2>
+<section id="assemble-variable-results" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="assemble-variable-results"><span class="header-section-number">10.2</span> Assemble variable results</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create variable trend summary table</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">create_variable_trend_summary_table</span>(alpha_code)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create variable trends page</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_variable_trends_page</span>(alpha_code)</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># gather trend and rate-of-change maps for the top 10 variables</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">gather_top_variable_trend_maps</span>(alpha_code)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co"># create summary page for the top 10 variables</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_variable_trend_maps_page</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create variable trend summary table</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">create_variable_trend_summary_table</span>(alpha_code)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create variable trends page</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_variable_trends_page</span>(alpha_code)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># gather trend and rate-of-change maps for the top 10 variables</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">gather_top_variable_trend_maps</span>(alpha_code)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># create summary page for the top 10 variables</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_variable_trend_maps_page</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="assemble-centroid-results" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="assemble-centroid-results"><span class="header-section-number">9.3</span> Assemble centroid results</h2>
+<section id="assemble-centroid-results" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="assemble-centroid-results"><span class="header-section-number">10.3</span> Assemble centroid results</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create centroid trend summary table</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">create_centroid_trend_summary_table</span>(alpha_code)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a suitability trends with centroids page</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_centroid_trends_page</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<blockquote class="blockquote">
-<h1 id="genai-analysis" data-number="10"><span class="header-section-number">10</span> GenAI Analysis</h1>
-</blockquote>
-<p>This experimental module uses <strong>generative AI (GenAI)</strong> to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, the package is submitted to to a large language model (LLM) for interpretation.</p>
-<p>There are several manual steps required before you’ll be able to use the rENM.ai module. Without going into the details, you’ll basically need to create an account with ChatGPT or Claude, acquire and API key, then record that key in the .Renviron file in your home directory. Your .Renviron file will end up looking something like this:</p>
-<p><code>OPENAI_API_KEY=&quot;sk-proj-fQpuBZIF5l4XkgB ...&quot;</code></p>
-<p><code>ANTHROPIC_API_KEY=&quot;sk-ant-api03-JuQS6V9 ...&quot;</code></p>
-<p><code>RENM_PROJECT_DIR=&quot;/Users/jschnase/rENM&quot;</code></p>
-<p>We’re currently evaluating two AI options: <strong>ChatGPT</strong> (model gpt-5.1) and <strong>Claude</strong> (model claude-sonnet-4.6). It’s interesting see the differences in behavior and interpretations. Note that interacting with Claude programmatically through Antrhopic’s API takes more time and costs a lot more. We’ll have more on that soon …</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># build a data and prompt submission package</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">assemble_ai_package</span>(alpha_code)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># submit the package to chatgpt</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">submit_to_chatgpt</span>(alpha_code)</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># submit the package to claude</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.ai::submit_to_claude(alpha_code)</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co"># render the returned .docx file into a .pdf file</span></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">render_ai_docx</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create centroid trend summary table</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">create_centroid_trend_summary_table</span>(alpha_code)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a suitability trends with centroids page</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_centroid_trends_page</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-<section id="create-final-report" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Create Final Report</h1>
+<section id="genai-analysis" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> GenAI Analysis</h1>
+<p>This experimental module uses <strong>generative AI (GenAI)</strong> to support suitability trend analysis. In the first step, the function assembles an AI-ready package containing suitability trend rasters, summary tables, species metadata, and a structured prompt. In the second step, the package is submitted to a large language model (LLM) for interpretation, and the resulting DOCX report is converted to PDF.</p>
+<p>Before using <code>rENM.ai</code>, you must create an account with your preferred AI provider, obtain an API key, and record it in your <code>.Renviron</code> file. Note that API usage is billed per token, independently of any web subscription. Your <code>.Renviron</code> file should include entries of the following form:</p>
+<pre><code>OPENAI_API_KEY=&quot;sk-proj-...&quot;
+ANTHROPIC_API_KEY=&quot;sk-ant-...&quot;
+RENM_PROJECT_DIR=&quot;/Users/yourname/rENM&quot;</code></pre>
+<p>The framework currently supports two providers: <strong>OpenAI</strong> (ChatGPT) and <strong>Anthropic</strong> (Claude). Both providers accept the same assembled data package; the choice of provider affects interpretation style, response time, and per-run cost. Consult each provider’s current API documentation for model availability and pricing. For additional details on authentication and configuration, see <code>?submit_to_claude</code> and <code>?submit_to_chatgpt</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># build a data and prompt submission package</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">assemble_ai_package</span>(alpha_code)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># submit the package to chatgpt</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">submit_to_chatgpt</span>(alpha_code)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co"># submit the package to claude</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.ai::submit_to_claude(alpha_code)</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="co"># render the returned .docx file into a .pdf file</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>rENM.ai<span class="sc">::</span><span class="fu">render_ai_docx</span>(alpha_code)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="create-final-report" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Create Final Report</h1>
 <p>As a final step, the results generated by the preceding steps can be compiled into a final PDF document.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a final report composed of all the summary pages</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_final_report</span>(alpha_code)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># these are the default pages, edit as needed ...</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.reports::assemble_final_report(alpha_code, </span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                                     pages = c(&quot;Suitability-Trend-Analysis&quot;,</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Suitability-Trends&quot;,</span></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;State-Trends&quot;,</span></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Centroid-Trends&quot;,</span></span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Suitability-TimeSeries&quot;,</span></span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Range-TimeSeries&quot;,</span></span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Variable-Trends&quot;,</span></span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Variable-Trend-Maps1&quot;,</span></span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Variable-Trend-Maps2&quot;))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a final report composed of all the summary pages</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>rENM.reports<span class="sc">::</span><span class="fu">assemble_final_report</span>(alpha_code)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># these are the default pages, edit as needed ...</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rENM.reports::assemble_final_report(alpha_code, </span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                                     pages = c(&quot;Suitability-Trend-Analysis&quot;,</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Suitability-Trends&quot;,</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;State-Trends&quot;,</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Centroid-Trends&quot;,</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Suitability-TimeSeries&quot;,</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Range-TimeSeries&quot;,</span></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Variable-Trends&quot;,</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Variable-Trend-Maps1&quot;,</span></span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="co">#                                               &quot;Variable-Trend-Maps2&quot;))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p> </p>
 <p><strong><em>Coming soon …</em></strong></p>
 </section>
-<section id="appendices" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> APPENDICES</h1>
-<section id="technical-specifications" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="technical-specifications"><span class="header-section-number">12.1</span> Technical specifications</h2>
+<section id="appendices" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> APPENDICES</h1>
+<section id="technical-specifications" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="technical-specifications"><span class="header-section-number">13.1</span> Technical specifications</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This section is under development. It will document R and system version requirements, tested platform configurations, and known compatibility notes.</p>
+</div>
+</div>
 </section>
-<section id="data-extensions" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="data-extensions"><span class="header-section-number">12.2</span> Data extensions</h2>
+<section id="data-extensions" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="data-extensions"><span class="header-section-number">13.2</span> Data extensions</h2>
 <section id="adding-new-species" class="level3">
 <h3 class="anchored" data-anchor-id="adding-new-species">- Adding new species</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This section is under development. It will describe how to prepare and register occurrence data and GAP range files for species not included in the example dataset.</p>
+</div>
+</div>
 </section>
 <section id="adding-new-variables" class="level3">
 <h3 class="anchored" data-anchor-id="adding-new-variables">- Adding new variables</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This section is under development. It will describe how to prepare and integrate additional MERRA-2 or custom environmental predictor variables into the framework’s data collection.</p>
+</div>
+</div>
 </section>
 </section>
 </section>

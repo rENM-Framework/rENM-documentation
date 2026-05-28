@@ -51,7 +51,7 @@ Schnase, J. L., M. L. Carroll, R. L. Gill, G. S. Tamkin, J. Li, S. L. Strong, T.
 
 ## Contact
 
-John Schnase — [rENM.Framework\@gmail.com](mailto:rENM.Framework@gmail.com){.email}
+John Schnase — [rENM.Framework\@gmail.com](mailto:rENM.Framework@gmail.com)
 
 ## License
 

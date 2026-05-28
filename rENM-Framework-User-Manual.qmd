@@ -188,7 +188,9 @@ mkdir -p "$PROJECT_DIRECTORY/runs"
 
 ## Installing the example data set
 
-Next, you'll want to install the example data set. Make sure your current working directory is the project base directory you just created, then run the following commands from a terminal window:
+Next, you'll want to install the example data set. The dataset includes occurrence records for three focal species: Brown-capped Rosy-Finch (*Leucosticte australis*; BCRF), Cassin's Sparrow (*Peucaea cassinii*; CASP), and Greater Roadrunner (*Geococcyx californianus*; GRRO). These species represent a range of ecological contexts, providing examples of small, medium, and large geographic distributions, as well as varying occurrence record densities. Also included are the 14 environmental variables used in Schnase et al. (2026), shapefiles for state boundaries and species ranges, and a catalog of the dataset's contents.
+
+The dataset is hosted on Google Cloud and downloaded automatically by the commands below. Make sure your current working directory is the project base directory you just created, then run the following from a terminal window:
 
 ``` bash
 #!/usr/bin/env bash
@@ -267,7 +269,7 @@ library(rENM.ai)
 
 # Performing an rENM Analysis
 
-Species within the rENM framework are identified using a four-character banding code (alpha code). To demonstrate the framework’s capabilities, the example dataset includes three species: Brown-capped Rosy-Finch (*Leucosticte australis*; BCRF), Cassin’s Sparrow (*Peucaea cassinii*; CASP), and Greater Roadrunner (*Geococcyx californianus*; GRRO). These species represent a range of ecological contexts, providing examples of small, medium, and large geographic distributions, as well as varying occurrence record densities.
+Species within the rENM framework are identified using a four-character banding code (alpha code). The example dataset includes three species that serve as examples across a range of modeling conditions. The Brown-capped Rosy-Finch (*Leucosticte australis*; BCRF) occupies a small, high-elevation range in the southern Rockies and offers a test case with sparse occurrence records. Cassin's Sparrow (*Peucaea cassinii*; CASP) is the focal species of the Schnase et al. study series and provides a well-characterized mid-range example with an extensive retrospective literature to draw on. The Greater Roadrunner (*Geococcyx californianus*; GRRO) spans a broad distribution across the southwestern United States and presents a high-density occurrence record scenario. Together, these three species let you explore how the framework behaves across meaningfully different ecological and data contexts.
 
 ## Viewing installed species data
 

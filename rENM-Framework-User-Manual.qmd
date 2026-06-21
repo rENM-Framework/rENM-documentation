@@ -666,10 +666,10 @@ Submit the assembled package to your preferred provider. Choose one and comment 
 ```{r}
 
 # submit to Anthropic (Claude)
-rENM.ai::submit_to_claude(alpha_code)
+# rENM.ai::submit_to_claude(alpha_code)
 
 # submit to OpenAI (ChatGPT)
-# rENM.ai::submit_to_chatgpt(alpha_code)
+rENM.ai::submit_to_chatgpt(alpha_code)
 ```
 
 If `submit_to_claude()` fails or returns an unexpected result, use the diagnostic helper to inspect the response:
@@ -677,7 +677,7 @@ If `submit_to_claude()` fails or returns an unexpected result, use the diagnosti
 ```{r}
 
 # diagnose a failed submit_to_claude() response
-rENM.ai::submit_to_claude_diag(alpha_code)
+# rENM.ai::submit_to_claude_diag(alpha_code)
 ```
 
 ## Rendering the AI report
@@ -835,13 +835,13 @@ Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Ma
 ### rENM
 
 | Function | Description | See |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | `rENM()` | Execute the complete rENM pipeline for a target species | *The rENM Workflow* |
 
 ### rENM.core
 
 | Function | Description | See |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | `rENM_project_dir()` | Resolve the active project root | *Configuring the RStudio Environment* |
 | `get_species_info()` | Retrieve metadata for a species by alpha code | *Performing an rENM Analysis* |
 | `show_species()` | List species available in the project | *Performing an rENM Analysis* |
@@ -852,7 +852,7 @@ Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Ma
 All functions in this package are documented in *Data Assembly*.
 
 | Function | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | `find_occurrence_extent()` | Derive spatial extent from occurrence data |
 | `find_range_extent()` | Derive spatial extent from a USGS GAP range polygon |
 | `get_ebird_occurrences()` | Read and bin an eBird EBD file into five-year temporal bins |
@@ -869,7 +869,7 @@ All functions in this package are documented in *Data Assembly*.
 All functions in this package are documented in *Time Series Construction*.
 
 | Function | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | `create_ensemble_model()` | Fit an ensemble ENM for a single species and time bin |
 | `create_range_map()` | Produce a binary presence-absence range map |
 | `create_timeseries()` | Run ensemble models across all time bins in parallel |
@@ -888,7 +888,7 @@ All functions in this package are documented in *Time Series Construction*.
 All functions in this package are documented in *Time Series Analysis*.
 
 | Function | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | `analyze_weighted_centroids()` | Fit Bayesian trends to centroid coordinates |
 | `create_hot_spot_map()` | Map hotspot regions within states intersecting the GAP range |
 | `create_state_trend_analysis()` | Per-state suitability trend map and statistics |
@@ -913,7 +913,7 @@ All functions in this package are documented in *Time Series Analysis*.
 All functions in this package are documented in *GenAI Analysis*.
 
 | Function | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | `assemble_ai_package()` | Assemble AI-ready data bundle with analytical prompt |
 | `render_ai_docx()` | Convert AI-generated DOCX report to PDF via LibreOffice |
 | `submit_to_chatgpt()` | Submit data bundle to OpenAI and retrieve DOCX report |
@@ -925,7 +925,7 @@ All functions in this package are documented in *GenAI Analysis*.
 All functions in this package are documented in *Report Generation* and *Assembling the Final Report*.
 
 | Function | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | `assemble_centroid_trends_page()` | Single-page PDF: centroid trend map and table |
 | `assemble_final_report()` | Combine all pages into a single paginated PDF report |
 | `assemble_range_timeseries_page()` | Single-page PDF: range time series contact sheet |

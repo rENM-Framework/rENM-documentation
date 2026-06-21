@@ -47,7 +47,7 @@ By revealing long-term patterns, rENMs provide an empirical basis for addressing
 
 Although this analytical approach is broadly applicable across taxa, the current implementation of the rENM Framework is designed to investigate climate-driven dynamics in North American bird species. The framework spans 45 years (1980–2024), leveraging citizen science observations from the Cornell Lab of Ornithology's eBird database alongside environmental data derived from NASA's Modern-Era Retrospective Analysis for Research and Applications, Version 2 (MERRA-2).
 
-This manual guides users through the rENM modeling and analysis workflow. Detailed documentation for individual functions is available within the respective package manuals. Additional information about this work an be found in the Appendix A publications and the project's GitHub repository at: <https://github.com/rENM-Framework>.
+This manual guides users through the rENM modeling and analysis workflow. Detailed documentation for individual functions is available within the respective package manuals. Additional information about this work can be found in the Appendix A publications and the project's GitHub repository at: <https://github.com/rENM-Framework>.
 
 The rENM Framework is an active research platform under ongoing development. It is provided for educational and research purposes only and is distributed without formal technical support. Feedback and contributions are welcome.
 
@@ -86,7 +86,7 @@ The rENM Framework requires R (≥ 4.1.0) and two external software dependencies
 
 ## R package dependencies
 
-Two framework packages pull in notably heavy R dependencies worth anticipating before installation:
+Two framework packages pull in heavy R dependencies worth anticipating before installation:
 
 - **`rENM.model`** depends on `sdm`, which requires `randomForest`, `gbm`, and `earth` as modeling back-ends. These are installed on first use.
 - **`rENM.analysis`** depends on `rstanarm` for Bayesian trend estimation. `rstanarm` is large and may take several minutes to compile on first install.
@@ -131,8 +131,10 @@ The rENM Framework relies on a simple, standardized filesystem structure. At the
 
 ```         
 PROJECT_DIRECTORY/
-|___ data -> (symbolic link to example_data)
-|___ example_data/...
+|___ data -> (symbolic link to dataset in use)
+|___ rENM-Framework-v0.1.0-example-data/...
+|___ rENM-Framework-v0.1.0-extended-data/...
+|___ my_input_data/...
 |___ runs/...
 ```
 
@@ -153,7 +155,7 @@ mkdir -p "$PROJECT_DIRECTORY"
 mkdir -p "$PROJECT_DIRECTORY/runs"
 ```
 
-## Installing the example data set
+## Installing the example dataset
 
 The example dataset includes occurrence records for three focal species: Brown-capped Rosy-Finch (*Leucosticte australis*; BCRF), Cassin's Sparrow (*Peucaea cassinii*; CASP), and Greater Roadrunner (*Geococcyx californianus*; GRRO). Also included are 14 MERRA-2 and MERRAclim-2 environmental variables, shapefiles for state boundaries and species ranges, and a catalog of the dataset's contents. The dataset is approximately 725 MB.
 
@@ -167,26 +169,18 @@ PROJECT_DIRECTORY="$HOME/rENMtest"
 cd "${PROJECT_DIRECTORY}"
 
 # download and unzip example dataset
-DATA_URL="https://zenodo.org/records/XXXXXXX/files/example_data.zip"
-ZIP_FILE="example_data.zip"
+DATA_URL="https://zenodo.org/records/20750253/files/rENM-Framework-v0.1.0-example-data.zip"
+ZIP_FILE="rENM-Framework-v0.1.0-example-data.zip"
 curl -L -o "${ZIP_FILE}" "${DATA_URL}"
 unzip -o "${ZIP_FILE}"
 
 # create symbolic link
-ln -sfn example_data data
+ln -sfn rENM-Framework-v0.1.0-example-data data
 
 # clean up
 rm -rf __MACOSX
 rm -f "${ZIP_FILE}"
 ```
-
-Once the example dataset is installed, create a symbolic link from the `data` subdirectory to the `example_data` directory:
-
-``` bash
-ln -sfn example_data data
-```
-
-This allows the rENM Framework to locate input data consistently regardless of which dataset you are using.
 
 # Configuring the RStudio Environment
 
@@ -248,7 +242,7 @@ library(rENM.ai)
 
 # Performing an rENM Analysis
 
-Species within the rENM Framework are identified using a four-character alpha code — the same banding codes used by the North American Bird Banding Program. The example dataset includes three species that cover a range of modeling conditions. The Brown-capped Rosy-Finch (*Leucosticte australis;* BCRF) occupies a small, high-elevation range in the southern Rockies and has sparse occurrence records, making it a useful test case for low-density modeling scenarios. Cassin's Sparrow (*Peucaea cassinii*; CASP) is the focal species of the Schnase et al. study series and provides a well-characterized example with an extensive retrospective literature to draw on. The Greater Roadrunner (*Geococcyx californianus*; GRRO) has a broad distribution across the southwestern United States and presents a high-density occurrence record scenario. Together these three species let you explore how the rENM Framework behaves across meaningfully different ecological and data contexts.
+Species within the rENM Framework are identified using a four-character alpha code, following the same conventions used by the North American Bird Banding Program. The example dataset includes three species that cover a range of modeling conditions. The Brown-capped Rosy-Finch (*Leucosticte australis*; BCRF) occupies a small, high-elevation range in the southern Rockies and has sparse occurrence records, making it a useful test case for low-density modeling scenarios. Cassin's Sparrow (*Peucaea cassinii*; CASP) is the focal species of the Schnase et al. study series and provides a well-characterized example with an extensive retrospective literature to draw on. The Greater Roadrunner (*Geococcyx californianus*; GRRO) has a broad distribution across the southwestern United States and presents a high-density occurrence record scenario. Together these three species let you explore how the rENM Framework behaves across meaningfully different ecological and data contexts.
 
 ## Viewing installed species data
 
@@ -345,11 +339,11 @@ rENM.data::tidy_occurrences(alpha_code)
 
 ### - Setting the spatial extent
 
-The the first step in preparing environmental data is setting the spatial extent of the analysis. Three options are available for defining these geographic boundaries:
+The first step in preparing environmental data is setting the spatial extent of the analysis. Three options are available for defining these geographic boundaries:
 
 - `find_range_extent()` derives the extent from the species' USGS GAP range polygon and is the recommended option for most analyses,
 
-- find_occurrence_extent() derives the extent from the species' eBird occurrence records using a centered percentile bounding box, and
+- `find_occurrence_extent()` derives the extent from the species' eBird occurrence records using a centered percentile bounding box, and
 
 - `set_extent()` accepts explicit bounding box coordinates; run \`?set_extent\` for details.
 
@@ -402,7 +396,7 @@ This step moves the processed occurrence records from the `<alpha_code>/_occs/` 
 ```{r}
 
 # stage occurrence records into TimeSeries bins
-rENM.model::stage_occurrences(alpha_code))
+rENM.model::stage_occurrences(alpha_code)
 
 ```
 
@@ -439,7 +433,7 @@ rENM.model::stage_screened_variables(alpha_code)
 
 ## Reducing covariance
 
-This optional step removes covarying predictors from the staged environmental variable sets using variance inflation factor (VIF) screening. By default, a “light-touch” approach is applied using variance inflation factors (VIF) and pairwise correlation thresholds. A relaxed VIF threshold (10) and a high correlation threshold (0.95) are used to remove only strongly redundant variables while preserving alternative representations of environmental gradients.
+This optional step removes covarying predictors from the staged environmental variable sets using variance inflation factor (VIF) screening. By default, a “light-touch” approach is applied using a relaxed VIF threshold (10) and a high correlation threshold (0.95), removing only strongly redundant variables while preserving alternative representations of environmental gradients.
 
 It is commented out by default. In practice, omitting this step may produce better representation of environmental structure, particularly when the Monte Carlo variable screening procedure described above has already identified a compact, informative predictor set.
 
@@ -451,7 +445,7 @@ It is commented out by default. In practice, omitting this step may produce bett
 
 ## Computing the time series
 
-The `create_timeseries()` fits an ensemble of five ecological niche models for each of the nine temporal bins in parallel. The five algorithms are maxnet, random forest, boosted regression trees, generalized linear models, and multivariate adaptive regression splines. Ensemble predictions are computed as the unweighted average across the five algorithms. Each bin produces a continuous suitability raster and a binary range raster. Together these nine suitability rasters constitute the rENM time series and are the primary inputs to the analysis steps that follow. For additional details and configuration options, refer to the documentation by running `?create_ensemble_model` in the RStudio console.
+The `create_timeseries()` function fits an ensemble of five ecological niche models for each of the nine temporal bins in parallel. The five algorithms are maxnet, random forest, boosted regression trees, generalized linear models, and multivariate adaptive regression splines. Ensemble predictions are computed as the unweighted average across the five algorithms. Each bin produces a continuous suitability raster and a binary range raster. Together these nine suitability rasters constitute the rENM time series and are the primary inputs to the analysis steps that follow. For additional details and configuration options, refer to the documentation by running `?create_ensemble_model` in the RStudio console.
 
 ```{r}
 
@@ -471,7 +465,7 @@ This required step computes per-cell Theil-Sen trend estimates from the time ser
 
 ```{r}
 
-# compute thiel-sen trends across the time series
+# compute theil-sen trends across the time series
 rENM.analysis::find_suitability_trend(alpha_code)
 
 ```
@@ -488,7 +482,7 @@ rENM.analysis::find_trend_percentages(alpha_code)
 
 ### - Finding range trend percentages
 
-The function below computes cell-wise trend sign statistics from the suitability trend raster and This step computes the same trend sign statistics restricted to cells within the species' USGS GAP range.
+This step computes the same trend sign statistics restricted to cells within the species' USGS GAP range.
 
 ```{r}
 
@@ -657,7 +651,7 @@ After editing `.Renviron`, restart R or run `readRenviron("~/.Renviron")` to mak
 
 ## Assembling the AI package
 
-This step collects the quantitative outputs produced by the rENM analysis pipeline — suitability trend rasters, summary statistics, variable contribution tables, centroid displacement metrics, and species metadata — and organizes them into a data bundle with a structured analytical prompt. The bundle is staged for submission to the target provider.
+This step collects suitability trend rasters, summary statistics, variable contribution tables, centroid displacement metrics, and species metadata from the rENM analysis pipeline and organizes them into a data bundle with a structured analytical prompt. The bundle is staged for submission to the target provider.
 
 ```{r}
 
@@ -708,18 +702,18 @@ The `assemble_final_report()` function combines the individual summary pages pro
 rENM.reports::assemble_final_report(alpha_code)
 ```
 
-By default, `assemble_final_report()` includes all pages produced by the workflow in their standard order. You can pass an explicit `pages` argument to include a subset of pages or to change their order. The full list of available pages will be documented here when `assemble_final_report()` is finalized.
+By default, `assemble_final_report()` includes all pages produced by the workflow in their standard order. You can pass an explicit `pages` argument to include a subset of pages or to change their order. Available page names are shown in the commented example above.
 
 ```{r}
 
 # assemble a custom selection of pages
 # rENM.reports::assemble_final_report(alpha_code, 
 #                                     pages = c("Suitability-Trend-Analysis",
+#                                               "Suitability-TimeSeries",
+#                                               "Range-TimeSeries",
 #                                               "Suitability-Trends",
 #                                               "State-Trends",
 #                                               "Centroid-Trends",
-#                                               "Suitability-TimeSeries",
-#                                               "Range-TimeSeries",
 #                                               "Variable-Trends",
 #                                               "Variable-Trend-Maps1",
 #                                               "Variable-Trend-Maps2"))
@@ -727,9 +721,44 @@ By default, `assemble_final_report()` includes all pages produced by the workflo
 
 # Extending the Framework
 
+## Installing the extended dataset
+
+The rENM Framework also provides an extended dataset that includes eBird occurrence records for 18 North American bird species, the complete set of MERRA-2 and MERRAclim-2 environmental predictor variables for nine five-year bins spanning 1980–2020, long-term trend and rate-of-change maps for all variables, USGS GAP range shapefiles for the additional species, and pipeline metadata files. The part files total approximately 30 GB and unzip to 73.1 GB. Make sure sufficient disk space is available before starting the download.
+
+Make sure your current working directory is the project directory, then run the following commands from a terminal window:
+
+``` bash
+#!/usr/bin/env bash
+
+# set project directory name 
+PROJECT_DIRECTORY="$HOME/rENMtest"
+cd "${PROJECT_DIRECTORY}"
+
+# download extended dataset part files
+BASE_URL="https://zenodo.org/records/20765324/files"
+for part in aa ab ac ad; do
+    curl -L -o "rENM-Framework-v0.1.0-extended-data.zip.part-${part}" \
+         "${BASE_URL}/rENM-Framework-v0.1.0-extended-data.zip.part-${part}"
+done
+
+# reassemble and unzip
+cat rENM-Framework-v0.1.0-extended-data.zip.part-* > rENM-Framework-v0.1.0-extended-data.zip
+unzip -o rENM-Framework-v0.1.0-extended-data.zip
+
+# update symbolic link
+ln -sfn rENM-Framework-v0.1.0-extended-data data
+
+# clean up
+rm -f rENM-Framework-v0.1.0-extended-data.zip.part-*
+rm -f rENM-Framework-v0.1.0-extended-data.zip
+rm -rf __MACOSX
+```
+
+The `ln -sfn` command updates the `data` symbolic link to point to the extended dataset. After this step, all framework operations will use the extended dataset automatically.
+
 ## Adding new species
 
-Three things are required to add a new species to the rENM Framework: an eBird Basic Dataset file for the species, a USGS GAP range shapefile for the species, and an entry in the species registry. The example dataset provides a useful template for all three; examine the `example_data` directory structure before proceeding.
+Three things are required to add a new species to the rENM Framework: an eBird Basic Dataset file for the species, a USGS GAP range shapefile for the species, and an entry in the species registry. The example dataset provides a useful template for all three; examine the `rENM-Framework-v0.1.0-example-data/` directory structure before proceeding.
 
 ### - Downloading an eBird Basic Dataset file
 
@@ -765,62 +794,13 @@ Open the species registry file at `<project_directory>/data/_species.csv` and ad
 
 Use the existing rows in `_species.csv` as a template. Once the row is saved, the new species will be available to the Framework and can be selected by passing its alpha code to any rENM function.
 
-## Adding new variables
-
-### - Downloading the full MERRA-2 collection
-
-**\[ \_\_\_\_\_\_ Placeholder \_\_\_\_\_ \]**
-
-*A description of the full MERRA-2 collection (Appendix B) and associated GoogleCloud download instructions will be provided here ...*
-
-The dataset is hosted on Google Cloud and downloaded automatically by the commands below. Make sure your current working directory is the project directory you created above, then run the following commands from a terminal window to download and install it:
-
-``` bash
-#!/usr/bin/env bash
-
-# set project directory name (using rENMtest as an example)
-PROJECT_DIRECTORY="$HOME/rENMtest"
-cd "${PROJECT_DIRECTORY}"
-
-# download and unzip full data set
-DATA_URL="https://storage.googleapis.com/renm_data/full_data.zip"
-ZIP_FILE="full_data.zip"
-curl -L -o "${ZIP_FILE}" "${DATA_URL}"
-unzip -o "${ZIP_FILE}"
-
-# create symbolic link
-ln -sfn full_data data
-
-# clean up
-rm -rf __MACOSX
-rm -f "${ZIP_FILE}"
-```
-
-Once the full dataset is installed, create a symbolic link from the `data` subdirectory to the `full_data` directory:
-
-``` bash
-ln -sfn example_data data
-```
-
-This allows the rENM Framework to locate input data consistently regardless of which dataset you are using. When finished, your project directory structure will look something like this:
-
-```         
-PROJECT_DIRECTORY/
-|___ data -> (symbolic link to full_data)
-|___ example_data/...
-|___ full_data/...
-|___ runs/...
-```
-
-**\[ \_\_\_\_\_\_ Placeholder \_\_\_\_\_ \]**
-
-### - Adding new variable types
+## Adding new variable types
 
 Adding new types of variables to the rENM Framework beyond the MERRA-2 and MERRAclim-2 variables included in this distribution requires careful attention to directory structure, file naming, spatial resolution, projection, and temporal organization. The steps involved depend on the type of data being added and may involve functional additions to one or more of the framework modules.
 
 In general terms, a framework-compatible environmental variable collection must be organized into a directory containing one subdirectory for each of the nine five-year temporal bins spanning 1980–2024, labeled by the bin's representative year. Each subdirectory contains the raster files for that bin. All bins must contain the same set of variables at the same spatial resolution, projection, and geographic coverage. Variables must have global coverage before being passed to `get_merra_variables()`, which crops each layer to the species-specific spatial extent at run time.
 
-The MERRA-2 and MERRAclim-2 collections included in the example dataset provide the best available template for constructing a new framework-compatible variable time series. Examining that directory structure before attempting to add new data is strongly recommended. Mapping out protocols for extending the types of occurrence and environmental data accommodated by the framework is an important focus of future development.
+The MERRA-2 and MERRAclim-2 collections included in the framework's example and extended datasets provide the best available templates for constructing a new framework-compatible variable collection. Examining those directory structures before attempting to add new data is strongly recommended. Mapping out protocols for extending the types of occurrence and environmental data accommodated by the framework is an important focus of future development.
 
 The rENM Framework is designed to accommodate a wide range of environmental data sources beyond MERRA-2, and the community is encouraged to develop and share dataset-specific integration instructions that can be referenced in future releases of the framework.
 

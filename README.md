@@ -2,7 +2,7 @@
 
 ![rENM](https://img.shields.io/badge/rENM-framework-blue) ![module](https://img.shields.io/badge/module-documentation-informational)
 
-**User manual and peer-reviewed publications for the rENM Framework**
+**User manual, function reference manuals, and project bibliography**
 
 ## Overview
 
@@ -20,18 +20,6 @@ This repository contains the primary documentation and supporting publications f
 | `rENM-Framework-User-Manual.docx` | Rendered Word document |
 | `rENM-Framework-User-Manual.ipynb` | Rendered Jupyter Notebook |
 | `references.bib` | BibTeX bibliography for all framework publications |
-
-### Publications
-
-| File | Citation |
-|----|----|
-| `2021_PLOS.pdf` | Schnase et al. 2021 — Monte Carlo variable selection in MaxEnt |
-| `2022_PLOS.pdf` | Schnase et al. 2022 — Automatic variable selection, Cassin's Sparrow |
-| `2023_BiDS.pdf` | Schnase & Carroll 2023 — MMX Toolkit, BiDS'23 conference proceedings |
-| `2024_JFO.pdf` | Schnase et al. 2024 — Complex changes in climatic suitability |
-| `2025_JFO.pdf` | Schnase et al. 2025 — Shifts in breeding phenology |
-| `2026_SWAN.pdf` | Schnase et al. 2026 — Shifts in seasonal climatic suitability |
-| *(in preparation)* | Schnase et al. — The rENM Framework (no PDF yet) |
 
 ## Publications
 

@@ -47,7 +47,15 @@ Work has begun on corrections and improvements to the v0.1.0 codebase, tracked c
 | `rENM.ai`        | TBD     | TBD      | TBD              |
 | `rENM.reports`   | TBD     | TBD      | TBD              |
 
-Summary of changes since v0.1.0: *TBD*
+Summary of changes since v0.1.0 (from each package's `NEWS.md`; not yet tagged as a Framework release):
+
+- **`rENM.core`** — added `check_species()`, an audit function for the species metadata table. `get_species_info()` no longer requires or returns an `EBD.RANGE` column and its console output is now left-justified; the returned object is still a plain data frame.
+- **`rENM.data`** — `find_occurrence_extent()`'s default `bbox_pct` changed from 99 to 90, and occurrence records are now restricted to a continental-US bounding box before that percentile extent is computed. This changes the spatial extent used to crop predictors for any run using the default settings.
+- **`rENM.model`** — one compatibility patch (fixes an R 4.6.0 `"invalid 'scipen'"` crash in `create_ensemble_model()`), currently recorded under the `0.1.0` heading in `NEWS.md` rather than a new version section.
+- **`rENM.analysis`** — fixed `create_state_trend_analysis()` and `create_hot_spot_map()`, which could error or silently include states with no real raster coverage when a species' modeled extent is smaller than its GAP range polygon. State-level statistics for affected species may change.
+- **`rENM.ai`** — no changes.
+- **`rENM.reports`** — added a `top_states` filter to the state summary table (default preserves prior behavior). `assemble_final_report()` was substantially rewritten: page numbering now uses `cpdf` instead of a raster overlay, pages are normalized to letter size, an optional `.docx` output was added, and the function's return value changed from a single path to a vector of paths.
+- **`rENM`** — default extent determination now calls `find_occurrence_extent()` (matching the `rENM.data` change above).
 
 <!--
 When filling in this section: pull the high-level points from each package's
@@ -55,7 +63,7 @@ NEWS.md rather than duplicating detail here; keep the summary to a few
 sentences and link out to the relevant NEWS.md entries.
 -->
 
-Affects a result, figure, or number reported in the v0.1.0 / bioRxiv paper: *TBD*
+Affects a result, figure, or number reported in the v0.1.0 / bioRxiv paper: **Possibly — needs confirmation.** The `rENM.data` extent default change and the `rENM.analysis` state-statistics fix both touch computations that feed published numbers; the rest are non-computational (docs, output format, a crash fix). Confirm before tagging v0.2.0.
 
 <!--
 Answer this explicitly once v0.2.0 is tagged. If yes, that's a signal to loop

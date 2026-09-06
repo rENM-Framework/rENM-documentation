@@ -47,9 +47,20 @@ Work has begun on corrections and improvements to the v0.1.0 codebase, tracked c
 | `rENM.ai`        | TBD     | TBD      | TBD              |
 | `rENM.reports`   | TBD     | TBD      | TBD              |
 
-Summary of changes since v0.1.0: *(fill in once scoped — pull the high-level points from each package's `NEWS.md`; keep this to a few sentences, link out for detail rather than duplicating it here)*
+Summary of changes since v0.1.0: *TBD*
 
-Does this change any result, figure, or number reported in the v0.1.0 paper? **Yes / No** — *(answer this explicitly when v0.2.0 is tagged; if yes, that's a signal to loop in PLOS rather than only updating this file)*
+<!--
+When filling in this section: pull the high-level points from each package's
+NEWS.md rather than duplicating detail here; keep the summary to a few
+sentences and link out to the relevant NEWS.md entries.
+-->
+
+Affects a result, figure, or number reported in the v0.1.0 / bioRxiv paper: *TBD*
+
+<!--
+Answer this explicitly once v0.2.0 is tagged. If yes, that's a signal to loop
+in PLOS about the submitted manuscript, not just update this file.
+-->
 
 ---
 

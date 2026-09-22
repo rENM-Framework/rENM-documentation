@@ -29,7 +29,9 @@ Example reports and example runs (CASP, GRRO, BCRF) distributed with this releas
 - Reports: [zenodo.org/records/20750861](https://zenodo.org/records/20750861)
 - Runs: [zenodo.org/records/20762105](https://zenodo.org/records/20762105)
 
-**Reproducibility note:** results in the bioRxiv preprint and the PLOS One submission were generated with this exact combination. To reproduce them, install these tagged versions, not `main`. See the pinned installation instructions in the [org README](https://github.com/rENM-Framework).
+**Reproducibility note:** the figures in the bioRxiv preprint and the PLOS One submission were generated with this exact combination. To work from the same code, install these tagged versions, not `main`. See the pinned installation instructions in the [org README](https://github.com/rENM-Framework).
+
+This reproduces the method rather than every number. v0.1.0 seeds no stage of the pipeline, so `limit_record_count()`, `screen_by_convergence2()`, and `create_ensemble_model()` draw fresh on each run. Quantities derived from vector geometry, including Range Area, Extent Area, and Range %, involve no model and are exact on any run. Model-derived statistics vary. In the one case measured, two runs of the same species, range-wide aggregates moved by one to three percentage points while a small state's positive-trend fraction moved from 98.4 to 11.3. Run-to-run determinism was added in v0.2.0 through the `seed` argument to `rENM()`.
 
 ---
 

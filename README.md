@@ -15,11 +15,10 @@ This repository contains the primary documentation and supporting publications f
 | File | Description |
 |----|----|
 | `rENM-Framework-User-Manual.qmd` | Source document (Quarto Markdown) |
-| `rENM-Framework-User-Manual.html` | Rendered HTML (self-contained) |
-| `rENM-Framework-User-Manual.pdf` | Rendered PDF |
-| `rENM-Framework-User-Manual.docx` | Rendered Word document |
-| `rENM-Framework-User-Manual.ipynb` | Rendered Jupyter Notebook |
-| `references.bib` | BibTeX bibliography for all framework publications |
+| `FRAMEWORK-CHANGELOG.md` | Framework-level version history and the DOI set for each release |
+| `publications.bib` | BibTeX bibliography for all framework publications |
+
+`main` carries the manual source only. Rendered editions in HTML, PDF, DOCX, and IPYNB are produced at release time and ship with the corresponding tag, alongside the per-package reference manuals. For Framework v0.1.0 they are in the [`v0.1.0` tag](https://github.com/rENM-Framework/rENM-documentation/tree/v0.1.0) and archived at [10.5281/zenodo.20799331](https://doi.org/10.5281/zenodo.20799331).
 
 ## Publications
 

@@ -1,6 +1,6 @@
 ---
 title: "rENM Framework User Manual"
-subtitle: "Version 0.1.0"
+subtitle: "Version 0.2.0"
 author: "John L. Schnase"
 date: today
 number-sections: false
@@ -82,7 +82,7 @@ If you use the *rENM-Framework-User-Manual.qmd* file as a template for your own 
 
 # System Requirements
 
-The rENM Framework requires R (≥ 4.1.0) and two external software dependencies, LibreOffice and Chrome or Chromium, that must be installed separately before the full pipeline can run. The Framework has been developed and tested on macOS and is expected to be compatible with Linux. Windows users may experience longer run times due to limited support for parallel processing on that platform. All R package dependencies are installed automatically when you install the framework packages from GitHub (see *Installing the Framework Packages* below).
+The rENM Framework requires R (≥ 4.1.0) and three external software dependencies, LibreOffice, Chrome or Chromium, and cpdf, that must be installed separately before the full pipeline can run. The Framework has been developed and tested on macOS and is expected to be compatible with Linux. Windows users may experience longer run times due to limited support for parallel processing on that platform. All R package dependencies are installed automatically when you install the framework packages from GitHub (see *Installing the Framework Packages* below).
 
 ## R package dependencies
 
@@ -120,6 +120,18 @@ chromote::find_chrome()
 ```
 
 If that call throws an error, install Google Chrome from <https://www.google.com/chrome/> and re-run `chromote::find_chrome()` to confirm. If Chrome is unavailable at runtime, PNG and PDF outputs from the summary table functions are silently skipped with a console note; the XLSX output is always written regardless.
+
+## cpdf
+
+`rENM.reports::assemble_final_report()` uses cpdf (Coherent PDF Tools) to normalize every page to letter size and to stamp page numbers on the assembled report. Both operations run through cpdf, so it must be installed before assembling a final report.
+
+On macOS, install with Homebrew:
+
+``` bash
+brew install cpdf
+```
+
+Unlike the Chrome dependency, an absent cpdf stops report assembly rather than skipping an output. Setting `page_numbers = FALSE` does not remove the requirement, since page normalization uses cpdf regardless.
 
 ## Troubleshooting package installation
 

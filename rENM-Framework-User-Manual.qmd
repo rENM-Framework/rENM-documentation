@@ -353,11 +353,17 @@ rENM.data::tidy_occurrences(alpha_code)
 
 The first step in preparing environmental data is setting the spatial extent of the analysis. Three options are available for defining these geographic boundaries:
 
-- `find_range_extent()` derives the extent from the species' USGS GAP range polygon and is the recommended option for most analyses,
+- `find_range_extent()` derives the extent from the species' USGS GAP range polygon, buffered outward by 250 km, and is the recommended option for most analyses,
 
 - `find_occurrence_extent()` derives the extent from the species' eBird occurrence records using a centered percentile bounding box, and
 
 - `set_extent()` accepts explicit bounding box coordinates; run \`?set_extent\` for details.
+
+`find_range_extent()` does not use the GAP range polygon directly. It buffers the polygon outward by `buffer_km` (default 250) and takes the bounding box of the buffered result. The buffer is applied in EPSG:5070, an equal-area projection, so the margin is a true ground distance in every direction rather than a fixed number of degrees, which varies with latitude.
+
+The buffer exists so that a moving range edge has somewhere to appear. A trend surface clipped at the historic range boundary describes only conditions inside a range delineated decades ago; it cannot show suitability improving just beyond it. The 250 km figure comes from Huang et al. (2017), who measured an average multidirectional centroid velocity of 5.89 km/yr across 57 permanent resident North American bird species. Projected across the framework's 45-year window that gives approximately 265 km, rounded down to 250 as a conservative default. The estimate is drawn from permanent residents and may not suit strongly migratory species. Run `?find_range_extent` for the full derivation and for guidance on setting a different value.
+
+The buffer also defines two zones that later analyses report separately. The interior is the area inside the GAP range polygon. The ring is the band between that polygon and its buffered outline, the 250 km margin surrounding the range. The buffered polygon is written to `<alpha_code>/_occs/range_buffered.gpkg` so both zones can be recovered later; *Finding boundary trend statistics* compares trend behavior between them.
 
 In the code block below, choose one and comment out the other options.
 

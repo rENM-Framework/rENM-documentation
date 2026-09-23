@@ -29,6 +29,15 @@ Example reports and example runs (CASP, GRRO, BCRF) distributed with this releas
 - Reports: [zenodo.org/records/20750861](https://zenodo.org/records/20750861)
 - Runs: [zenodo.org/records/20762105](https://zenodo.org/records/20762105)
 
+Datasets used by this release are archived separately:
+
+| Dataset | Archive | Zenodo |
+| ------- | ------- | ------ |
+| Example (~725 MB) | `rENM-Framework-v0.1.0-example-data` | [zenodo.org/records/20750253](https://zenodo.org/records/20750253) |
+| Extended (~30 GB) | `rENM-Framework-v0.1.0-extended-data` | [zenodo.org/records/20765324](https://zenodo.org/records/20765324) |
+
+Datasets are versioned on their own line. The `v0.1.0` in a dataset name refers to that line, not to a Framework software version. The two coincide here because both were first published together.
+
 **Reproducibility note:** the figures in the bioRxiv preprint and the PLOS One submission were generated with this exact combination. To work from the same code, install these tagged versions, not `main`. See the pinned installation instructions in the [org README](https://github.com/rENM-Framework).
 
 This reproduces the method rather than every number. v0.1.0 seeds no stage of the pipeline, so `limit_record_count()`, `screen_by_convergence2()`, and `create_ensemble_model()` draw fresh on each run. Quantities derived from vector geometry, including Range Area, Extent Area, and Range %, involve no model and are exact on any run. Model-derived statistics vary. In the one case measured, two runs of the same species, range-wide aggregates moved by one to three percentage points while a small state's positive-trend fraction moved from 98.4 to 11.3. Run-to-run determinism was added in v0.2.0 through the `seed` argument to `rENM()`.
@@ -49,15 +58,17 @@ Work has begun on corrections and improvements to the v0.1.0 codebase, tracked c
 | `rENM.ai`        | TBD     | TBD      | TBD              |
 | `rENM.reports`   | TBD     | TBD      | TBD              |
 
+**Datasets:** unchanged. Framework v0.2.0 runs against the v0.1.0 example and extended datasets listed above, and the User Manual's download instructions are unchanged. A dataset version is not expected to track the software version.
+
 Summary of changes since v0.1.0 (from each package's `NEWS.md`; not yet tagged as a Framework release):
 
-- **`rENM.core`** — added `check_species()`, an audit function for the species metadata table. `get_species_info()` no longer requires or returns an `EBD.RANGE` column and its console output is now left-justified; the returned object is still a plain data frame.
-- **`rENM.data`** — `find_occurrence_extent()`'s default `bbox_pct` changed from 99 to 90, and occurrence records are now restricted to a continental-US bounding box before that percentile extent is computed. This changes the spatial extent used to crop predictors for any run using the default settings.
-- **`rENM.model`** — one compatibility patch (fixes an R 4.6.0 `"invalid 'scipen'"` crash in `create_ensemble_model()`), currently recorded under the `0.1.0` heading in `NEWS.md` rather than a new version section.
-- **`rENM.analysis`** — fixed `create_state_trend_analysis()` and `create_hot_spot_map()`, which could error or silently include states with no real raster coverage when a species' modeled extent is smaller than its GAP range polygon. State-level statistics for affected species may change.
-- **`rENM.ai`** — no changes.
-- **`rENM.reports`** — added a `top_states` filter to the state summary table (default preserves prior behavior). `assemble_final_report()` was substantially rewritten: page numbering now uses `cpdf` instead of a raster overlay, pages are normalized to letter size, an optional `.docx` output was added, and the function's return value changed from a single path to a vector of paths.
-- **`rENM`** — default extent determination now calls `find_occurrence_extent()` (matching the `rENM.data` change above).
+- **`rENM.core`** — added `check_species()`, an audit of the species metadata table. `get_species_info()` no longer requires or returns an `EBD.RANGE` column and now prints left-justified.
+- **`rENM.data`** — `find_range_extent()` now derives the modeled extent from a true 250 km buffer around the GAP range polygon, applied in EPSG:5070, replacing a percentage pad of the bounding box that varied with latitude and corresponded to no fixed ground distance. `pad_pct` is replaced by `buffer_km` (default 250), and the buffered polygon is saved so boundary statistics can use it. `find_occurrence_extent()` changed its default `bbox_pct` from 99 to 90 and now restricts records to a CONUS bounding box first, though it is no longer the pipeline default.
+- **`rENM.model`** — run-to-run determinism. `create_timeseries()` had been seeding its worker streams from the wall clock, which defeated any seed set upstream; it and `create_ensemble_model()` gain a `seed` argument with per-year seeding, which is what makes a result independent of which worker picks up which year. `screen_by_convergence2()` now registers `doRNG`, tying the RNG stream to the iteration rather than the worker, so variable selection no longer varies between seeded runs. Adds `doRNG` to Imports. Also carries an R 4.6.0 `scipen` compatibility patch.
+- **`rENM.analysis`** — added `find_boundary_trend_statistics()`, comparing trend behavior inside the GAP range against the surrounding buffer ring. `find_trend_percentages()` gained a `layer` argument and per-class area columns, and its percentages moved from a cell-count basis to an area basis, matching every other percentage the framework reports. Several hot-spot corrections: area is clipped to the GAP range portion within each state and weighted by the fraction of each cell inside it, and Hot Spot % is taken against a grid-measured range area, so it can no longer exceed 100. Also fixed `create_hot_spot_map()` aborting where a range edge coincides with a state line, and both state functions including states with no raster coverage.
+- **`rENM.ai`** — added `assemble_coversheet()`, which builds the narrative page locally with no language model, used when `ai = NULL` and as the fallback when a provider call fails. Adds `officer` to Imports. `submit_to_chatgpt()`'s container listing is now paginated, which was the actual cause of document retrieval failing at random. `render_ai_docx()` runs three checks on the returned document: unsubstituted placeholders stop the run, truncation and known prose faults warn. Extensive prompt corrections, including removing fabricated references.
+- **`rENM.reports`** — `assemble_final_report()` substantially rewritten: `cpdf` page numbering in place of a raster overlay, letter-size normalization, optional `.docx` output, an `optional_pages` argument that lets a missing narrative page be skipped rather than aborting assembly, and a vector return value. Adds `SystemRequirements: cpdf`. The state summary table gained a boundary block and a `top_states` filter, Hot Spot % now uses a grid-measured range area as its denominator, and the mislabeled "State Area" column was renamed. Added a methods note to the report appendix.
+- **`rENM`** — added `seed` (default 42) and `ai` (`"chatgpt"`, `"claude"`, or `NULL`) arguments. Default extent determination is now `find_range_extent()`, superseding a `find_occurrence_extent()` default that never shipped in a release. The pipeline now calls `find_boundary_trend_statistics()` and runs `find_trend_percentages()` a second time on the change trend. A GenAI failure no longer aborts the run; the coversheet substitutes.
 
 <!--
 When filling in this section: pull the high-level points from each package's
@@ -65,12 +76,7 @@ NEWS.md rather than duplicating detail here; keep the summary to a few
 sentences and link out to the relevant NEWS.md entries.
 -->
 
-Affects a result, figure, or number reported in the v0.1.0 / bioRxiv paper: **Possibly — needs confirmation.** The `rENM.data` extent default change and the `rENM.analysis` state-statistics fix both touch computations that feed published numbers; the rest are non-computational (docs, output format, a crash fix). Confirm before tagging v0.2.0.
-
-<!--
-Answer this explicitly once v0.2.0 is tagged. If yes, that's a signal to loop
-in PLOS about the submitted manuscript, not just update this file.
--->
+**Affects a result, figure, or number reported in the v0.1.0 / bioRxiv paper:** Numbers change, but no published claim depends on them. The manuscript's figures illustrate the kinds of data product the framework produces rather than supporting scientific conclusions, so no result rests on a specific value, and the v0.1.0 tag remains the anchor for the figures as published. Note that several v0.2.0 changes are corrections rather than refinements: hot-spot percentages could exceed 100, percentages and the areas printed beside them were computed on different bases, and state statistics could include states with no raster coverage. Figures regenerated under v0.2.0 will therefore differ visibly from their v0.1.0 counterparts. The preprint can be updated; anything arising in PLOS One review will be handled there.
 
 ---
 

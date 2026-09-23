@@ -12,7 +12,7 @@ Initial public release. Described in:
 
 - Schnase, John L., Mark L. Carroll, Paul M. Montesano, and Virginia A. Seamster. "The rENM Framework: A Modular System for Reconstructing and Analyzing Long-Term Ecological Niche Dynamics." Preprint, bioRxiv, August 7, 2026. <https://doi.org/10.64898/2026.08.06.741224>. Submitted to PLOS One; review in progress.
 
-Archived and citable as a set through the [rENM Framework Zenodo Community](https://zenodo.org/communities/renm-framework/records).
+Archived and citable as a set through the [rENM Framework Zenodo Community](https://zenodo.org/communities/renm-framework/records). The complete v0.1.0 software bundle carries its own DOI: [10.5281/zenodo.20799598](https://doi.org/10.5281/zenodo.20799598).
 
 | Package          | Version | Git tag  | DOI                                                                  | Released     |
 | ---------------- | ------- | -------- | --------------------------------------------------------------------- | ------------ |
@@ -38,6 +38,14 @@ Datasets used by this release are archived separately:
 
 Datasets are versioned on their own line. The `v0.1.0` in a dataset name refers to that line, not to a Framework software version. The two coincide here because both were first published together.
 
+Documentation for this release:
+
+| Artifact | Source | Zenodo |
+| -------- | ------ | ------ |
+| User Manual | `rENM-documentation` tag `v0.1.0` | [10.5281/zenodo.20799331](https://doi.org/10.5281/zenodo.20799331) |
+
+The `v0.1.0` tag of `rENM-documentation` carries the rendered manual in PDF, DOCX, HTML, and IPYNB, together with per-package reference manuals. Use the manual matching the Framework version you are running: each edition describes the pipeline as it behaved at that release, and the v0.1.0 manual does not describe the buffered extent default, the `seed` and `ai` arguments, or boundary statistics.
+
 **Reproducibility note:** the figures in the bioRxiv preprint and the PLOS One submission were generated with this exact combination. To work from the same code, install these tagged versions, not `main`. See the pinned installation instructions in the [org README](https://github.com/rENM-Framework).
 
 This reproduces the method rather than every number. v0.1.0 seeds no stage of the pipeline, so `limit_record_count()`, `screen_by_convergence2()`, and `create_ensemble_model()` draw fresh on each run. Quantities derived from vector geometry, including Range Area, Extent Area, and Range %, involve no model and are exact on any run. Model-derived statistics vary. In the one case measured, two runs of the same species, range-wide aggregates moved by one to three percentage points while a small state's positive-trend fraction moved from 98.4 to 11.3. Run-to-run determinism was added in v0.2.0 through the `seed` argument to `rENM()`.
@@ -59,6 +67,8 @@ Work has begun on corrections and improvements to the v0.1.0 codebase, tracked c
 | `rENM.reports`   | TBD     | TBD      | TBD              |
 
 **Datasets:** unchanged. Framework v0.2.0 runs against the v0.1.0 example and extended datasets listed above, and the User Manual's download instructions are unchanged. A dataset version is not expected to track the software version.
+
+**Documentation:** the User Manual is being revised for v0.2.0 and will be tagged in `rENM-documentation` and deposited to Zenodo alongside the release. Until then the v0.1.0 manual remains the published reference and describes v0.1.0 behavior.
 
 Summary of changes since v0.1.0 (from each package's `NEWS.md`; not yet tagged as a Framework release):
 

@@ -80,9 +80,19 @@ If you prefer not to run an rENM analysis step by step, you can execute the full
 
 If you use the *rENM-Framework-User-Manual.qmd* file as a template for your own species or study system, RStudio's Quarto rendering engine can convert it to multiple output formats from the `Render` drop-down menu, including HTML, PDF, and Microsoft Word (DOCX). A Jupyter Notebook (IPYNB) version can also be rendered, producing a notebook that executes the same rENM Framework functions in an R kernel environment and making the workflow accessible to users who prefer the Jupyter interface without requiring any modification to the underlying R code.
 
+# Versions and Compatibility
+
+The rENM Framework versions three things independently: the software, this manual, and the datasets. They do not advance in step, and a version number in one implies nothing about the others.
+
+This manual describes Framework v0.2.0. A Framework version is a specific, tested combination of the seven package versions. Which combination constitutes which version is recorded in `FRAMEWORK-CHANGELOG.md` in the [rENM-documentation](https://github.com/rENM-Framework/rENM-documentation) repository, together with the Zenodo DOI for each component.
+
+The example and extended datasets are at v0.1.0 and remain current. Framework v0.2.0 runs against them unchanged, and the download instructions below are correct as written. The `v0.1.0` in a dataset filename refers to the dataset's own release line rather than to a software version; the two coincide because both were first published together.
+
+To reproduce results from a specific publication, install the package versions tagged for the Framework version that publication names rather than the current state of `main`. The changelog gives the tags, and the project's GitHub landing page shows the pinned installation form.
+
 # System Requirements
 
-The rENM Framework requires R (≥ 4.1.0) and three external software dependencies, LibreOffice, Chrome or Chromium, and cpdf, that must be installed separately before the full pipeline can run. The Framework has been developed and tested on macOS and is expected to be compatible with Linux. Windows users may experience longer run times due to limited support for parallel processing on that platform. All R package dependencies are installed automatically when you install the framework packages from GitHub (see *Installing the Framework Packages* below).
+The rENM Framework requires R (≥ 4.1.0) and three external software dependencies, LibreOffice, Chrome or Chromium, and cpdf, that must be installed separately before the full pipeline can run. The Framework has been developed and tested on macOS and is expected to be compatible with Linux. Windows users may experience longer run times due to limited support for parallel processing on that platform. All R package dependencies are installed automatically when you install the framework packages from GitHub (see *Installing the framework packages* below).
 
 ## R package dependencies
 
@@ -150,7 +160,7 @@ PROJECT_DIRECTORY/
 |___ runs/...
 ```
 
-You only need to configure your host environment once. The examples below assume a macOS or Linux environment using the Bash shell. If you prefer to run these commands outside of RStudio, equivalent scripts are available at <https://github.com/rENM-Framework/rENM-scripts>.
+You only need to configure your host environment once. The examples below assume a macOS or Linux environment using the Bash shell.
 
 ## Creating the project directory
 
@@ -691,9 +701,17 @@ rENM.reports::assemble_centroid_trends_page(alpha_code)
 
 # GenAI Analysis
 
-This optional, experimental module uses generative AI to produce a structured interpretive narrative from the quantitative outputs of the rENM analysis pipeline. The narrative is included in the final report. Two providers are supported: Anthropic (Claude) and OpenAI (ChatGPT). Both accept the same assembled data package; the choice of provider affects interpretation style, response time, and per-run cost.
+This step produces the report's opening page, and there are three ways to do it.
+
+Two use generative AI to write a structured interpretive narrative from the pipeline's quantitative outputs. Anthropic (Claude) and OpenAI (ChatGPT) are both supported and both accept the same assembled data package; the choice affects interpretation style, response time, and per-run cost. This module is experimental.
+
+The third uses no AI. It produces a plain coversheet carrying the species name, the list of figures included in the report, the framework citation, and a timestamp, leaving the report to consist only of computed results. Skip *Assembling the AI package* and *Submitting to a provider*, and run *Building a coversheet instead*.
+
+All three produce the same file, `<alpha_code>-Suitability-Trend-Analysis.docx`, which *Rendering the page* converts for inclusion in the final report. Running the whole pipeline with `rENM()` selects among them with its `ai` argument, and falls back to the coversheet if a provider call fails.
 
 ## API key configuration
+
+Required for the ChatGPT and Claude paths only. Skip this if you are producing a coversheet.
 
 Both providers require a separate API account. API usage is billed per token, independently of any web subscription. Obtain a key from each provider you intend to use and add it to your \`.Renviron\` file alongside the project directory entry in *Configuring the RStudio Environment*:
 
@@ -706,6 +724,8 @@ RENM_PROJECT_DIR="/Users/yourname/rENM"
 After editing `.Renviron`, restart R or run `readRenviron("~/.Renviron")` to make the keys available in the current session. Obtain an Anthropic API key at <https://console.anthropic.com> and an OpenAI key at <https://platform.openai.com>. Enter `?submit_to_claude` or `?submit_to_chatgpt` for current model availability and pricing guidance.
 
 ## Assembling the AI package
+
+This step and the next belong to the two provider paths.
 
 This step collects suitability trend rasters, summary statistics, variable contribution tables, centroid displacement metrics, and species metadata from the rENM analysis pipeline and organizes them into a data bundle with a structured analytical prompt. The bundle is staged for submission to the target provider.
 
@@ -736,17 +756,33 @@ If `submit_to_claude()` fails or returns an unexpected result, use the diagnosti
 # rENM.ai::submit_to_claude_diag(alpha_code)
 ```
 
-## Rendering the AI report
+## Building a coversheet instead
 
-This step converts the DOCX report returned by the provider to PDF via LibreOffice for inclusion in the final report. LibreOffice must be installed before running this function (see *System Requirements*).
+If you are not using AI, this step produces the opening page directly. It writes the same `<alpha_code>-Suitability-Trend-Analysis.docx` a provider would have returned, carrying the title block, the list of figures included in the report, the framework citation, and a timestamp. No API key is needed and nothing is sent anywhere.
+
+Run this instead of the two steps above rather than in addition to them. It writes the same filename, so running it after a successful submission overwrites the narrative with the coversheet. It is commented out by default for that reason; uncomment it and comment out the two steps above to take this path.
+
+Run it also if a provider call failed and you want to continue. `assemble_final_report()` treats the opening page as optional and omits it when the file is absent, so a report assembled after a failed submission without this step opens directly on the suitability time series.
 
 ```{r}
 
-# convert AI-generated DOCX report to PDF
+# build the report's opening page without AI
+# rENM.ai::assemble_coversheet(alpha_code)
+```
+
+## Rendering the page
+
+This step converts the DOCX produced above, whether written by a provider or by `assemble_coversheet()`, to PDF via LibreOffice for inclusion in the final report. LibreOffice must be installed before running this function (see *System Requirements*).
+
+The function also checks the document it received. An unsubstituted placeholder stops the run, since a placeholder standing in for a figure means the page is missing data; truncated paragraphs and known prose faults produce warnings. If it stops, regenerate the narrative by re-running the submission step rather than looking for a LibreOffice problem.
+
+```{r}
+
+# convert the DOCX page to PDF
 rENM.ai::render_ai_docx(alpha_code)
 ```
 
-The AI-generated narrative is intended as a preliminary interpretation to support expert review. It should not be treated as a validated ecological conclusion.
+An AI-generated narrative is intended as a preliminary interpretation to support expert review. It should not be treated as a validated ecological conclusion.
 
 # Assembling the final report
 
@@ -758,7 +794,11 @@ The `assemble_final_report()` function combines the individual summary pages pro
 rENM.reports::assemble_final_report(alpha_code)
 ```
 
-By default, `assemble_final_report()` includes all pages produced by the workflow in their standard order. You can pass an explicit `pages` argument to include a subset of pages or to change their order. Available page names are shown in the commented example above.
+The assembled report opens with the interpretation page produced in the previous section, followed by the eight summary pages built under *Report Generation*, and closes with two appendices: a methods note describing how the modeled extent and the boundary statistics are defined, and the MERRA variable reference. The appendices are static assets that ship with `rENM.reports` rather than products of the run, so they are controlled by the `appendix` argument rather than by `pages`. Passing `appendix = NULL` omits them. Unlike a workflow page, a missing appendix file is always an error. Page numbers are stamped on every page but the first, which carries the title block.
+
+The opening page is the one exception to that rule. If `<alpha_code>-Suitability-Trend-Analysis.pdf` is absent, whether because a submission failed or because neither a provider nor a coversheet was run, it is omitted with a warning and the rest of the report assembles. Every other page is required, and a missing one raises an error, since that normally means an earlier step did not finish.
+
+Pass an explicit `pages` argument to include a subset of pages or to change their order. The commented example below lists the default set in its standard order.
 
 ```{r}
 
@@ -864,7 +904,7 @@ The rENM Framework is designed to accommodate a wide range of environmental data
 
 # APPENDIX A - Related Publications
 
-Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. (in preparation). The rENM Framework: Toward a modular system for reconstructing and analyzing long-term ecological niche dynamics.
+Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. The rENM Framework: A modular system for reconstructing and analyzing long-term ecological niche dynamics. Preprint, bioRxiv. <https://doi.org/10.64898/2026.08.06.741224>. Submitted to PLOS One; review in progress.
 
 Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2026. Shifts in seasonal climatic suitability for Cassin's Sparrow (*Peucaea cassinii*) over four decades. The Southwestern Naturalist, 70(1):1-17. <https://doi.org/10.1894/0038-4909-70.1.7>
 
@@ -899,6 +939,7 @@ Schnase, J.L., M.L. Carroll, R.L. Gill, G.S. Tamkin, J. Li, S.L. Strong, T.P. Ma
 | Function | Description | See |
 |----|----|----|
 | `rENM_project_dir()` | Resolve the active project root | *Configuring the RStudio Environment* |
+| `check_species()` | Audit the species table for complete records and matching data directories | *Extending the Framework* |
 | `get_species_info()` | Retrieve metadata for a species by alpha code | *Performing an rENM Analysis* |
 | `show_species()` | List species available in the project | *Performing an rENM Analysis* |
 | `show_variables()` | List environmental variables available in the project | *Data Assembly* |
@@ -916,6 +957,7 @@ All functions in this package are documented in *Data Assembly*.
 | `limit_record_count()` | Downsample bins to a maximum record count |
 | `remove_duplicate_occurrences()` | Remove exact-coordinate duplicate records |
 | `set_extent()` | Set spatial extent from explicit coordinates |
+| `set_up_run()` | Create the run directory structure for a species |
 | `thin_occurrences()` | Sequential spatial thinning |
 | `thin_occurrences2()` | Parallel spatial thinning with optional record cap |
 | `tidy_occurrences()` | Move cleaned occurrence files from staging to main directory |
@@ -950,6 +992,7 @@ All functions in this package are documented in *Time Series Analysis*.
 | `create_state_trend_analysis()` | Per-state suitability trend map and statistics |
 | `create_suitability_change_map()` | Suitability rate-of-change trend map |
 | `find_bioclimatic_velocity()` | Estimate suitability displacement direction, distance, and velocity |
+| `find_boundary_trend_statistics()` | Compare trend behavior inside the GAP range against the surrounding buffer ring |
 | `find_hot_spots()` | Identify cells with accelerating suitability declines |
 | `find_range_change_percentages()` | Summarize trend proportions within the USGS GAP range |
 | `find_suitability_change_trend()` | Compute trends in suitability rate of change |
@@ -971,19 +1014,20 @@ All functions in this package are documented in *GenAI Analysis*.
 | Function | Description |
 |----|----|
 | `assemble_ai_package()` | Assemble AI-ready data bundle with analytical prompt |
-| `render_ai_docx()` | Convert AI-generated DOCX report to PDF via LibreOffice |
+| `assemble_coversheet()` | Build the report's opening page without calling a language model |
+| `render_ai_docx()` | Convert the report's opening page from DOCX to PDF via LibreOffice |
 | `submit_to_chatgpt()` | Submit data bundle to OpenAI and retrieve DOCX report |
 | `submit_to_claude()` | Submit data bundle to Anthropic and retrieve DOCX report |
 | `submit_to_claude_diag()` | Diagnose a failed `submit_to_claude()` response |
 
 ### rENM.reports
 
-All functions in this package are documented in *Report Generation* and *Assembling the Final Report*.
+All functions in this package are documented in *Report Generation* and *Assembling the final report*.
 
 | Function | Description |
 |----|----|
 | `assemble_centroid_trends_page()` | Single-page PDF: centroid trend map and table |
-| `assemble_final_report()` | Combine all pages into a single paginated PDF report |
+| `assemble_final_report()` | Combine all pages and appendices into a single paginated PDF report |
 | `assemble_range_timeseries_page()` | Single-page PDF: range time series contact sheet |
 | `assemble_state_trends_page()` | Single-page PDF: state trend map, hotspot map, and table |
 | `assemble_suitability_timeseries_page()` | Single-page PDF: suitability time series contact sheet |

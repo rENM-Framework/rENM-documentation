@@ -367,7 +367,7 @@ The first step in preparing environmental data is setting the spatial extent of 
 
 The buffer exists so that a moving range edge has somewhere to appear. A trend surface clipped at the historic range boundary describes only conditions inside a range delineated decades ago; it cannot show suitability improving just beyond it. The 250 km figure comes from Huang et al. (2017), who measured an average multidirectional centroid velocity of 5.89 km/yr across 57 permanent resident North American bird species. Projected across the framework's 45-year window that gives approximately 265 km, rounded down to 250 as a conservative default. The estimate is drawn from permanent residents and may not suit strongly migratory species. Run `?find_range_extent` for the full derivation and for guidance on setting a different value.
 
-The buffer also defines two zones that later analyses report separately. The interior is the area inside the GAP range polygon. The ring is the band between that polygon and its buffered outline, the 250 km margin surrounding the range. The buffered polygon is written to `<alpha_code>/_occs/range_buffered.gpkg` so both zones can be recovered later; *Finding boundary trend statistics* compares trend behavior between them.
+The buffer also defines two zones that later analyses report separately. The interior is the area inside the GAP range polygon. The ring is the band between that polygon and its buffered outline, the 250 km margin surrounding the range. The buffered polygon is written to `<alpha_code>/_occs/range_buffered.gpkg` so both zones can be recovered later; *Boundary trend statistics* compares trend behavior between them.
 
 In the code block below, choose one and comment out the other options.
 
@@ -594,6 +594,16 @@ This step generates a map highlighting areas of accelerating and decelerating tr
 rENM.analysis::create_suitability_change_map(alpha_code)
 ```
 
+The same `find_trend_percentages()` function used above summarizes the rate-of-change raster when passed `layer = "Suitability-Change-Trend"`. It must run after the map, since that is what produces the raster it reads. The result is a second percentages file giving the area and share of the extent where suitability trends are accelerating and decelerating. The report and the GenAI narrative both take their acceleration figures from this file.
+
+```{r}
+
+# summarize accelerating and decelerating proportions
+rENM.analysis::find_trend_percentages(
+  alpha_code = alpha_code,
+  layer = "Suitability-Change-Trend")
+```
+
 ## Hotspot analysis
 
 This experimental step identifies areas where climatic suitability is declining at an increasing rate and generates a map highlighting those regions within states intersecting the species' USGS GAP range. Results should be treated as exploratory pending validation against independent field data.
@@ -602,6 +612,20 @@ This experimental step identifies areas where climatic suitability is declining 
 
 # identify and map hotspots of accelerating suitability decline
 rENM.analysis::create_hot_spot_map(alpha_code)
+```
+
+## Boundary trend statistics
+
+This step compares trend behavior inside the species' GAP range against the buffer ring surrounding it, the two zones defined in *Setting the spatial extent* above. A static range polygon cannot reveal a range edge that is moving. Strong positive trends concentrated just outside the historic boundary are the signature of an advancing leading edge, and a statistic computed over the range alone never looks there.
+
+The function reports area, positive and negative trend percentages, and hot spot area and percentage for each zone, writing `<alpha_code>-Suitability-Trend-Boundary-Statistics.csv`. Figures are range-wide rather than per state. The ring extends into states holding none of the range, which have no counterpart row in the state-level table, and a statistic computed over a handful of cells is unstable between model realizations while the range-wide interior and ring figures reproduce closely.
+
+Run this after the hotspot analysis above. It reads the hot spot mask that step produces, together with the buffered polygon written when the extent was set.
+
+```{r}
+
+# compare trend behavior inside the GAP range against the surrounding ring
+rENM.analysis::find_boundary_trend_statistics(alpha_code)
 ```
 
 # Report Generation

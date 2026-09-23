@@ -276,6 +276,10 @@ Set the alpha code for the species you want to analyze. The code block below sho
 # alpha_code <- "BCRF"
 alpha_code <- "CASP"
 # alpha_code <- "GRRO"
+
+# set the run seed; see Reproducibility under Time Series Construction
+seed <- 42
+set.seed(seed)
 ```
 
 Once `alpha_code` is set, it is passed automatically to all subsequent functions in the workflow.
@@ -407,6 +411,16 @@ rENM.data::get_merra_variables(
 
 Time series construction transforms the prepared occurrence records and environmental predictor variables into a multi-decadal series of ensemble ecological niche models. By the end of this section, you will have nine ensemble suitability models, one for each five-year temporal bin spanning 1980–2024, that together constitute the rENM time series consumed by the analysis steps in the following section.
 
+## Reproducibility
+
+Several stages of the pipeline draw on the random number generator. Occurrence records are subsampled by `limit_record_count()`, variables are screened by `screen_by_convergence2()`, and `create_ensemble_model()` draws background points and replicate partitions. Left unseeded, each stage draws fresh on every run, and repeating an analysis on identical inputs produces different results.
+
+Setting a seed fixes those draws. `set.seed(seed)` in the configuration block covers `limit_record_count()`, which draws on the global stream. `screen_by_convergence2()` and `create_timeseries()` take a `seed` argument of their own, because both distribute work across parallel workers and which worker receives which task is not fixed between runs; seeding inside those functions, per iteration and per year, is what makes the result independent of that scheduling. `rENM()` does the same thing internally, with a default of 42.
+
+A fixed seed makes a run repeatable. It does not make any individual figure more reliable, since it selects one realization from the distribution the pipeline would otherwise sample.
+
+Determinism holds within a fixed environment. Two runs with the same seed, on the same machine and the same R and package versions, produce identical output apart from embedded timestamps. Changing the R version, or the versions of the modeling packages underneath `sdm`, can change which draw a given seed produces.
+
 ## Staging occurrence records
 
 This step moves the processed occurrence records from the `<alpha_code>/_occs/` directory into a structured `TimeSeries` directory organized into nine five-year bins. Within each bin, occurrence records are stored in an `occs` subdirectory. The resulting structure is `<alpha_code>/TimeSeries/<year>/occs/`.
@@ -443,7 +457,7 @@ The `screen_by_convergence2()` function uses the R package `maxnet` to drive sel
 ```{r}
 
 # screen variables by convergence [recommended]
-rENM.model::screen_by_convergence2(alpha_code)
+rENM.model::screen_by_convergence2(alpha_code, seed = seed)
 
 # stage screened variables into TimeSeries bins
 rENM.model::stage_screened_variables(alpha_code)
@@ -468,7 +482,7 @@ The `create_timeseries()` function fits an ensemble of five ecological niche mod
 ```{r}
 
 # fit ensemble models across all temporal bins
-rENM.model::create_timeseries(alpha_code)
+rENM.model::create_timeseries(alpha_code, seed = seed)
 ```
 
 # Time Series Analysis

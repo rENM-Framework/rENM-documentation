@@ -45,7 +45,7 @@ By revealing long-term patterns, rENMs provide an empirical basis for addressing
 - Bioclimatic velocity
 - Hotspots of accelerating suitability decline
 
-Although this analytical approach is broadly applicable across taxa, the current implementation of the rENM Framework is designed to investigate climate-driven dynamics in North American bird species. The framework spans 45 years (1980–2024), leveraging citizen science observations from the Cornell Lab of Ornithology's eBird database alongside environmental data derived from NASA's Modern-Era Retrospective Analysis for Research and Applications, Version 2 (MERRA-2).
+Although this analytical approach is broadly applicable across CONUS taxa, the current implementation of the rENM Framework is designed to investigate climate-driven dynamics in North American bird species. The framework spans 45 years (1980–2024), leveraging citizen science observations from the Cornell Lab of Ornithology's eBird database alongside environmental data derived from NASA's Modern-Era Retrospective Analysis for Research and Applications, Version 2 (MERRA-2).
 
 This manual guides users through the rENM modeling and analysis workflow. Detailed documentation for individual functions is available within the respective package manuals. Additional information about this work can be found in the Appendix A publications and the project's GitHub repository at: <https://github.com/rENM-Framework>.
 
@@ -324,7 +324,7 @@ rENM.data::remove_duplicate_occurrences(alpha_code)
 
 You may optionally apply spatial thinning to the occurrence records. Thinning reduces spatial clustering by enforcing a minimum distance between points, helping to mitigate sampling bias. For example, analyses of Cassin’s Sparrow typically use a thinning distance of 8 km (\~5 miles) to reduce the likelihood of counting the same individual multiple times. This step can be skipped entirely or configured by setting the `thin_distance` parameter, as shown below.
 
-Thinning can be time-consuming. By default, temporal bins are processed sequentially using `thin_occurrences()`, as shown in the code block below. A `thin_occurrences2()` parallel processing option is also available and can reduce runtime; however, if system resources are limited or uncertain, the default sequential approach is recommended. Comment out the option you do not use.
+Thinning can be time-consuming. `thin_occurrences2()` processes the temporal bins in parallel and is what the pipeline uses. A sequential alternative, `thin_occurrences()`, is left commented out in the block below; it is slower but undemanding, and is worth substituting if system resources are limited or uncertain.
 
 ```{r}
 
@@ -365,13 +365,9 @@ rENM.data::tidy_occurrences(alpha_code)
 
 ### - Setting the spatial extent
 
-The first step in preparing environmental data is setting the spatial extent of the analysis. Three options are available for defining these geographic boundaries:
+The first step in preparing environmental data is setting the spatial extent of the analysis. `find_range_extent()` derives it from the species' USGS GAP range polygon, buffered outward by 250 km, and is the method the framework uses.
 
-- `find_range_extent()` derives the extent from the species' USGS GAP range polygon, buffered outward by 250 km, and is the recommended option for most analyses,
-
-- `find_occurrence_extent()` derives the extent from the species' eBird occurrence records using a centered percentile bounding box, and
-
-- `set_extent()` accepts explicit bounding box coordinates; run \`?set_extent\` for details.
+The extent determines which region the predictor rasters are cropped to, and therefore which region the models draw their background from. That makes it one of the most consequential choices in the workflow. Deriving it from the GAP range keeps it independent of the occurrence records used to fit the models. An extent derived from the records themselves would move as eBird effort accumulates, which is uneven across the 1980 to 2024 window by a wide margin, and the region a model is trained against would then partly reflect where people happened to bird.
 
 `find_range_extent()` does not use the GAP range polygon directly. It buffers the polygon outward by `buffer_km` (default 250) and takes the bounding box of the buffered result. The buffer is applied in EPSG:5070, an equal-area projection, so the margin is a true ground distance in every direction rather than a fixed number of degrees, which varies with latitude.
 
@@ -379,19 +375,10 @@ The buffer exists so that a moving range edge has somewhere to appear. A trend s
 
 The buffer also defines two zones that later analyses report separately. The interior is the area inside the GAP range polygon. The ring is the band between that polygon and its buffered outline, the 250 km margin surrounding the range. The buffered polygon is written to `<alpha_code>/_occs/range_buffered.gpkg` so both zones can be recovered later; *Boundary trend statistics* compares trend behavior between them.
 
-In the code block below, choose one and comment out the other options.
-
 ```{r}
 
 # set model extent using the usgs gap range
 rENM.data::find_range_extent(alpha_code)
-
-# set model extent using ebird occurrences records
-# rENM.data::find_occurrence_extent(alpha_code)
-
-# manually set the model extent
-# rENM.data::set_extent(alpha_code)
-
 ```
 
 ### - Assembling MERRA variables

@@ -721,7 +721,7 @@ ANTHROPIC_API_KEY="sk-ant-..."
 RENM_PROJECT_DIR="/Users/yourname/rENM"
 ```
 
-After editing `.Renviron`, restart R or run `readRenviron("~/.Renviron")` to make the keys available in the current session. Obtain an Anthropic API key at <https://console.anthropic.com> and an OpenAI key at <https://platform.openai.com>. Enter `?submit_to_claude` or `?submit_to_chatgpt` for current model availability and pricing guidance.
+After editing `.Renviron`, restart R or run `readRenviron("~/.Renviron")` to make the keys available in the current session. Obtain an Anthropic API key at <https://platform.claude.com/> and an OpenAI key at <https://platform.openai.com>. Enter `?submit_to_claude` or `?submit_to_chatgpt` for current model availability and pricing guidance.
 
 ## Assembling the AI package
 

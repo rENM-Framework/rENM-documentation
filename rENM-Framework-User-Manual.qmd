@@ -595,7 +595,7 @@ rENM.analysis::create_hot_spot_map(alpha_code)
 
 ## Boundary trend statistics
 
-This step compares trend behavior in two zones. The interior is the area inside the species' GAP range polygon. The ring is the band between that polygon and its buffered outline, the 250 km margin surrounding the range, recovered from the buffered polygon written when the extent was set. Strong positive trends concentrated just outside the historic boundary may be the signature of an advancing leading edge, which a statistic computed over the range alone cannot show. The function reports area, positive and negative trend percentages, and hot spot area and percentage for each zone, range-wide rather than per state. Run it after the hotspot analysis above, whose output it reads. Appendix D describes the two zones further.
+This step compares trend behavior in two zones. The interior is the area inside the species' GAP range polygon. The ring is the band between that polygon and its buffered outline, the 250 km margin surrounding the range, recovered from the buffered polygon written when the extent was set. Strong positive trends concentrated just outside the historic boundary may be the signature of an advancing leading edge, which a statistic computed over the range alone cannot show. The function reports area, positive and negative trend percentages, median and median absolute slope, and hot spot area and percentage for each zone, range-wide rather than per state. Read the percentages together with the medians: a percentage counts area above and below zero and says nothing about how large the trends are. Run it after the hotspot analysis above, whose output it reads. Appendix D describes the two zones further.
 
 ```{r}
 
@@ -1028,6 +1028,8 @@ Range-based summary statistics are computed against the unbuffered GAP range pol
 The buffer ring is the zone between the raw GAP polygon and the 250 km buffered polygon. Trend behavior there is reported separately as a boundary trend statistic. Comparing the ring against the range interior shows whether conditions just outside the historic range are improving or deteriorating relative to the occupied range. A static range polygon cannot show this.
 
 Boundary statistics are reported range-wide rather than per state. The ring extends into states holding none of the range, which have no counterpart row in the state-level table, and a statistic computed over a handful of raster cells is unstable between model realizations, while the range-wide interior and ring figures reproduce closely.
+
+A ring percentage near 50 is not a finding of balance. Because the percentage counts area above and below zero, a zone whose slopes hover around zero produces a figure near 50 that carries no signal at all, and it will look as precise as any other. The two median columns are what tell the cases apart. Across the twelve pilot species the ring's median absolute slope ran from 4 to 70 percent of the interior's: Loggerhead Shrike's ring is 20 percent positive at 70 percent of the interior's magnitude, a genuinely declining periphery, while Eastern Meadowlark's is 51 percent positive at a median slope of -3e-07, which over the study window is no change at all. Positivity also falls steadily from the range core to its boundary rather than being uniform inside, so the interior figure is an average over a gradient.
 
 ### Limitations
 

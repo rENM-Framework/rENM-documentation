@@ -47,7 +47,7 @@ By revealing long-term patterns, rENMs provide an empirical basis for addressing
 
 Although this analytical approach is broadly applicable across CONUS taxa, the current implementation of the rENM Framework is designed to investigate climate-driven dynamics in North American bird species. The framework spans 45 years (1980–2024), leveraging citizen science observations from the Cornell Lab of Ornithology's eBird database alongside environmental data derived from NASA's Modern-Era Retrospective Analysis for Research and Applications, Version 2 (MERRA-2).
 
-This manual guides users through the rENM modeling and analysis workflow. Detailed documentation for individual functions is available within the respective package manuals. Additional information about this work can be found in the Appendix A publications and the project's GitHub repository at: <https://github.com/rENM-Framework>.
+This manual guides users through the rENM modeling and analysis workflow. Appendix C indexes every function in the framework and names the section that covers it. Detailed documentation for individual functions is available within the respective package manuals. Additional information about this work can be found in the Appendix A publications and the project's GitHub repository at: <https://github.com/rENM-Framework>.
 
 The rENM Framework is an active research platform under ongoing development. It is provided for educational and research purposes only and is distributed without formal technical support. Feedback and contributions are welcome.
 
@@ -74,7 +74,7 @@ Finally, from the RStudio **`Run`** drop-down menu, select *Restart R and Run Al
 
 ## Automated scripting
 
-If you prefer not to run an rENM analysis step by step, you can execute the full pipeline from the RStudio console with a single function call. For example: `rENM("CASP")`. Enter `?rENM` in the RStudio console for details.
+If you prefer not to run an rENM analysis step by step, you can execute the full pipeline from the RStudio console with a single function call. For example: `rENM("CASP")`. Once the framework is installed and loaded, enter `?rENM` in the RStudio console for details.
 
 ## Document rendering options
 
@@ -324,7 +324,7 @@ rENM.data::remove_duplicate_occurrences(alpha_code)
 
 You may optionally apply spatial thinning to the occurrence records. Thinning reduces spatial clustering by enforcing a minimum distance between points, helping to mitigate sampling bias. For example, analyses of Cassin’s Sparrow typically use a thinning distance of 8 km (\~5 miles) to reduce the likelihood of counting the same individual multiple times. This step can be skipped entirely or configured by setting the `thin_distance` parameter, as shown below.
 
-Thinning can be time-consuming. `thin_occurrences2()` processes the temporal bins in parallel and is what the pipeline uses. A sequential alternative, `thin_occurrences()`, is left commented out in the block below; it is slower but undemanding, and is worth substituting if system resources are limited or uncertain.
+Thinning can be time-consuming. `thin_occurrences2()` processes the temporal bins in parallel. A sequential alternative, `thin_occurrences()`, is left commented out in the block below; it is slower but undemanding, and is worth substituting if system resources are limited or uncertain.
 
 ```{r}
 
@@ -365,15 +365,7 @@ rENM.data::tidy_occurrences(alpha_code)
 
 ### - Setting the spatial extent
 
-The first step in preparing environmental data is setting the spatial extent of the analysis. `find_range_extent()` derives it from the species' USGS GAP range polygon, buffered outward by 250 km, and is the method the framework uses.
-
-The extent determines which region the predictor rasters are cropped to, and therefore which region the models draw their background from. That makes it one of the most consequential choices in the workflow. Deriving it from the GAP range keeps it independent of the occurrence records used to fit the models. An extent derived from the records themselves would move as eBird effort accumulates, which is uneven across the 1980 to 2024 window by a wide margin, and the region a model is trained against would then partly reflect where people happened to bird.
-
-`find_range_extent()` does not use the GAP range polygon directly. It buffers the polygon outward by `buffer_km` (default 250) and takes the bounding box of the buffered result. The buffer is applied in EPSG:5070, an equal-area projection, so the margin is a true ground distance in every direction rather than a fixed number of degrees, which varies with latitude.
-
-The buffer exists so that a moving range edge has somewhere to appear. A trend surface clipped at the historic range boundary describes only conditions inside a range delineated decades ago; it cannot show suitability improving just beyond it. The 250 km figure comes from Huang et al. (2017), who measured an average multidirectional centroid velocity of 5.89 km/yr across 57 permanent resident North American bird species. Projected across the framework's 45-year window that gives approximately 265 km, rounded down to 250 as a conservative default. The estimate is drawn from permanent residents and may not suit strongly migratory species. Run `?find_range_extent` for the full derivation and for guidance on setting a different value.
-
-The buffer also defines two zones that later analyses report separately. The interior is the area inside the GAP range polygon. The ring is the band between that polygon and its buffered outline, the 250 km margin surrounding the range. The buffered polygon is written to `<alpha_code>/_occs/range_buffered.gpkg` so both zones can be recovered later; *Boundary trend statistics* compares trend behavior between them.
+The first step in preparing environmental data is setting the spatial extent of the analysis. `find_range_extent()` derives it from the species' USGS GAP range polygon, buffered outward by 250 km. Appendix D gives the derivation of the 250 km figure, what the buffer does and does not affect, and the limitations of the default. Run `?find_range_extent` for the function's arguments.
 
 ```{r}
 
@@ -410,13 +402,7 @@ Time series construction transforms the prepared occurrence records and environm
 
 ## Reproducibility
 
-Several stages of the pipeline draw on the random number generator. Occurrence records are subsampled by `limit_record_count()`, variables are screened by `screen_by_convergence2()`, and `create_ensemble_model()` draws background points and replicate partitions. Left unseeded, each stage draws fresh on every run, and repeating an analysis on identical inputs produces different results.
-
-Setting a seed fixes those draws. `set.seed(seed)` in the configuration block covers `limit_record_count()`, which draws on the global stream. `screen_by_convergence2()` and `create_timeseries()` take a `seed` argument of their own, because both distribute work across parallel workers and which worker receives which task is not fixed between runs; seeding inside those functions, per iteration and per year, is what makes the result independent of that scheduling. `rENM()` does the same thing internally, with a default of 42.
-
-A fixed seed makes a run repeatable. It does not make any individual figure more reliable, since it selects one realization from the distribution the pipeline would otherwise sample.
-
-Determinism holds within a fixed environment. Two runs with the same seed, on the same machine and the same R and package versions, produce identical output apart from embedded timestamps. Changing the R version, or the versions of the modeling packages underneath `sdm`, can change which draw a given seed produces.
+Several stages of the analysis draw on a random number generator. Left unseeded, each draws fresh on every run, so repeating an analysis on identical inputs produces different results, by a point or two range-wide but sometimes far more for an individual state. Setting a seed fixes those draws and makes a run repeatable. It does not make any individual figure more reliable, since it selects one realization from the distribution the pipeline would otherwise sample. Appendix E covers how the seed is applied, what determinism guarantees, and the conditions under which it holds.
 
 ## Staging occurrence records
 
@@ -445,15 +431,11 @@ This option transfers all cropped environmental predictors from `<alpha_code>/_v
 
 ### - Option 2 - Staging with down selection
 
-With this option, a Monte Carlo–based variable selection procedure (Schnase et al. 2022) is first applied to the variables in `<alpha_code>/_vars/`. This step identifies the highest-performing variables, which are then transferred to the `TimeSeries` directory for further processing.
-
-This option applies a Monte Carlo convergence procedure to identify the highest-contributing predictors for each temporal bin before staging them. It is the recommended option for most analyses. The screener evaluates randomly selected pairs of predictors across independent model runs and identifies the variables that consistently emerge as top contributors within each bin. Screening is performed independently for each bin, so variable selection is informed only by the occurrence records and environmental data for that interval. See Schnase et al. (2022) for additional detail.
-
-The `screen_by_convergence2()` function uses the R package `maxnet` to drive selection and has no external dependencies. A Java-dependent alternative, `screen_by_convergence1()`, is available for users who prefer to use MaxEnt via the `dismo` package; enter `?screen_by_convergence1` for details.
+A Monte Carlo variable selection procedure identifies the highest-contributing predictors for each temporal bin before staging them, and is the recommended option for most analyses. The screener evaluates randomly selected pairs of predictors across independent model runs and keeps the variables that consistently emerge as top contributors. Screening is performed independently for each bin, so selection is informed only by the occurrence records and environmental data for that interval. `screen_by_convergence2()` uses the R package `maxnet` and has no external dependencies. See Schnase et al. (2022) for the method.
 
 ```{r}
 
-# screen variables by convergence [recommended]
+# screen variables by convergence
 rENM.model::screen_by_convergence2(alpha_code, seed = seed)
 
 # stage screened variables into TimeSeries bins
@@ -613,11 +595,7 @@ rENM.analysis::create_hot_spot_map(alpha_code)
 
 ## Boundary trend statistics
 
-This step compares trend behavior inside the species' GAP range against the buffer ring surrounding it, the two zones defined in *Setting the spatial extent* above. A static range polygon cannot reveal a range edge that is moving. Strong positive trends concentrated just outside the historic boundary are the signature of an advancing leading edge, and a statistic computed over the range alone never looks there.
-
-The function reports area, positive and negative trend percentages, and hot spot area and percentage for each zone, writing `<alpha_code>-Suitability-Trend-Boundary-Statistics.csv`. Figures are range-wide rather than per state. The ring extends into states holding none of the range, which have no counterpart row in the state-level table, and a statistic computed over a handful of cells is unstable between model realizations while the range-wide interior and ring figures reproduce closely.
-
-Run this after the hotspot analysis above. It reads the hot spot mask that step produces, together with the buffered polygon written when the extent was set.
+This step compares trend behavior in two zones. The interior is the area inside the species' GAP range polygon. The ring is the band between that polygon and its buffered outline, the 250 km margin surrounding the range, recovered from the buffered polygon written when the extent was set. Strong positive trends concentrated just outside the historic boundary may be the signature of an advancing leading edge, which a statistic computed over the range alone cannot show. The function reports area, positive and negative trend percentages, and hot spot area and percentage for each zone, range-wide rather than per state. Run it after the hotspot analysis above, whose output it reads. Appendix D describes the two zones further.
 
 ```{r}
 
@@ -694,8 +672,6 @@ Two use generative AI to write a structured interpretive narrative from the pipe
 
 The third uses no AI. It produces a plain coversheet carrying the species name, the list of figures included in the report, the framework citation, and a timestamp, leaving the report to consist only of computed results. Skip *Assembling the AI package* and *Submitting to a provider*, and run *Building a coversheet instead*.
 
-All three produce the same file, `<alpha_code>-Suitability-Trend-Analysis.docx`, which *Rendering the page* converts for inclusion in the final report. Running the whole pipeline with `rENM()` selects among them with its `ai` argument, and falls back to the coversheet if a provider call fails.
-
 ## API key configuration
 
 Required for the ChatGPT and Claude paths only. Skip this if you are producing a coversheet.
@@ -759,9 +735,9 @@ Run it also if a provider call failed and you want to continue. `assemble_final_
 
 ## Rendering the page
 
-This step converts the DOCX produced above, whether written by a provider or by `assemble_coversheet()`, to PDF via LibreOffice for inclusion in the final report. LibreOffice must be installed before running this function (see *System Requirements*).
+This step converts the DOCX produced above, whether written by a provider or by `assemble_coversheet()`, to PDF via LibreOffice, which must be installed first (see *System Requirements*).
 
-The function also checks the document it received. An unsubstituted placeholder stops the run, since a placeholder standing in for a figure means the page is missing data; truncated paragraphs and known prose faults produce warnings. If it stops, regenerate the narrative by re-running the submission step rather than looking for a LibreOffice problem.
+The function checks the document before converting it. An unsubstituted placeholder stops the run, because a placeholder standing in for a figure means the page is missing data. Truncated paragraphs and known prose faults only warn. A stop here is a problem with the narrative, not with LibreOffice: re-run the submission step.
 
 ```{r}
 
@@ -781,9 +757,9 @@ The `assemble_final_report()` function combines the individual summary pages pro
 rENM.reports::assemble_final_report(alpha_code)
 ```
 
-The assembled report opens with the interpretation page produced in the previous section, followed by the eight summary pages built under *Report Generation*, and closes with two appendices: a methods note describing how the modeled extent and the boundary statistics are defined, and the MERRA variable reference. The appendices are static assets that ship with `rENM.reports` rather than products of the run, so they are controlled by the `appendix` argument rather than by `pages`. Passing `appendix = NULL` omits them. Unlike a workflow page, a missing appendix file is always an error. Page numbers are stamped on every page but the first, which carries the title block.
+The assembled report opens with the interpretation page produced in the previous section, followed by the eight summary pages built under *Report Generation*, and closes with two appendices: a methods note defining the modeled extent and the boundary statistics, and the MERRA variable reference. The appendices ship with `rENM.reports` and have their own argument; `appendix = NULL` omits them.
 
-The opening page is the one exception to that rule. If `<alpha_code>-Suitability-Trend-Analysis.pdf` is absent, whether because a submission failed or because neither a provider nor a coversheet was run, it is omitted with a warning and the rest of the report assembles. Every other page is required, and a missing one raises an error, since that normally means an earlier step did not finish.
+A missing page is an error, since that normally means an earlier step did not finish. The opening page is the exception: if `<alpha_code>-Suitability-Trend-Analysis.pdf` is absent, whether because a submission failed or because neither a provider nor a coversheet was run, it is omitted with a warning and the rest of the report assembles.
 
 Pass an explicit `pages` argument to include a subset of pages or to change their order. The commented example below lists the default set in its standard order.
 
@@ -1028,3 +1004,51 @@ All functions in this package are documented in *Report Generation* and *Assembl
 | `gather_suitability_maps()` | Assemble suitability map contact sheet |
 | `gather_suitability_trend_stats()` | Merge state-level suitability and hotspot statistics |
 | `gather_top_variable_trend_maps()` | Assemble variable trend map composites |
+
+{{< pagebreak >}}
+
+# APPENDIX D - Modeled extent and boundary statistics
+
+This appendix reproduces the methods note appended to every assembled report.
+
+### Modeled extent
+
+The modeled extent is a rectangular bounding box enclosing the USGS GAP range polygon for the species after that polygon has been buffered outward by 250 km, computed in a projected equal-area coordinate system (EPSG:5070, USA Contiguous Albers Equal Area Conic). The buffered polygon is species-specific. The distance is not. The same 250 km is used for every species. This keeps the boundary condition standardized and avoids setting a parameter of the analysis from centroid velocity, which the analysis itself produces.
+
+### Derivation of the 250 km buffer
+
+The figure derives from Huang, Sauer, and Dubayah (2017), who tracked the abundance-weighted geographic centroid of 57 permanent resident North American bird species over 44 years of Breeding Bird Survey data and found an average multidirectional centroid velocity of 5.89 km/yr. Projected across rENM's 45-year study window this gives approximately 265 km. Huang et al. report a 259 km average displacement directly, over a comparable period. The round figure of 250 km is slightly conservative against both.
+
+Other bird range-shift estimates report only a poleward or latitudinal component of movement. The multidirectional figure was chosen because rENM computes a full two-dimensional suitability centroid, and the pilot species examined during development did not shift uniformly poleward.
+
+### What the buffer does and does not affect
+
+Range-based summary statistics are computed against the unbuffered GAP range polygon, not the bounding box. This covers positive and negative trend percentage, hot spot area, and hot spot percentage. The buffer and its enclosing rectangle keep the trend surface from being clipped at the historic range edge. They do not redefine what counts as range in the reported tables.
+
+The buffer ring is the zone between the raw GAP polygon and the 250 km buffered polygon. Trend behavior there is reported separately as a boundary trend statistic. Comparing the ring against the range interior shows whether conditions just outside the historic range are improving or deteriorating relative to the occupied range. A static range polygon cannot show this.
+
+Boundary statistics are reported range-wide rather than per state. The ring extends into states holding none of the range, which have no counterpart row in the state-level table, and a statistic computed over a handful of raster cells is unstable between model realizations, while the range-wide interior and ring figures reproduce closely.
+
+### Limitations
+
+The 250 km figure is drawn from permanent resident species. Huang et al. chose residents because a resident species' abundance centroid is a cleaner climate signal than a migrant's, whose breeding and wintering ranges can shift independently. The figure may not suit strongly migratory species.
+
+The buffer distance is a provisional default. It should be revisited as more species run through the pipeline and as taxon- or guild-specific velocity estimates become practical to compute internally.
+
+### Reference
+
+Huang, Q., J. R. Sauer, and R. O. Dubayah. 2017. Multidirectional abundance shifts among North American birds and the relative influence of multifaceted climate factors. *Global Change Biology* 23:3610--3622. <https://doi.org/10.1111/gcb.13683>
+
+{{< pagebreak >}}
+
+# APPENDIX E - Reproducibility
+
+This appendix expands the summary under *Reproducibility* in *Time Series Construction*.
+
+Several stages of the pipeline draw on the random number generator. Occurrence records are subsampled by `limit_record_count()`, variables are screened by `screen_by_convergence2()`, and `create_ensemble_model()` draws background points and replicate partitions. Left unseeded, each stage draws fresh on every run, and repeating an analysis on identical inputs produces different results.
+
+Setting a seed fixes those draws. `set.seed(seed)` in the configuration block covers `limit_record_count()`, which draws on the global stream. `screen_by_convergence2()` and `create_timeseries()` take a `seed` argument of their own, because both distribute work across parallel workers and which worker receives which task is not fixed between runs; seeding inside those functions, per iteration and per year, is what makes the result independent of that scheduling. `rENM()` does the same thing internally, with a default of 42.
+
+A fixed seed makes a run repeatable. It does not make any individual figure more reliable, since it selects one realization from the distribution the pipeline would otherwise sample.
+
+Determinism holds within a fixed environment. Two runs with the same seed, on the same machine and the same R and package versions, produce identical output apart from embedded timestamps. Changing the R version, or the versions of the modeling packages underneath `sdm`, can change which draw a given seed produces.

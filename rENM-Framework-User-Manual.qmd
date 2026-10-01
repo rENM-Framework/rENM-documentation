@@ -557,6 +557,8 @@ rENM.analysis::gather_variable_contributions(alpha_code)
 
 This step selects the top contributing variables based on average relative importance across the time series and generates visualizations and summary statistics describing how their contributions change across temporal bins.
 
+Read these results as properties of one run. The candidate variables are strongly correlated, and many sets of them fit the data about equally well, so a run at another seed can select different variables that describe the same climate gradients. In five seeded runs of Cassin's Sparrow, the variable sets two runs selected for the same interval overlapped by 0.45 on average (Jaccard index), while all 45 models drew on the same gradient of temperature and shortwave radiation. This has been tested for one species only. A trend in one variable's contribution can also reflect weight shifting among correlated variables rather than a change in that factor's importance. Interpret the variable profile at the level of gradients rather than individual variables.
+
 ```{r}
 
 # summarize variable contributions across the time series

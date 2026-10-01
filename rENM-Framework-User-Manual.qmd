@@ -39,7 +39,7 @@ The rENM Framework is a modular suite of R packages designed to support the deve
 By revealing long-term patterns, rENMs provide an empirical basis for addressing biological questions and assessing both the current and future conservation status of species. Rather than treating ecological niche models as static representations, the rENM Framework uses time-structured modeling to reveal:
 
 - Long-term trends in climatic suitability for a species
-- Acceleration and deceleration of those trends
+- Changes in the pace of those trends
 - Directional change in suitability and shifts in the suitability-weighted geographic center of a species' climatic niche
 - Changes in the relative importance of environmental predictors across decades
 - Bioclimatic velocity
@@ -565,19 +565,19 @@ rENM.analysis::summarize_variable_contributions(alpha_code)
 
 ## Suitability rate-of-change map
 
-This step generates a map highlighting areas of accelerating and decelerating trends in climatic suitability across the modeled extent.
+This step generates a map of the suitability change trend across the modeled extent: the Theil-Sen trend in successive changes in suitability. A positive change trend means successive changes grew more positive, as gains strengthened or losses eased. A negative change trend means they grew more negative, as gains faded or losses steepened. The sign alone does not say whether suitability rose or fell, so read this map with the suitability trend map.
 
 ```{r}
 
-# generate suitability acceleration/deceleration map
+# generate suitability change trend map
 rENM.analysis::create_suitability_change_map(alpha_code)
 ```
 
-The same `find_trend_percentages()` function used above summarizes the rate-of-change raster when passed `layer = "Suitability-Change-Trend"`. It must run after the map, since that is what produces the raster it reads. The result is a second percentages file giving the area and share of the extent where suitability trends are accelerating and decelerating. The report and the GenAI narrative both take their acceleration figures from this file.
+The same `find_trend_percentages()` function used above summarizes the rate-of-change raster when passed `layer = "Suitability-Change-Trend"`. It must run after the map, since that is what produces the raster it reads. The result is a second percentages file giving the area and share of the extent with a positive and a negative change trend. The report and the GenAI narrative both take their change-trend figures from this file.
 
 ```{r}
 
-# summarize accelerating and decelerating proportions
+# summarize positive and negative change-trend proportions
 rENM.analysis::find_trend_percentages(
   alpha_code = alpha_code,
   layer = "Suitability-Change-Trend")
@@ -585,7 +585,7 @@ rENM.analysis::find_trend_percentages(
 
 ## Hotspot analysis
 
-This experimental step identifies areas where climatic suitability is declining at an increasing rate and generates a map highlighting those regions within states intersecting the species' USGS GAP range. Results should be treated as exploratory pending validation against independent field data.
+This experimental step identifies areas where climatic suitability is declining at an increasing rate and generates a map highlighting those regions within states intersecting the species' USGS GAP range. A cell is a hot spot when both its suitability trend and its change trend are negative: suitability is falling, and each successive change is more negative than the last. Versions before 0.2.0 required a positive change trend and so mapped declines that were easing. Results should be treated as exploratory pending validation against independent field data.
 
 ```{r}
 
@@ -958,7 +958,7 @@ All functions in this package are documented in *Time Series Analysis*.
 | `find_boundary_trend_statistics()` | Compare trend behavior inside the GAP range against the surrounding buffer ring |
 | `find_hot_spots()` | Identify cells with accelerating suitability declines |
 | `find_range_change_percentages()` | Summarize trend proportions within the USGS GAP range |
-| `find_suitability_change_trend()` | Compute trends in suitability rate of change |
+| `find_suitability_change_trend()` | Compute the suitability change trend (trend in successive changes) |
 | `find_suitability_trend()` | Compute per-cell Theil-Sen trends and Mann-Kendall statistics |
 | `find_trend_percentages()` | Summarize trend proportions across the modeled extent |
 | `find_weighted_centroid()` | Compute suitability-weighted spatial centroids (called internally by `analyze_weighted_centroids()`) |

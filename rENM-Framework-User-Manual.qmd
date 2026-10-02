@@ -670,7 +670,7 @@ rENM.reports::assemble_centroid_trends_page(alpha_code)
 
 This step produces the report's opening page, and there are three ways to do it.
 
-Two use generative AI to write a structured interpretive narrative from the pipeline's quantitative outputs. Anthropic (Claude) and OpenAI (ChatGPT) are both supported and both accept the same assembled data package; the choice affects interpretation style, response time, and per-run cost. This module is experimental.
+Two use generative AI to write a structured interpretive narrative from the pipeline's quantitative outputs. Anthropic (Claude) and OpenAI (ChatGPT) are both supported and both accept the same assembled data package; the choice affects interpretation style, response time, and per-run cost. Claude is the default in `rENM()`: in a side-by-side test both passed every check, and Claude's narrative was better written, at about $1.20 a run against about $0.11 for ChatGPT. This module is experimental.
 
 The third uses no AI. It produces a plain coversheet carrying the species name, the list of figures included in the report, the framework citation, and a timestamp, leaving the report to consist only of computed results. Skip *Assembling the AI package* and *Submitting to a provider*, and run *Building a coversheet instead*.
 
@@ -706,11 +706,11 @@ Submit the assembled package to your preferred provider. Choose one and comment 
 
 ```{r}
 
-# submit to Anthropic (Claude)
-# rENM.ai::submit_to_claude(alpha_code)
+# submit to Anthropic (Claude), the default in rENM()
+rENM.ai::submit_to_claude(alpha_code)
 
 # submit to OpenAI (ChatGPT)
-rENM.ai::submit_to_chatgpt(alpha_code)
+# rENM.ai::submit_to_chatgpt(alpha_code)
 ```
 
 If `submit_to_claude()` fails or returns an unexpected result, use the diagnostic helper to inspect the response:

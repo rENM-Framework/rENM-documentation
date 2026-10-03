@@ -692,7 +692,7 @@ After editing `.Renviron`, restart R or run `readRenviron("~/.Renviron")` to mak
 
 This step and the next belong to the two provider paths.
 
-This step collects suitability trend rasters, summary statistics, variable contribution tables, centroid displacement metrics, and species metadata from the rENM analysis pipeline and organizes them into a data bundle with a structured analytical prompt. The bundle is staged for submission to the target provider.
+This step collects summary statistics, regional trend tables, variable contribution tables, centroid displacement metrics, and species metadata from the rENM analysis pipeline and organizes them into a data bundle with a structured analytical prompt. The bundle is staged for submission to the target provider.
 
 ```{r}
 

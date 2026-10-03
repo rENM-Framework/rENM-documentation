@@ -786,7 +786,7 @@ Pass an explicit `pages` argument to include a subset of pages or to change thei
 
 ## Installing the extended dataset
 
-The rENM Framework also provides an extended dataset that includes eBird occurrence records for 18 North American bird species, the complete set of MERRA-2 and MERRAclim-2 environmental predictor variables for nine five-year bins spanning 1980–2020, long-term trend and rate-of-change maps for all variables, USGS GAP range shapefiles for the additional species, and pipeline metadata files. The part files total approximately 30 GB and unzip to 73.1 GB. Make sure sufficient disk space is available before starting the download.
+The rENM Framework also provides an extended dataset that includes eBird occurrence records for 18 North American bird species, the complete set of MERRA-2 and MERRAclim-2 environmental predictor variables for nine five-year bins spanning 1980–2024, long-term trend and rate-of-change maps for all variables, USGS GAP range shapefiles for the additional species, and pipeline metadata files. The part files total approximately 30 GB and unzip to 73.1 GB. Make sure sufficient disk space is available before starting the download.
 
 Make sure your current working directory is the project directory, then run the following commands from a terminal window:
 

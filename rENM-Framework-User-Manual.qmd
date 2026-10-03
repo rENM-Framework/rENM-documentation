@@ -74,7 +74,7 @@ Finally, from the RStudio **`Run`** drop-down menu, select *Restart R and Run Al
 
 ## Automated scripting
 
-If you prefer not to run an rENM analysis step by step, you can execute the full pipeline from the RStudio console with a single function call. For example: `rENM("CASP")`. Once the framework is installed and loaded, enter `?rENM` in the RStudio console for details.
+If you prefer not to run an rENM analysis step by step, you can execute the full pipeline from the RStudio console with a single function call. For example: `rENM("CASP")`. The `seed` argument fixes the run's random draws and defaults to 42 (see *Reproducibility* under *Time Series Construction*). The `ai` argument names the provider that writes the opening page, `"claude"` by default, or `NULL` for a plain coversheet (see *GenAI Analysis*). Once the framework is installed and loaded, enter `?rENM` in the RStudio console for details.
 
 ## Document rendering options
 
@@ -85,6 +85,8 @@ If you use the *rENM-Framework-User-Manual.qmd* file as a template for your own 
 The rENM Framework versions three things independently: the software, this manual, and the datasets. They do not advance in step, and a version number in one implies nothing about the others.
 
 This manual describes Framework v0.2.0. A Framework version is a specific, tested combination of the seven package versions. Which combination constitutes which version is recorded in `FRAMEWORK-CHANGELOG.md` in the [rENM-documentation](https://github.com/rENM-Framework/rENM-documentation) repository, together with the Zenodo DOI for each component.
+
+Framework v0.1.0 is the version described in the rENM Framework preprint (Appendix A). The v0.1.0 edition of this manual describes it and is archived at [10.5281/zenodo.20799331](https://doi.org/10.5281/zenodo.20799331). This edition describes v0.2.0 and will be archived as a new version of the same record at release: [FILL AT RELEASE: v0.2.0 tag, manual DOI, release date]. Results from the two versions differ in ways the changelog sets out. The largest is the hot spot definition: v0.1.0 mapped declines that were easing rather than steepening.
 
 The example and extended datasets are at v0.1.0 and remain current. Framework v0.2.0 runs against them unchanged, and the download instructions below are correct as written. The `v0.1.0` in a dataset filename refers to the dataset's own release line rather than to a software version; the two coincide because both were first published together.
 
@@ -402,7 +404,7 @@ Time series construction transforms the prepared occurrence records and environm
 
 ## Reproducibility
 
-Several stages of the analysis draw on a random number generator. Left unseeded, each draws fresh on every run, so repeating an analysis on identical inputs produces different results, by a point or two range-wide but sometimes far more for an individual state. Setting a seed fixes those draws and makes a run repeatable. It does not make any individual figure more reliable, since it selects one realization from the distribution the pipeline would otherwise sample. Appendix E covers how the seed is applied, what determinism guarantees, and the conditions under which it holds.
+Several stages of the analysis draw on a random number generator. Setting a seed fixes those draws and makes a run repeatable. It does not make any figure more reliable: a run at another seed can give noticeably different results. Appendix E gives the details.
 
 ## Staging occurrence records
 
@@ -431,7 +433,7 @@ This option transfers all cropped environmental predictors from `<alpha_code>/_v
 
 ### - Option 2 - Staging with down selection
 
-A Monte Carlo variable selection procedure identifies the highest-contributing predictors for each temporal bin before staging them, and is the recommended option for most analyses. The screener evaluates randomly selected pairs of predictors across independent model runs and keeps the variables that consistently emerge as top contributors. Screening is performed independently for each bin, so selection is informed only by the occurrence records and environmental data for that interval. `screen_by_convergence2()` uses the R package `maxnet` and has no external dependencies. See Schnase et al. (2022) for the method.
+A Monte Carlo variable selection procedure identifies the highest-contributing predictors for each temporal bin before staging them, and is the recommended option for most analyses. Each bin is screened independently. See Schnase et al. (2022) for the method.
 
 ```{r}
 
@@ -444,9 +446,7 @@ rENM.model::stage_screened_variables(alpha_code)
 
 ## Reducing covariance
 
-This optional step removes covarying predictors from the staged environmental variable sets using variance inflation factor (VIF) screening. By default, a “light-touch” approach is applied using a relaxed VIF threshold (10) and a high correlation threshold (0.95), removing only strongly redundant variables while preserving alternative representations of environmental gradients.
-
-It is commented out by default. In practice, omitting this step may produce better representation of environmental structure, particularly when the Monte Carlo variable screening procedure described above has already identified a compact, informative predictor set.
+This optional step removes strongly collinear predictors from the staged variable sets using variance inflation factor (VIF) screening. It is commented out by default, since variable screening usually leaves a compact set already.
 
 ```{r}
 
@@ -456,7 +456,7 @@ It is commented out by default. In practice, omitting this step may produce bett
 
 ## Computing the time series
 
-The `create_timeseries()` function fits an ensemble of five ecological niche models for each of the nine temporal bins in parallel. The five algorithms are maxnet, random forest, boosted regression trees, generalized linear models, and multivariate adaptive regression splines. Ensemble predictions are computed as the unweighted average across the five algorithms. Each bin is modeled on land only. Sixteen MERRA-2 land-surface variables have no values over open water, while the MERRAclim-2 variables do, so without a mask a bin's domain would depend on which variables screening selected. Every bin is therefore masked to the land footprint of the MERRA-2 variable `evland`, which is the same in every year. Each bin produces a continuous suitability raster and a binary range raster. Together these nine suitability rasters constitute the rENM time series and are the primary inputs to the analysis steps that follow. For additional details and configuration options, refer to the documentation by running `?create_ensemble_model` in the RStudio console.
+The `create_timeseries()` function fits an ensemble of five ecological niche models for each of the nine temporal bins in parallel. The five algorithms are maxnet, random forest, boosted regression trees, generalized linear models, and multivariate adaptive regression splines. Ensemble predictions are computed as the unweighted average across the five algorithms. Each bin is modeled on land only, using the land footprint of the MERRA-2 variable `evland`. Each bin produces a continuous suitability raster and a binary range raster. Together these nine suitability rasters constitute the rENM time series and are the primary inputs to the analysis steps that follow. For additional details and configuration options, refer to the documentation by running `?create_ensemble_model` in the RStudio console.
 
 ```{r}
 
@@ -555,9 +555,9 @@ rENM.analysis::gather_variable_contributions(alpha_code)
 
 ### - Summarizing variable contributions
 
-This step selects the top contributing variables based on average relative importance across the time series and generates visualizations and summary statistics describing how their contributions change across temporal bins.
+This step ranks variables by their average importance across all nine intervals and describes how the contributions of the top ten change over the time series.
 
-Read these results as properties of one run. The candidate variables are strongly correlated, and many sets of them fit the data about equally well, so a run at another seed can select different variables that describe the same climate gradients. In five seeded runs of Cassin's Sparrow, the variable sets two runs selected for the same interval overlapped by 0.45 on average (Jaccard index), while all 45 models drew on the same gradient of temperature and shortwave radiation. This has been tested for one species only. A trend in one variable's contribution can also reflect weight shifting among correlated variables rather than a change in that factor's importance. Interpret the variable profile at the level of gradients rather than individual variables.
+Read these results as properties of one run. The candidate variables are strongly correlated, so a run at another seed can select different variables that describe the same climate gradients. Interpret the results at the level of gradients rather than individual variables. Appendix E shows how much the selected variables change between seeds.
 
 ```{r}
 
@@ -575,7 +575,7 @@ This step generates a map of the suitability change trend across the modeled ext
 rENM.analysis::create_suitability_change_map(alpha_code)
 ```
 
-The same `find_trend_percentages()` function used above summarizes the rate-of-change raster when passed `layer = "Suitability-Change-Trend"`. It must run after the map, since that is what produces the raster it reads. The result is a second percentages file giving the area and share of the extent with a positive and a negative change trend. The report and the GenAI narrative both take their change-trend figures from this file.
+The same `find_trend_percentages()` function used above summarizes the rate-of-change raster when passed `layer = "Suitability-Change-Trend"`. It must run after the map, since that is what produces the raster it reads. The result gives the area and share of the extent with a positive and a negative change trend.
 
 ```{r}
 
@@ -587,7 +587,7 @@ rENM.analysis::find_trend_percentages(
 
 ## Hotspot analysis
 
-This experimental step identifies areas where climatic suitability is declining at an increasing rate and generates a map highlighting those regions within states intersecting the species' USGS GAP range. A cell is a hot spot when both its suitability trend and its change trend are negative: suitability is falling, and each successive change is more negative than the last. Versions before 0.2.0 required a positive change trend and so mapped declines that were easing. Results should be treated as exploratory pending validation against independent field data.
+This experimental step identifies areas where climatic suitability is declining at an increasing rate and generates a map highlighting those regions within states intersecting the species' USGS GAP range. A cell is a hot spot when both its suitability trend and its change trend are negative: suitability is falling, and each successive change is more negative than the last. Results should be treated as exploratory pending validation against independent field data.
 
 ```{r}
 
@@ -597,7 +597,7 @@ rENM.analysis::create_hot_spot_map(alpha_code)
 
 ## Boundary trend statistics
 
-This step compares trend behavior in two zones. The interior is the area inside the species' GAP range polygon. The ring is the band between that polygon and its buffered outline, the 250 km margin surrounding the range, recovered from the buffered polygon written when the extent was set. Strong positive trends concentrated just outside the historic boundary may be the signature of an advancing leading edge, which a statistic computed over the range alone cannot show. The function reports area, positive and negative trend percentages, median and median absolute slope, and hot spot area and percentage for each zone, range-wide rather than per state. Read the percentages together with the medians: a percentage counts area above and below zero and says nothing about how large the trends are. Run it after the hotspot analysis above, whose output it reads. Appendix D describes the two zones further.
+This step compares trends inside the species' GAP range with those in the 250 km ring around it. Strong positive trends just outside the range may mark an advancing edge, which a statistic over the range alone cannot show. Read the percentages together with the medians reported beside them: a percentage says nothing about how large the trends are. Run it after the hotspot analysis above. Appendix D describes the two zones further.
 
 ```{r}
 
@@ -713,12 +713,14 @@ rENM.ai::submit_to_claude(alpha_code)
 # rENM.ai::submit_to_chatgpt(alpha_code)
 ```
 
-If `submit_to_claude()` fails or returns an unexpected result, use the diagnostic helper to inspect the response:
+If `submit_to_claude()` fails or returns an unexpected result, use the diagnostic helper to inspect the response. The raw response is saved to `runs/<alpha_code>/Summaries/claude/debug_resp.rds` and kept only when no DOCX was retrieved.
 
 ```{r}
 
 # diagnose a failed submit_to_claude() response
-# rENM.ai::submit_to_claude_diag(alpha_code)
+# rENM.ai::submit_to_claude_diag(readRDS(file.path(
+#   rENM.core::rENM_project_dir(), "runs", alpha_code,
+#   "Summaries", "claude", "debug_resp.rds")))
 ```
 
 ## Building a coversheet instead
@@ -727,7 +729,7 @@ If you are not using AI, this step produces the opening page directly. It writes
 
 Run this instead of the two steps above rather than in addition to them. It writes the same filename, so running it after a successful submission overwrites the narrative with the coversheet. It is commented out by default for that reason; uncomment it and comment out the two steps above to take this path.
 
-Run it also if a provider call failed and you want to continue. `assemble_final_report()` treats the opening page as optional and omits it when the file is absent, so a report assembled after a failed submission without this step opens directly on the suitability time series.
+Run it also if a provider call failed and you want to continue. Without it, the report opens directly on the suitability time series.
 
 ```{r}
 
@@ -739,7 +741,7 @@ Run it also if a provider call failed and you want to continue. `assemble_final_
 
 This step converts the DOCX produced above, whether written by a provider or by `assemble_coversheet()`, to PDF via LibreOffice, which must be installed first (see *System Requirements*).
 
-The function checks the document before converting it. An unsubstituted placeholder stops the run, because a placeholder standing in for a figure means the page is missing data. Truncated paragraphs and known prose faults only warn. A stop here is a problem with the narrative, not with LibreOffice: re-run the submission step.
+The function checks the document before converting it. An unsubstituted placeholder stops the run, because a placeholder standing in for a figure means the page is missing data. Truncated paragraphs and known prose faults only warn. A stop here is a problem with the narrative, not with LibreOffice: re-run the submission step. Under `rENM()` the run continues instead. The rejected narrative is kept as `<alpha_code>-Suitability-Trend-Analysis-Rejected.docx` and a coversheet takes its place.
 
 ```{r}
 
@@ -1025,11 +1027,11 @@ Other bird range-shift estimates report only a poleward or latitudinal component
 
 ### What the buffer does and does not affect
 
-Range-based summary statistics are computed against the unbuffered GAP range polygon, not the bounding box. This covers positive and negative trend percentage, hot spot area, and hot spot percentage. The buffer and its enclosing rectangle keep the trend surface from being clipped at the historic range edge. They do not redefine what counts as range in the reported tables.
+Range-based summary statistics are computed against the unbuffered GAP range polygon, not the bounding box. This covers positive and negative trend percentage, hot spot area, and hot spot percentage. The buffer and its enclosing rectangle keep the trend surface from being clipped at the historic range edge. They do not redefine what counts as range in the reported tables. Models are fitted on land only, so open water counts toward no area or percentage.
 
 The buffer ring is the zone between the raw GAP polygon and the 250 km buffered polygon. Trend behavior there is reported separately as a boundary trend statistic. Comparing the ring against the range interior shows whether conditions just outside the historic range are improving or deteriorating relative to the occupied range. A static range polygon cannot show this.
 
-Boundary statistics are reported range-wide rather than per state. The ring extends into states holding none of the range, which have no counterpart row in the state-level table, and a statistic computed over a handful of raster cells is unstable between model realizations, while the range-wide interior and ring figures reproduce closely.
+Boundary statistics are reported range-wide rather than per state. The ring extends into states holding none of the range, which have no counterpart row in the state-level table, and a statistic computed over a handful of raster cells is unstable between model realizations. The range-wide figures move too. Across seeds, the interior's positive share spread by 7 to 21 points and the ring's by 14 to 34 in six species, so the direction of the contrast between them is more reliable than its size.
 
 A ring percentage near 50 is not a finding of balance. Because the percentage counts area above and below zero, a zone whose slopes hover around zero produces a figure near 50 that carries no signal at all, and it will look as precise as any other. The two median columns are what tell the cases apart. Across the twelve pilot species the ring's median absolute slope ran from 4 to 70 percent of the interior's: Loggerhead Shrike's ring is 20 percent positive at 70 percent of the interior's magnitude, a genuinely declining periphery, while Eastern Meadowlark's is 51 percent positive at a median slope of -3e-07, which over the study window is no change at all. Positivity also falls steadily from the range core to its boundary rather than being uniform inside, so the interior figure is an average over a gradient.
 

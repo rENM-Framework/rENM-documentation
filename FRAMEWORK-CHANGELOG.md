@@ -99,6 +99,8 @@ v0.2.0 makes runs reproducible under a fixed seed, standardizes the modeled exte
 - `create_hot_spot_map()` failed where a range edge follows a state line.
 - ChatGPT narratives were intermittently not retrieved, and a provider failure stopped the whole run.
 - Temporary occurrence files were occasionally left behind.
+- Records outside the extent counted toward the 250-record cap.
+- A fixed 2,500 background points let the growth in eBird records read as a suitability trend.
 
 <!--
 When filling in this section: pull the high-level points from each package's
@@ -106,7 +108,13 @@ NEWS.md rather than duplicating detail here; keep the summary to a few
 sentences and link out to the relevant NEWS.md entries.
 -->
 
-**Corrections affecting v0.1.0 results and the published paper.** Two. The paper describes the hotspot analysis as identifying areas of accelerating suitability decline; in v0.1.0 the code identified declines that were easing, so the Cassin's Sparrow hotspot figures in the paper and its S2 Appendix are affected. The method as described stands. The paper also describes runs as fully reproducible; v0.1.0 did not fix its random seeds, so a repeated run does not reproduce its figures exactly. Other changes alter numbers but no published claim, and figures regenerated under v0.2.0 will differ from their v0.1.0 counterparts.
+**Corrections affecting v0.1.0 results.** Results from any v0.1.0 run are affected by three defects:
+
+- Hot spots were declines that were easing, not steepening.
+- Random seeds were not fixed, so a repeated run does not reproduce its figures.
+- A fixed 2,500 background points let the growth in eBird records read as a suitability trend.
+
+The v0.1.0 preprint (above) reports Cassin's Sparrow results affected by all three. Other changes alter numbers only.
 
 ---
 

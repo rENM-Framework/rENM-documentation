@@ -322,9 +322,29 @@ This step removes exact-coordinate duplicate records from the occurrence files i
 rENM.data::remove_duplicate_occurrences(alpha_code)
 ```
 
+### - Setting the spatial extent
+
+Next, set the spatial extent of the analysis. `find_range_extent()` derives it from the species' USGS GAP range polygon, buffered outward by 250 km. The extent depends only on the range polygon, not on the records, so it is set here, before thinning, and the predictor rasters are later cropped to it. Appendix D gives the derivation of the 250 km figure, what the buffer does and does not affect, and the limitations of the default. Run `?find_range_extent` for the function's arguments.
+
+```{r}
+
+# set model extent using the usgs gap range
+rENM.data::find_range_extent(alpha_code)
+```
+
+### - Clipping records to the extent
+
+This step removes records that fall outside the extent. The predictor rasters cover only the extent, so a model cannot use those records. Removing them before thinning and capping keeps them from taking places under the record cap. Species whose eBird records reach well beyond their GAP range, into Mexico or Canada, otherwise reach their models with fewer records per bin than the cap suggests.
+
+```{r}
+
+# drop records outside the extent from the _occs/tmp/ run collection
+rENM.data::clip_occurrences(alpha_code)
+```
+
 ### - Spatial thinning
 
-You may optionally apply spatial thinning to the occurrence records. Thinning reduces spatial clustering by enforcing a minimum distance between points, helping to mitigate sampling bias. For example, analyses of Cassin’s Sparrow typically use a thinning distance of 8 km (\~5 miles) to reduce the likelihood of counting the same individual multiple times. This step can be skipped entirely or configured by setting the `thin_distance` parameter, as shown below.
+You may optionally apply spatial thinning to the occurrence records. Thinning reduces spatial clustering by enforcing a minimum distance between points. It does not correct for uneven observer effort, or for the growth in eBird coverage between 1980 and 2024. For example, analyses of Cassin’s Sparrow typically use a thinning distance of 8 km (\~5 miles) to reduce the likelihood of counting the same individual multiple times. This step can be skipped entirely or configured by setting the `thin_distance` parameter, as shown below.
 
 Thinning can be time-consuming. `thin_occurrences2()` processes the temporal bins in parallel. A sequential alternative, `thin_occurrences()`, is left commented out in the block below; it is slower but undemanding, and is worth substituting if system resources are limited or uncertain.
 
@@ -365,19 +385,9 @@ rENM.data::tidy_occurrences(alpha_code)
 
 ## Environmental data
 
-### - Setting the spatial extent
-
-The first step in preparing environmental data is setting the spatial extent of the analysis. `find_range_extent()` derives it from the species' USGS GAP range polygon, buffered outward by 250 km. Appendix D gives the derivation of the 250 km figure, what the buffer does and does not affect, and the limitations of the default. Run `?find_range_extent` for the function's arguments.
-
-```{r}
-
-# set model extent using the usgs gap range
-rENM.data::find_range_extent(alpha_code)
-```
-
 ### - Assembling MERRA variables
 
-This step copies MERRA-2 and MERRAclim-2 predictor rasters from the base data collection into the species-specific run directory, cropping each layer to the spatial extent defined in the previous step. The results are written to `<alpha_code>/_vars/`.
+This step copies MERRA-2 and MERRAclim-2 predictor rasters from the base data collection into the species-specific run directory, cropping each layer to the spatial extent set during occurrence data preparation. The results are written to `<alpha_code>/_vars/`.
 
 Use `rENM.core::show_variables()` in the RStudio console to display a list of available variables. You can pass explicit variable selections to the `m2_vars` and `mc_vars` arguments, or set either to `NULL` to include all available variables of that type. The example below includes all available variables; variable definitions can be found in Appendix B.
 
@@ -917,6 +927,7 @@ All functions in this package are documented in *Data Assembly*.
 
 | Function | Description |
 |----|----|
+| `clip_occurrences()` | Remove records outside the extent before thinning and capping |
 | `find_occurrence_extent()` | Derive spatial extent from occurrence data |
 | `find_range_extent()` | Derive spatial extent from a USGS GAP range polygon |
 | `get_ebird_occurrences()` | Read and bin an eBird EBD file into five-year temporal bins |

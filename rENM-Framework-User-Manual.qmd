@@ -1042,11 +1042,11 @@ Range-based summary statistics are computed against the unbuffered GAP range pol
 
 The buffer ring is the zone between the raw GAP polygon and the 250 km buffered polygon. Trend behavior there is reported separately as a boundary trend statistic. Comparing the ring against the range interior shows whether conditions just outside the historic range are improving or deteriorating relative to the occupied range. A static range polygon cannot show this.
 
-Boundary statistics are reported range-wide rather than per state. The ring extends into states holding none of the range, which have no counterpart row in the state-level table, and a statistic computed over a handful of raster cells is unstable between model realizations. The range-wide figures move too. Across seeds, the interior's positive share spread by 7 to 21 points and the ring's by 14 to 34 in six species, so the direction of the contrast between them is more reliable than its size.
+Boundary statistics are reported range-wide rather than per state. The ring extends into states holding none of the range, which have no counterpart row in the state-level table, and a statistic computed over a handful of raster cells is unstable between model realizations. The range-wide figures move too. Across seeds, the direction of the contrast between the interior's and the ring's positive shares is more reliable than its size.
 
 A ring percentage near 50 is not a finding of balance. Because the percentage counts area above and below zero, a zone whose slopes hover around zero produces a figure near 50 that carries no signal at all, and it will look as precise as any other. The two median columns are what tell the cases apart. Across the twelve pilot species the ring's median absolute slope ran from 4 to 70 percent of the interior's: Loggerhead Shrike's ring is 20 percent positive at 70 percent of the interior's magnitude, a genuinely declining periphery, while Eastern Meadowlark's is 51 percent positive at a median slope of -3e-07, which over the study window is no change at all. Positivity also falls steadily from the range core to its boundary rather than being uniform inside, so the interior figure is an average over a gradient.
 
-These figures predate two later corrections and will be re-measured before release.
+The pilot-species figures above predate two later corrections and will be re-measured when the pilot reports are reissued.
 
 ### Limitations
 
@@ -1070,8 +1070,6 @@ Setting a seed fixes those draws. `set.seed(seed)` in the configuration block co
 
 A fixed seed makes a run repeatable. It does not make any individual figure more reliable, since it selects one realization from the distribution the pipeline would otherwise sample.
 
-Stability differs by figure. In 35 seeded runs of six species (ten of Cassin's Sparrow, five each of five others), compared over land cells only, the centroid's bearing held in every species, and the ring was less positive than the interior in every run of five species. The share of the extent with a positive trend moved by 10 to 31 points across seeds, and for two species its majority sign changed: Pinyon Jay was majority positive in one run of five, Eastern Meadowlark in four. The range-wide change trend's majority sign changed in five of the six species. Hot spot maps from two seeds overlapped by 16 to 38 percent (Jaccard index), and the variable sets two runs selected for the same interval overlapped by 0.38 to 0.65. A contribution trend flagged in one run rarely recurred: only one, Cassin's Sparrow's declining bio8, appeared in at least 80 percent of a species' runs, so reports no longer mark them. Per-state figures are least stable where trends are weak or a state holds few raster cells. Every report states these limits qualitatively in its REPRODUCIBILITY section.
-
-These figures predate two later corrections and will be re-measured before release.
+Stability differs by figure. The direction of the centroid shift and the contrast between ring and interior are the most stable results. The change trend, hot spot locations and the selected variables vary more, and per-state figures are least stable where trends are weak or a state holds few raster cells. Every report states these limits in its REPRODUCIBILITY section.
 
 Determinism holds within a fixed environment. Two runs with the same seed, on the same machine and the same R and package versions, produce identical output apart from embedded timestamps. Changing the R version, or the versions of the modeling packages underneath `sdm`, can change which draw a given seed produces.

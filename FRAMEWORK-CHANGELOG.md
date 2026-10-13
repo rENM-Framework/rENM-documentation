@@ -68,7 +68,7 @@ Work has begun on corrections and improvements to the v0.1.0 codebase, tracked c
 | `rENM.ai`        | TBD     | TBD      | TBD              |
 | `rENM.reports`   | TBD     | TBD      | TBD              |
 
-**Datasets:** unchanged. Framework v0.2.0 runs against the v0.1.0 example and extended datasets listed above, and the User Manual's download instructions are unchanged. A dataset version is not expected to track the software version.
+**Datasets:** unchanged. Framework v0.2.0 runs against the v0.1.0 example and extended datasets listed above, and the User Manual's download instructions are unchanged. A dataset version is not expected to track the software version. This is tested rather than assumed: the species table ships inside each dataset, and its schema changed between v0.1.0 and the current development series, so `get_species_info()` and `check_species()` accept both. Until 2026-10-13 they did not, and `rENM()` stopped on its first step against either published dataset.
 
 **Documentation:** the User Manual is being revised for v0.2.0 and will be tagged in `rENM-documentation` and deposited to Zenodo alongside the release. Until then the v0.1.0 manual remains the published reference and describes v0.1.0 behavior.
 

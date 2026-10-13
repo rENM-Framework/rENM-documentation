@@ -68,7 +68,9 @@ Work has begun on corrections and improvements to the v0.1.0 codebase, tracked c
 | `rENM.ai`        | TBD     | TBD      | TBD              |
 | `rENM.reports`   | TBD     | TBD      | TBD              |
 
-**Datasets:** unchanged. Framework v0.2.0 runs against the v0.1.0 example and extended datasets listed above, and the User Manual's download instructions are unchanged. A dataset version is not expected to track the software version. This is tested rather than assumed: the species table ships inside each dataset, and its schema changed between v0.1.0 and the current development series, so `get_species_info()` and `check_species()` accept both. Until 2026-10-13 they did not, and `rENM()` stopped on its first step against either published dataset.
+**Datasets:** unchanged. The v0.2.0 code set can run against the v0.1.0 example and extended datasets listed above, and the User Manual's download instructions are unchanged. A dataset version is not expected to track the software version. Being able to run is not the same as reproducing. The published figures come from the v0.1.0 code set with the v0.1.0 datasets, and that pairing is what the preprint and the PLOS One submission describe. It is frozen, it is citable through the Zenodo community, and nothing in this section changes it: to reproduce those figures, install the `v0.1.0` tags and run them against the v0.1.0 data.
+
+This is tested rather than assumed. Cassin's Sparrow was run end to end under v0.2.0 against both published datasets on 2026-10-13. Two things had to be fixed first. The species table ships inside each dataset and its schema changed between v0.1.0 and this series, so `get_species_info()` and `check_species()` now accept either; until then `rENM()` stopped on its first step. And `create_ensemble_model()` began requiring a MERRA-2 land mask, `evland`, which the extended dataset carries but the example dataset -- complete for the version it shipped with -- does not; `rENM.data` now ships that footprint and stages it only when a dataset has none.
 
 **Documentation:** the User Manual is being revised for v0.2.0 and will be tagged in `rENM-documentation` and deposited to Zenodo alongside the release. Until then the v0.1.0 manual remains the published reference and describes v0.1.0 behavior.
 
@@ -83,6 +85,7 @@ v0.2.0 makes runs reproducible under a fixed seed, standardizes the modeled exte
 - A REPRODUCIBILITY section on every report, saying which figures vary between seeds, and a methods note in the report appendix.
 - Automated checks on AI narratives, convergence diagnostics for the variable-contribution fits, and a summary of warnings in each run log.
 - `check_species()`, an audit of the species metadata table.
+- A land/water footprint shipped with `rENM.data`, staged only when a dataset carries no `evland` of its own, so masking to land no longer requires a dataset published after the masking was added.
 
 **Changed**
 
@@ -101,6 +104,8 @@ v0.2.0 makes runs reproducible under a fixed seed, standardizes the modeled exte
 - Temporary occurrence files were occasionally left behind.
 - Records outside the extent counted toward the 250-record cap.
 - A fixed 2,500 background points let the growth in eBird records read as a suitability trend.
+- Parallel model fitting resolved the project directory from `.Renviron` instead of the one it was given, so a run against a second project read its occurrences from the first and wrote range maps there.
+- The species table is read whether or not it carries a `COMMENT` column, and completeness is judged on the columns a run actually needs, so the published v0.1.0 tables are usable.
 
 <!--
 When filling in this section: pull the high-level points from each package's
